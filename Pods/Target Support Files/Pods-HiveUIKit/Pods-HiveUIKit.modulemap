@@ -1,0 +1,6 @@
+framework module Pods_HiveUIKit {
+  umbrella header "Pods-HiveUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

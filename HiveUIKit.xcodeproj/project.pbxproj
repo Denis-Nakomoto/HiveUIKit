@@ -3,27 +3,43 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		698C44E7C2371870A0E7F833 /* Pods_HiveUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */; };
+		9203A8ED2549227C004AE522 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8EC2549227C004AE522 /* Farm.swift */; };
+		9203A8F425492376004AE522 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8F325492376004AE522 /* Worker.swift */; };
+		9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FB25492583004AE522 /* NetworkManager.swift */; };
+		9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */; };
+		9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A9032549277A004AE522 /* SignUpViewController.swift */; };
 		9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F67F2509AA2700F45271 /* AppDelegate.swift */; };
 		9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6812509AA2700F45271 /* SceneDelegate.swift */; };
-		9267F6842509AA2700F45271 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6832509AA2700F45271 /* ViewController.swift */; };
+		9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6832509AA2700F45271 /* LoginViewController.swift */; };
 		9267F6872509AA2700F45271 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6852509AA2700F45271 /* Main.storyboard */; };
 		9267F6892509AA2900F45271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6882509AA2900F45271 /* Assets.xcassets */; };
 		9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */; };
+		927E0AB02549418800BFDDDA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E0AAF2549418800BFDDDA /* Login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4727676E6FCC9A6B85E89F55 /* Pods-HiveUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.release.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.release.xcconfig"; sourceTree = "<group>"; };
+		4EA4C148D4F3A2A2FF9B301A /* Pods-HiveUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.debug.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.debug.xcconfig"; sourceTree = "<group>"; };
+		9203A8EC2549227C004AE522 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
+		9203A8F325492376004AE522 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		9203A8FB25492583004AE522 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		9203A9032549277A004AE522 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9267F67C2509AA2700F45271 /* HiveUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiveUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9267F67F2509AA2700F45271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9267F6812509AA2700F45271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9267F6832509AA2700F45271 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9267F6832509AA2700F45271 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9267F6862509AA2700F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9267F6882509AA2900F45271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9267F68B2509AA2900F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9267F68D2509AA2900F45271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		927E0AAF2549418800BFDDDA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiveUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +47,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698C44E7C2371870A0E7F833 /* Pods_HiveUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09044EE877E8F1269AE4DBC3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4EA4C148D4F3A2A2FF9B301A /* Pods-HiveUIKit.debug.xcconfig */,
+				4727676E6FCC9A6B85E89F55 /* Pods-HiveUIKit.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9203A8EA25492229004AE522 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				9267F6852509AA2700F45271 /* Main.storyboard */,
+				9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		9203A8EB25492236004AE522 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9267F6832509AA2700F45271 /* LoginViewController.swift */,
+				9203A9032549277A004AE522 /* SignUpViewController.swift */,
+				9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9203A8F1254922CC004AE522 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				927E0AAF2549418800BFDDDA /* Login.swift */,
+				9203A8F325492376004AE522 /* Worker.swift */,
+				9203A8EC2549227C004AE522 /* Farm.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9203A8F925492565004AE522 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9203A8FB25492583004AE522 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		9267F6732509AA2700F45271 = {
 			isa = PBXGroup;
 			children = (
 				9267F67E2509AA2700F45271 /* HiveUIKit */,
 				9267F67D2509AA2700F45271 /* Products */,
+				09044EE877E8F1269AE4DBC3 /* Pods */,
+				9AA3144113EA7820FE8833AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +123,22 @@
 			children = (
 				9267F67F2509AA2700F45271 /* AppDelegate.swift */,
 				9267F6812509AA2700F45271 /* SceneDelegate.swift */,
-				9267F6832509AA2700F45271 /* ViewController.swift */,
-				9267F6852509AA2700F45271 /* Main.storyboard */,
+				9203A8F925492565004AE522 /* Services */,
+				9203A8F1254922CC004AE522 /* Models */,
+				9203A8EB25492236004AE522 /* ViewControllers */,
+				9203A8EA25492229004AE522 /* StoryBoards */,
 				9267F6882509AA2900F45271 /* Assets.xcassets */,
-				9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */,
 				9267F68D2509AA2900F45271 /* Info.plist */,
 			);
 			path = HiveUIKit;
+			sourceTree = "<group>";
+		};
+		9AA3144113EA7820FE8833AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9267F6902509AA2900F45271 /* Build configuration list for PBXNativeTarget "HiveUIKit" */;
 			buildPhases = (
+				7058B96108FEE0A524C1AC80 /* [CP] Check Pods Manifest.lock */,
 				9267F6782509AA2700F45271 /* Sources */,
 				9267F6792509AA2700F45271 /* Frameworks */,
 				9267F67A2509AA2700F45271 /* Resources */,
+				EEDE4055F0CA8956F58755C1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +209,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7058B96108FEE0A524C1AC80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HiveUIKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEDE4055F0CA8956F58755C1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9267F6782509AA2700F45271 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9267F6842509AA2700F45271 /* ViewController.swift in Sources */,
+				9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */,
+				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
+				9203A8F425492376004AE522 /* Worker.swift in Sources */,
+				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
+				9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
+				927E0AB02549418800BFDDDA /* Login.swift in Sources */,
 				9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */,
+				9203A8ED2549227C004AE522 /* Farm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,11 +406,13 @@
 		};
 		9267F6912509AA2900F45271 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EA4C148D4F3A2A2FF9B301A /* Pods-HiveUIKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VV3HM9845R;
 				INFOPLIST_FILE = HiveUIKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,11 +426,13 @@
 		};
 		9267F6922509AA2900F45271 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4727676E6FCC9A6B85E89F55 /* Pods-HiveUIKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VV3HM9845R;
 				INFOPLIST_FILE = HiveUIKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
