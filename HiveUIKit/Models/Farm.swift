@@ -9,14 +9,14 @@
 import Foundation
 
 struct Farm: Decodable {
-
-    var data: [Datum]
+    
+    let data: [Datum]
     enum CodingKeys: String, CodingKey {
         case data = "data"
     }
-    }
+}
 
-struct Datum: Decodable, Identifiable {
+struct Datum: Decodable, Identifiable, Hashable {
     
     let id: Int
     let name, timezone: String
@@ -35,7 +35,7 @@ struct Datum: Decodable, Identifiable {
     let hashrates: [Hashrate]?
     let hashratesByCoin: [HashratesByCoin]?
     let chargeOnPool: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
@@ -96,24 +96,30 @@ struct Datum: Decodable, Identifiable {
         owner = (try container.decodeIfPresent(Owner.self, forKey: .owner)) ?? nil
         chargeOnPool = (try container.decodeIfPresent(Bool.self, forKey: .chargeOnPool)) ?? false
     }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: Datum, rhs: Datum) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
-//
 struct HashratesByCoin: Decodable {
     let coin, algo: String
     let hashrate: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case coin = "coin"
         case algo = "algo"
         case hashrate = "hashrate"
     }
     init(from decoder: Decoder) throws {
-          let container = try decoder.container(keyedBy: CodingKeys.self)
-            algo = (try container.decodeIfPresent(String.self, forKey: .algo)) ?? ""
-            coin = (try container.decodeIfPresent(String.self, forKey: .coin)) ?? ""
-            hashrate = (try container.decodeIfPresent(Double.self, forKey: .hashrate)) ?? 0.0
-      }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        algo = (try container.decodeIfPresent(String.self, forKey: .algo)) ?? ""
+        coin = (try container.decodeIfPresent(String.self, forKey: .coin)) ?? ""
+        hashrate = (try container.decodeIfPresent(Double.self, forKey: .hashrate)) ?? 0.0
+    }
 }
 
 struct Owner: Decodable {
@@ -162,7 +168,7 @@ struct Money: Decodable {
     let dailyPrice, monthlyPrice: Double
     let discount, dailyUseRigs, dailyUseAsics: Double
     let dailyUseAccount:Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case isPaid = "is_paid"
         case isFree = "is_free"
@@ -197,13 +203,13 @@ struct Money: Decodable {
         dailyCost = (try container.decodeIfPresent(Double.self, forKey: .dailyCost)) ?? 0.0
         costDetails = (try container.decodeIfPresent([CostDetail].self, forKey: .costDetails)) ?? nil
         monthlyCost = (try container.decodeIfPresent(Double.self, forKey: .monthlyCost)) ?? 0.0
-       }
+    }
 }
 
 struct CostDetail: Decodable {
     let type, monthlyPrice: Int
     let amount, dailyCost, monthlyCost: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case type = "type"
         case amount = "amount"
@@ -232,7 +238,7 @@ struct Stats: Decodable {
     let asicsOffline, boardsOnline, boardsOffline, boardsOverheated, cpusOnline: Int
     let powerDraw: Int
     let asr: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case workersOnline = "workers_online"
         case workersOffline = "workers_offline"

@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 class NetworkManager {
     
@@ -15,40 +16,7 @@ class NetworkManager {
     
     private init() {}
     
-    //MARK: Fetch data for farmView and for workerView method
-    
-    func fetchData(with url: String, farmCompletition: ((_ result: Farm)->())? = nil, workerCompletition: ((_ result: Worker)->())? = nil, status: @escaping(_ statusCode: Int)->()) {
-        
-        AF.request(url).responseData { (response) in
-            guard let statusCode = response.response?.statusCode else { return }
-            if (200..<300).contains(statusCode) {
-                switch response.result {
-                case .success(let data):
-                    do {
-                        let farm = try JSONDecoder().decode(Farm.self, from: data)
-                        let worker = try JSONDecoder().decode(Worker.self, from: data)
-                        if let completition = farmCompletition {
-                            completition(farm)
-                        } else { return }
-                        if let completition = workerCompletition {
-                            completition(worker)
-                        } else { return }
-                    }
-                    catch let err {
-                        print ("ERR \(err)")
-                    }
-                case .failure (let error):
-                    print("ERROR \(error)")
-                }
-            } else {
-                guard let error = response.response?.statusCode else { return }
-                status(error)
-            }
-        }
-    }
-    
-    //MARK: Login method. Returns accessToken
-    
+    //MARK: - Login method. Returns accessToken
     func loginRequest(urlString: String, name: String, password: String, twoFA: String? = nil, completition: @escaping(_ result: String)->(), status: ((_ statusCode: Int)->())? = nil) {
         
         let headers: HTTPHeaders = [
@@ -71,7 +39,7 @@ class NetworkManager {
                         completition(token.accessToken ?? "")
                     }
                     catch let err {
-                        print ("ERR \(err)")
+                        print ("ENCODING ERROR \(err)")
                     }
                 case .failure:
                     if let statusCode = status {
@@ -81,14 +49,79 @@ class NetworkManager {
             }
     }
     
-    //MARK: Method for reset password handeling
-    
-    func resetPassword(with email: String) {
+    //MARK: - Fetch data for farm view
+    func fetchFarmData(with url: String, completition: @escaping((_ result: Farm)->()), status: ((_ statusCode: Int)->())? = nil) {
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
         
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (response) in
+                guard let statusCode = response.response?.statusCode else { return }
+                if (200..<300).contains(statusCode) {
+                    switch response.result {
+                    case .success(let data):
+                        print ("SUCCESS")
+                        do {
+                            let farms = try JSONDecoder().decode(Farm.self, from: data)
+                            completition(farms)
+                        }
+                        catch let err {
+                            print ("ENCOIDNG ERROR \(err)")
+                        }
+                    case .failure (let error):
+                        print("AF REQUEST FAILURE \(error)")
+                    }
+                } else {
+                    guard let error = response.response?.statusCode else { return }
+                    guard let status = status else { return }
+                    status(error)
+                }
+            }
+    }
+    
+    //MARK: - Fetch data for workers view
+    func fetchWorkerData(with url: String, completition: @escaping((_ result: Worker)->()), status: ((_ statusCode: Int)->())? = nil){
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (response) in
+                guard let statusCode = response.response?.statusCode else { return }
+                if (200..<300).contains(statusCode) {
+                    switch response.result {
+                    case .success(let data):
+                        print ("SUCCESS")
+                        do {
+                            let workers = try JSONDecoder().decode(Worker.self, from: data)
+                            completition(workers)
+                        }
+                        catch let err {
+                            let dataString = String(decoding: data, as: UTF8.self)
+                            print("Workers data: \(dataString)")
+                            print ("ENCOIDNG ERROR \(err)")
+                        }
+                    case .failure (let error):
+                        print("AF REQUEST FAILURE \(error)")
+                    }
+                } else {
+                    guard let error = response.response?.statusCode else { return }
+                    guard let status = status else { return }
+                    status(error)
+                }
+            }
     }
 }
-
-
-
-
-
