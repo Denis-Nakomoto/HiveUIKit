@@ -8,26 +8,26 @@
 import UIKit
 import SwiftKeychainWrapper
 
-struct MChat: Hashable, Decodable {
-    var username: String
-    var lastMessage: String
-    var id: Int
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: MChat, rhs: MChat) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
+//struct MChat: Hashable, Decodable {
+//    var username: String
+//    var lastMessage: String
+//    var id: Int
+//
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//
+//    static func == (lhs: MChat, rhs: MChat) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//}
 
 class FarmViewController: UIViewController {
     
     var farms: [Farm] = []
     var dataSource: UICollectionViewDiffableDataSource <Section, Datum>?
     var collectionView: UICollectionView!
-
+    
     enum Section: Int, CaseIterable {
         case myFarms
     }
@@ -40,28 +40,28 @@ class FarmViewController: UIViewController {
         reloadData()
     }
     
-    let activeChats: [MChat] = [
-        MChat(username: "Alexey", lastMessage: "How are you?", id: 1),
-    ]
+    //    let activeChats: [MChat] = [
+    //        MChat(username: "Alexey", lastMessage: "How are you?", id: 1),
+    //    ]
     
     //MARK: - Data source
     private func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Datum>(collectionView: collectionView,
                                                                         cellProvider: { (collectionView,
                                                                                          indexPath, farm) -> UICollectionViewCell? in
-            guard let section = Section(rawValue: indexPath.section) else {
-                fatalError("Unknown section kind")
-            }
+                                                                            guard let section = Section(rawValue: indexPath.section) else {
+                                                                                fatalError("Unknown section kind")
+                                                                            }
                                                                             
-            switch section {
-            case .myFarms:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "farmCell", for: indexPath) as? FarmCell
-                else { fatalError() }
-                cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-                cell.setupLabelsData (with: self.farms.first!.data[indexPath.row])
-                return cell
-            }
-        })
+                                                                            switch section {
+                                                                            case .myFarms:
+                                                                                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FarmCell.reuseId, for: indexPath) as? FarmCell
+                                                                                else { fatalError() }
+                                                                                cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                                                                                cell.setupLabelsData (with: self.farms.first!.data[indexPath.row])
+                                                                                return cell
+                                                                            }
+                                                                        })
     }
     
     private func reloadData() {
@@ -117,9 +117,14 @@ extension FarmViewController {
 extension FarmViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let farm = self.dataSource?.itemIdentifier(for: indexPath) else { return }
-//        guard let section = Section (rawValue: indexPath.section) else { return }
-        let workersVC = WorkersViewController(farm: farm)
-        self.present(workersVC, animated: true, completion: nil)
+        //        guard let section = Section (rawValue: indexPath.section) else { return }
+        let workersVC = WorkersViewController()
+        let vc = UINavigationController(rootViewController: workersVC)
+        let _ = NetworkManager.shared.fetchWorkerData(with: "https://api2.hiveos.farm/api/v2/farms/\(farm.id)/workers") { workers in
+            workersVC.workers = workers.data ?? []
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

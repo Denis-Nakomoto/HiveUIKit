@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		698C44E7C2371870A0E7F833 /* Pods_HiveUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */; };
 		9203A8ED2549227C004AE522 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8EC2549227C004AE522 /* Farm.swift */; };
-		9203A8F425492376004AE522 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8F325492376004AE522 /* Worker.swift */; };
 		9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FB25492583004AE522 /* NetworkManager.swift */; };
 		9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */; };
 		9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A9032549277A004AE522 /* SignUpViewController.swift */; };
@@ -23,9 +22,10 @@
 		9267F6872509AA2700F45271 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6852509AA2700F45271 /* Main.storyboard */; };
 		9267F6892509AA2900F45271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6882509AA2900F45271 /* Assets.xcassets */; };
 		9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */; };
-		927012D22562BCED00230288 /* MODEL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927012D12562BCED00230288 /* MODEL.swift */; };
+		927012D22562BCED00230288 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927012D12562BCED00230288 /* Worker.swift */; };
 		927E0AB02549418800BFDDDA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E0AAF2549418800BFDDDA /* Login.swift */; };
 		92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBD8D92558C01500D851B4 /* StackView+Extension.swift */; };
+		92ECE81325662639006A4A9E /* WorkerViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ECE81225662639006A4A9E /* WorkerViewHeader.swift */; };
 		92FDD1FE254C317B00DEF03E /* FarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +33,6 @@
 		4727676E6FCC9A6B85E89F55 /* Pods-HiveUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.release.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		4EA4C148D4F3A2A2FF9B301A /* Pods-HiveUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.debug.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		9203A8EC2549227C004AE522 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
-		9203A8F325492376004AE522 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		9203A8FB25492583004AE522 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		9203A9032549277A004AE522 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -49,9 +48,10 @@
 		9267F6882509AA2900F45271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9267F68B2509AA2900F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9267F68D2509AA2900F45271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		927012D12562BCED00230288 /* MODEL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODEL.swift; sourceTree = "<group>"; };
+		927012D12562BCED00230288 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		927E0AAF2549418800BFDDDA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		92CBD8D92558C01500D851B4 /* StackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+Extension.swift"; sourceTree = "<group>"; };
+		92ECE81225662639006A4A9E /* WorkerViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerViewHeader.swift; sourceTree = "<group>"; };
 		92FDD1FD254C317B00DEF03E /* FarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmViewController.swift; sourceTree = "<group>"; };
 		DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiveUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,9 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				927E0AAF2549418800BFDDDA /* Login.swift */,
-				927012D12562BCED00230288 /* MODEL.swift */,
+				927012D12562BCED00230288 /* Worker.swift */,
 				9203A8EC2549227C004AE522 /* Farm.swift */,
-				9203A8F325492376004AE522 /* Worker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,17 +122,18 @@
 			children = (
 				923D87FD2550FFA4003465C0 /* FarmCell.swift */,
 				920C47F3255B9D9A0047B85F /* WorkerCell.swift */,
+				92ECE81225662639006A4A9E /* WorkerViewHeader.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		9261CD0F2552D8EA00F78CED /* UIKit */ = {
+		9261CD0F2552D8EA00F78CED /* UIKit + Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				9261CD0C2552D8C900F78CED /* UILabel+extension.swift */,
 				92CBD8D92558C01500D851B4 /* StackView+Extension.swift */,
 			);
-			path = UIKit;
+			path = "UIKit + Extensions";
 			sourceTree = "<group>";
 		};
 		9267F6732509AA2700F45271 = {
@@ -157,9 +157,9 @@
 		9267F67E2509AA2700F45271 /* HiveUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				9261CD0F2552D8EA00F78CED /* UIKit */,
 				9267F67F2509AA2700F45271 /* AppDelegate.swift */,
 				9267F6812509AA2700F45271 /* SceneDelegate.swift */,
+				9261CD0F2552D8EA00F78CED /* UIKit + Extensions */,
 				9203A8F925492565004AE522 /* Services */,
 				9203A8F1254922CC004AE522 /* Models */,
 				9203A8EB25492236004AE522 /* ViewControllers */,
@@ -297,10 +297,9 @@
 				9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
 				92FDD1FE254C317B00DEF03E /* FarmViewController.swift in Sources */,
-				9203A8F425492376004AE522 /* Worker.swift in Sources */,
 				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
 				9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */,
-				927012D22562BCED00230288 /* MODEL.swift in Sources */,
+				927012D22562BCED00230288 /* Worker.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
 				920C47F4255B9D9A0047B85F /* WorkerCell.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
@@ -309,6 +308,7 @@
 				9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */,
 				92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */,
 				9203A8ED2549227C004AE522 /* Farm.swift in Sources */,
+				92ECE81325662639006A4A9E /* WorkerViewHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -438,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -456,7 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VV3HM9845R;
 				INFOPLIST_FILE = HiveUIKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,7 +476,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VV3HM9845R;
 				INFOPLIST_FILE = HiveUIKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
