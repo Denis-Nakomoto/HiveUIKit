@@ -1,22 +1,26 @@
 //
-//  Farm.swift
+//  FarmsEntity.swift
 //  HiveUIKit
 //
-//  Created by Denis Svetlakov on 28.10.2020.
-//  Copyright © 2020 Denis Svetlakov. All rights reserved.
+//  Created by Denis Svetlakov on 21.04.2021.
+//  Copyright © 2021 Denis Svetlakov. All rights reserved.
 //
 
 import Foundation
 
-struct Farm: Decodable {
+struct Farms: Decodable {
     
-    let data: [Datum]
+    init(data: [Farm]) {
+        self.data = data
+    }
+    
+    let data: [Farm]
     enum CodingKeys: String, CodingKey {
         case data = "data"
     }
 }
 
-struct Datum: Decodable, Identifiable, Hashable {
+struct Farm: Decodable, Identifiable, Hashable {
     
     let id: Int
     let name, timezone: String
@@ -100,7 +104,7 @@ struct Datum: Decodable, Identifiable, Hashable {
         hasher.combine(id)
     }
     
-    static func == (lhs: Datum, rhs: Datum) -> Bool {
+    static func == (lhs: Farm, rhs: Farm) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -283,3 +287,4 @@ struct Stats: Decodable {
         asicsOffline = (try container.decodeIfPresent(Int.self, forKey: .asicsOffline)) ?? 0
     }
 }
+

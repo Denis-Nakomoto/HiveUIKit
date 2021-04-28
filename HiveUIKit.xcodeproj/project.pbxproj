@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		698C44E7C2371870A0E7F833 /* Pods_HiveUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */; };
-		9203A8ED2549227C004AE522 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8EC2549227C004AE522 /* Farm.swift */; };
 		9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FB25492583004AE522 /* NetworkManager.swift */; };
 		9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */; };
 		9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203A9032549277A004AE522 /* SignUpViewController.swift */; };
@@ -23,16 +22,28 @@
 		9267F6892509AA2900F45271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6882509AA2900F45271 /* Assets.xcassets */; };
 		9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */; };
 		927012D22562BCED00230288 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927012D12562BCED00230288 /* Worker.swift */; };
-		927E0AB02549418800BFDDDA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E0AAF2549418800BFDDDA /* Login.swift */; };
+		929808192634F2D9002D66BC /* FarmsModuleContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929808182634F2D9002D66BC /* FarmsModuleContract.swift */; };
+		9298081E2634FF37002D66BC /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298081D2634FF37002D66BC /* UIAlertController+Extension.swift */; };
+		9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298082A2637D8A0002D66BC /* UITextField+Extension.swift */; };
+		92C718C8262FF96A0016B2EB /* FarmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718C7262FF96A0016B2EB /* FarmsView.swift */; };
+		92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718CA262FF97B0016B2EB /* FarmsInteractor.swift */; };
+		92C718CE262FF98B0016B2EB /* FarmsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718CD262FF98B0016B2EB /* FarmsPresenter.swift */; };
+		92C718D1262FF99B0016B2EB /* FarmsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718D0262FF99B0016B2EB /* FarmsEntity.swift */; };
+		92C718D4262FF9A90016B2EB /* FarmsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718D3262FF9A90016B2EB /* FarmsRouter.swift */; };
+		92C718D9263235AA0016B2EB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718D8263235AA0016B2EB /* LoginView.swift */; };
+		92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718DB263237DC0016B2EB /* LoginInteractor.swift */; };
+		92C718DF263238160016B2EB /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718DE263238160016B2EB /* LoginPresenter.swift */; };
+		92C718E2263238240016B2EB /* LoginEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718E1263238240016B2EB /* LoginEntity.swift */; };
+		92C718E52632382D0016B2EB /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718E42632382D0016B2EB /* LoginRouter.swift */; };
+		92C718E826323CD30016B2EB /* LoginModuleContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C718E726323CD30016B2EB /* LoginModuleContract.swift */; };
 		92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBD8D92558C01500D851B4 /* StackView+Extension.swift */; };
 		92ECE81325662639006A4A9E /* WorkerViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ECE81225662639006A4A9E /* WorkerViewHeader.swift */; };
-		92FDD1FE254C317B00DEF03E /* FarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmViewController.swift */; };
+		92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4727676E6FCC9A6B85E89F55 /* Pods-HiveUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.release.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		4EA4C148D4F3A2A2FF9B301A /* Pods-HiveUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiveUIKit.debug.xcconfig"; path = "Target Support Files/Pods-HiveUIKit/Pods-HiveUIKit.debug.xcconfig"; sourceTree = "<group>"; };
-		9203A8EC2549227C004AE522 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
 		9203A8FB25492583004AE522 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		9203A9032549277A004AE522 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -49,10 +60,23 @@
 		9267F68B2509AA2900F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9267F68D2509AA2900F45271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		927012D12562BCED00230288 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
-		927E0AAF2549418800BFDDDA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		929808182634F2D9002D66BC /* FarmsModuleContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsModuleContract.swift; sourceTree = "<group>"; };
+		9298081D2634FF37002D66BC /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		9298082A2637D8A0002D66BC /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		92C718C7262FF96A0016B2EB /* FarmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsView.swift; sourceTree = "<group>"; };
+		92C718CA262FF97B0016B2EB /* FarmsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsInteractor.swift; sourceTree = "<group>"; };
+		92C718CD262FF98B0016B2EB /* FarmsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsPresenter.swift; sourceTree = "<group>"; };
+		92C718D0262FF99B0016B2EB /* FarmsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsEntity.swift; sourceTree = "<group>"; };
+		92C718D3262FF9A90016B2EB /* FarmsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsRouter.swift; sourceTree = "<group>"; };
+		92C718D8263235AA0016B2EB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		92C718DB263237DC0016B2EB /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		92C718DE263238160016B2EB /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		92C718E1263238240016B2EB /* LoginEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEntity.swift; sourceTree = "<group>"; };
+		92C718E42632382D0016B2EB /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		92C718E726323CD30016B2EB /* LoginModuleContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleContract.swift; sourceTree = "<group>"; };
 		92CBD8D92558C01500D851B4 /* StackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+Extension.swift"; sourceTree = "<group>"; };
 		92ECE81225662639006A4A9E /* WorkerViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerViewHeader.swift; sourceTree = "<group>"; };
-		92FDD1FD254C317B00DEF03E /* FarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmViewController.swift; sourceTree = "<group>"; };
+		92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsViewController.swift; sourceTree = "<group>"; };
 		DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiveUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,11 +113,10 @@
 		9203A8EB25492236004AE522 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				923D88002550FFA8003465C0 /* Cells */,
 				9267F6832509AA2700F45271 /* LoginViewController.swift */,
 				9203A9032549277A004AE522 /* SignUpViewController.swift */,
 				9203A8FF254926E7004AE522 /* ForgotPasswordViewController.swift */,
-				92FDD1FD254C317B00DEF03E /* FarmViewController.swift */,
+				92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */,
 				920C47F0255B9D7B0047B85F /* WorkersViewController.swift */,
 			);
 			path = ViewControllers;
@@ -102,9 +125,7 @@
 		9203A8F1254922CC004AE522 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				927E0AAF2549418800BFDDDA /* Login.swift */,
 				927012D12562BCED00230288 /* Worker.swift */,
-				9203A8EC2549227C004AE522 /* Farm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,6 +153,8 @@
 			children = (
 				9261CD0C2552D8C900F78CED /* UILabel+extension.swift */,
 				92CBD8D92558C01500D851B4 /* StackView+Extension.swift */,
+				9298081D2634FF37002D66BC /* UIAlertController+Extension.swift */,
+				9298082A2637D8A0002D66BC /* UITextField+Extension.swift */,
 			);
 			path = "UIKit + Extensions";
 			sourceTree = "<group>";
@@ -157,6 +180,8 @@
 		9267F67E2509AA2700F45271 /* HiveUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				92C718D7263235670016B2EB /* LoginModule */,
+				92FC6CC9262AE12500CDA647 /* FarmsModule */,
 				9267F67F2509AA2700F45271 /* AppDelegate.swift */,
 				9267F6812509AA2700F45271 /* SceneDelegate.swift */,
 				9261CD0F2552D8EA00F78CED /* UIKit + Extensions */,
@@ -168,6 +193,33 @@
 				9267F68D2509AA2900F45271 /* Info.plist */,
 			);
 			path = HiveUIKit;
+			sourceTree = "<group>";
+		};
+		92C718D7263235670016B2EB /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				92C718E726323CD30016B2EB /* LoginModuleContract.swift */,
+				92C718D8263235AA0016B2EB /* LoginView.swift */,
+				92C718DB263237DC0016B2EB /* LoginInteractor.swift */,
+				92C718DE263238160016B2EB /* LoginPresenter.swift */,
+				92C718E1263238240016B2EB /* LoginEntity.swift */,
+				92C718E42632382D0016B2EB /* LoginRouter.swift */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		92FC6CC9262AE12500CDA647 /* FarmsModule */ = {
+			isa = PBXGroup;
+			children = (
+				923D88002550FFA8003465C0 /* Cells */,
+				929808182634F2D9002D66BC /* FarmsModuleContract.swift */,
+				92C718C7262FF96A0016B2EB /* FarmsView.swift */,
+				92C718CA262FF97B0016B2EB /* FarmsInteractor.swift */,
+				92C718D0262FF99B0016B2EB /* FarmsEntity.swift */,
+				92C718CD262FF98B0016B2EB /* FarmsPresenter.swift */,
+				92C718D3262FF9A90016B2EB /* FarmsRouter.swift */,
+			);
+			path = FarmsModule;
 			sourceTree = "<group>";
 		};
 		9AA3144113EA7820FE8833AD /* Frameworks */ = {
@@ -293,21 +345,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C718DF263238160016B2EB /* LoginPresenter.swift in Sources */,
 				923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */,
+				92C718CE262FF98B0016B2EB /* FarmsPresenter.swift in Sources */,
 				9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */,
+				92C718E826323CD30016B2EB /* LoginModuleContract.swift in Sources */,
+				92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
-				92FDD1FE254C317B00DEF03E /* FarmViewController.swift in Sources */,
+				92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */,
+				92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */,
+				9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */,
 				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
 				9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */,
+				92C718D9263235AA0016B2EB /* LoginView.swift in Sources */,
 				927012D22562BCED00230288 /* Worker.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
 				920C47F4255B9D9A0047B85F /* WorkerCell.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
+				92C718E2263238240016B2EB /* LoginEntity.swift in Sources */,
 				9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */,
-				927E0AB02549418800BFDDDA /* Login.swift in Sources */,
+				9298081E2634FF37002D66BC /* UIAlertController+Extension.swift in Sources */,
+				92C718D1262FF99B0016B2EB /* FarmsEntity.swift in Sources */,
 				9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */,
+				92C718D4262FF9A90016B2EB /* FarmsRouter.swift in Sources */,
+				92C718C8262FF96A0016B2EB /* FarmsView.swift in Sources */,
 				92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */,
-				9203A8ED2549227C004AE522 /* Farm.swift in Sources */,
+				929808192634F2D9002D66BC /* FarmsModuleContract.swift in Sources */,
+				92C718E52632382D0016B2EB /* LoginRouter.swift in Sources */,
 				92ECE81325662639006A4A9E /* WorkerViewHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,36 +1,26 @@
 //
-//  FarmViewController.swift
+//  FarmsView.swift
 //  HiveUIKit
 //
-//  Created by Denis Svetlakov on 30.10.2020.
-//  Copyright © 2020 Denis Svetlakov. All rights reserved.
+//  Created by Denis Svetlakov on 21.04.2021.
+//  Copyright © 2021 Denis Svetlakov. All rights reserved.
+//
 
 import UIKit
 import SwiftKeychainWrapper
 
-//struct MChat: Hashable, Decodable {
-//    var username: String
-//    var lastMessage: String
-//    var id: Int
-//
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//    }
-//
-//    static func == (lhs: MChat, rhs: MChat) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}
-
-class FarmViewController: UIViewController {
-    
-    var farms: [Farm] = []
-    var dataSource: UICollectionViewDiffableDataSource <Section, Datum>?
-    var collectionView: UICollectionView!
+class FarmsViewController: UIViewController, FarmsViewProtocol {
     
     enum Section: Int, CaseIterable {
         case myFarms
     }
+    
+    var presenter: FarmsPresenterProtocol?
+    
+    var dataSource: UICollectionViewDiffableDataSource <Section, Farm>?
+    var collectionView: UICollectionView!
+    
+    var farms = Farms(data: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +28,17 @@ class FarmViewController: UIViewController {
         setupCollectionView()
         createDataSource()
         reloadData()
+        setupUI()
+        view.backgroundColor = .systemBlue
     }
     
-    //    let activeChats: [MChat] = [
-    //        MChat(username: "Alexey", lastMessage: "How are you?", id: 1),
-    //    ]
+    deinit {
+        print("FARMS VC is allocated")
+    }
     
     //MARK: - Data source
     private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Datum>(collectionView: collectionView,
+        dataSource = UICollectionViewDiffableDataSource<Section, Farm>(collectionView: collectionView,
                                                                         cellProvider: { (collectionView,
                                                                                          indexPath, farm) -> UICollectionViewCell? in
                                                                             guard let section = Section(rawValue: indexPath.section) else {
@@ -58,26 +50,29 @@ class FarmViewController: UIViewController {
                                                                                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FarmCell.reuseId, for: indexPath) as? FarmCell
                                                                                 else { fatalError() }
                                                                                 cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-                                                                                cell.setupLabelsData (with: self.farms.first!.data[indexPath.row])
+                                                                                cell.setupLabelsData (with: self.farms.data[indexPath.row])
                                                                                 return cell
                                                                             }
                                                                         })
     }
     
     private func reloadData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Datum>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Farm>()
         snapshot.appendSections([.myFarms])
-        snapshot.appendItems(farms.first!.data, toSection: .myFarms)
+        snapshot.appendItems(farms.data, toSection: .myFarms)
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
-    @IBAction @objc func logOut(_ sender: Any) {
-        let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
-    }
+//    @IBAction @objc func logOut(_ sender: Any) {
+//        let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
+//    }
 }
 
-// MARK: - Setup layout
-extension FarmViewController {
+extension FarmsViewController {
+    
+    func setupUI() {
+        
+    }
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = .darkGray
@@ -92,7 +87,7 @@ extension FarmViewController {
         collectionView.backgroundColor = .darkGray
         view.addSubview(collectionView)
         collectionView.register(FarmCell.self, forCellWithReuseIdentifier: "farmCell")
-        collectionView.delegate = self
+//        collectionView.delegate = self
     }
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
@@ -111,41 +106,5 @@ extension FarmViewController {
             return section
         }
         return layout
-    }
-}
-
-extension FarmViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let farm = self.dataSource?.itemIdentifier(for: indexPath) else { return }
-        //        guard let section = Section (rawValue: indexPath.section) else { return }
-        let workersVC = WorkersViewController()
-        let vc = UINavigationController(rootViewController: workersVC)
-        let _ = NetworkManager.shared.fetchWorkerData(with: "https://api2.hiveos.farm/api/v2/farms/\(farm.id)/workers") { workers in
-            workersVC.workers = workers.data ?? []
-            vc.modalPresentationStyle = .overFullScreen
-            self.present(vc, animated: true, completion: nil)
-        }
-    }
-}
-
-// MARK: - SwiftUI
-import SwiftUI
-
-struct FarmVCProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        let viewController = FarmViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<FarmVCProvider.ContainerView>) -> FarmViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: FarmVCProvider.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<FarmVCProvider.ContainerView>) {
-            
-        }
     }
 }

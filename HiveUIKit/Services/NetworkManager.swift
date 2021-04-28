@@ -17,7 +17,7 @@ class NetworkManager {
     private init() {}
     
     //MARK: - Login method. Returns accessToken
-    func loginRequest(urlString: String, name: String, password: String, twoFA: String? = nil, completition: @escaping(_ result: String)->(), status: ((_ statusCode: Int)->())? = nil) {
+    func loginRequest(name: String, password: String, twoFA: String? = nil, completition: @escaping(_ result: String)->(), status: ((_ statusCode: Int)->())? = nil) {
         
         let headers: HTTPHeaders = [
             "Accept": "application/json",
@@ -25,7 +25,7 @@ class NetworkManager {
         ]
         let login = Login(login: name, password: password, twofaCode: twoFA)
         
-        AF.request(urlString,
+        AF.request("https://api2.hiveos.farm/api/v2/auth/login",
                    method: .post,
                    parameters: login,
                    encoder: JSONParameterEncoder.default,
@@ -50,7 +50,7 @@ class NetworkManager {
     }
     
     //MARK: - Fetch data for farm view
-    func fetchFarmData(with url: String, completition: @escaping((_ result: Farm)->()), status: ((_ statusCode: Int)->())? = nil) {
+    func fetchFarmData(with url: String, completition: @escaping((_ result: Farms)->()), status: ((_ statusCode: Int)->())? = nil) {
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
         
         let headers: HTTPHeaders = [
@@ -69,7 +69,7 @@ class NetworkManager {
                     case .success(let data):
                         print ("SUCCESS")
                         do {
-                            let farms = try JSONDecoder().decode(Farm.self, from: data)
+                            let farms = try JSONDecoder().decode(Farms.self, from: data)
                             completition(farms)
                         }
                         catch let err {
@@ -87,7 +87,7 @@ class NetworkManager {
     }
     
     //MARK: - Fetch data for workers view
-    func fetchWorkerData(with url: String, completition: @escaping((_ result: Worker)->()), status: ((_ statusCode: Int)->())? = nil){
+    func fetchWorkerData(with url: String, completition: @escaping((_ result: Worker)->()), status: ((_ statusCode: Int)->())? = nil) {
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
         
         let headers: HTTPHeaders = [
@@ -121,6 +121,44 @@ class NetworkManager {
                     guard let error = response.response?.statusCode else { return }
                     guard let status = status else { return }
                     status(error)
+                }
+            }
+    }
+    
+    func fetchData<T: Decodable>(with url: String, completition: @escaping(_ result: T?, _ error: String?)->()) {
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (response) in
+                guard let statusCode = response.response?.statusCode else { return }
+                if (200..<300).contains(statusCode) {
+                    switch response.result {
+                    case .success(let data):
+                        print ("SUCCESS")
+                        let dataString = String(decoding: data, as: UTF8.self)
+                        print("Workers data: \(dataString)")
+                        do {
+                            let farms = try JSONDecoder().decode(T.self, from: data)
+                            completition(farms, nil)
+                        }
+                        catch let err {
+                            print ("ENCOIDNG ERROR \(err)")
+                            completition(nil, err.localizedDescription)
+                        }
+                    case .failure (let error):
+                        print("AF REQUEST FAILURE \(error)")
+                        completition(nil, error.localizedDescription)
+                    }
+                } else {
+                    print("AF REQUEST FAILURE: \(response.response?.statusCode)")
                 }
             }
     }

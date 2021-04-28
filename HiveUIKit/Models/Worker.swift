@@ -8,11 +8,17 @@
 
 import Foundation
 
-struct Worker: Decodable {
-    let data: [Workers]?
+struct Workers: Decodable {
+    let data: [Worker]?
+    
+    init(data: [Worker]) {
+        self.data = data
+    }
 }
 
-struct Workers: Decodable, Hashable {
+
+struct Worker: Decodable, Hashable {
+    
     let id, platform: Int?
     let name, description: String?
     let unitsCount: Int?
@@ -120,7 +126,7 @@ struct Workers: Decodable, Hashable {
             hasher.combine(id)
         }
     
-        static func == (lhs: Workers, rhs: Workers) -> Bool {
+        static func == (lhs: Worker, rhs: Worker) -> Bool {
             return lhs.id == rhs.id
         }
 }

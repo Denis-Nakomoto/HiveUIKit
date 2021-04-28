@@ -105,13 +105,13 @@ extension WorkerViewHeader {
         ])
     }
     
-    func setupLabelsData(with value: [Workers]) {
-        rigName.text = value.first?.name
-        inService.text = String(value.first?.stats?.bootTime ?? 0)
-        amd.text = value.first?.hasAMD ?? false ? "A" : ""
-        nVidia.text = value.first?.hasNvidia ?? false ? "N" : ""
-        coinName.text = value.first?.flightSheet?.items?.first?.coin
-        hashRate.text = value.first?.packagesHash
-        effectivency.text = String(value.first?.psuEfficiency ?? 0)
-    }
+//    func setupLabelsData(with value: [Workers]) {
+//        rigName.text = value.first?.name
+//        inService.text = String(value.first?.stats?.bootTime ?? 0)
+//        amd.text = value.first?.hasAMD ?? false ? "A" : ""
+//        nVidia.text = value.first?.hasNvidia ?? false ? "N" : ""
+//        coinName.text = value.first?.flightSheet?.items?.first?.coin
+//        hashRate.text = value.first?.packagesHash
+//        effectivency.text = String(value.first?.psuEfficiency ?? 0)
+//    }
 }

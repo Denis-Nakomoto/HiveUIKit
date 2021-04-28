@@ -1,9 +1,9 @@
 //
-//  Login.swift
+//  LoginEntity.swift
 //  HiveUIKit
 //
-//  Created by Denis Svetlakov on 28.10.2020.
-//  Copyright © 2020 Denis Svetlakov. All rights reserved.
+//  Created by Denis Svetlakov on 23.04.2021.
+//  Copyright © 2021 Denis Svetlakov. All rights reserved.
 //
 
 import Foundation

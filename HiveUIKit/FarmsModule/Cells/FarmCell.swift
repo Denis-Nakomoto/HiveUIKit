@@ -28,12 +28,10 @@ class FarmCell: UICollectionViewCell {
     let priceLblName = UILabel(text: "Price",  font: .systemFont(ofSize: 12), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let hashrateLblName = UILabel(text: "Hashrate",  font: .systemFont(ofSize: 12), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     
-    
-    
     override init(frame: CGRect) {
         super.init (frame: frame)
         setupConstraints()
-        self.layer.cornerRadius = 4
+        self.layer.cornerRadius = 10
         self.clipsToBounds = true
     }
     
@@ -134,7 +132,7 @@ extension FarmCell {
         
     }
     
-    func setupLabelsData(with value: Datum) {
+    func setupLabelsData(with value: Farm) {
         powerLabel.text = "\(value.stats!.powerDraw)W"
         workersQtyLabel.text = String(value.workersCount)
         effectivencyLabel.text = "\(value.stats!.asr)%"
@@ -156,9 +154,9 @@ struct FarmCellProvider: PreviewProvider {
     
     struct ContainerView: UIViewControllerRepresentable {
         
-        let viewController = FarmViewController()
+        let viewController = FarmsViewController()
         
-        func makeUIViewController(context: UIViewControllerRepresentableContext<FarmCellProvider.ContainerView>) -> FarmViewController {
+        func makeUIViewController(context: UIViewControllerRepresentableContext<FarmCellProvider.ContainerView>) -> FarmsViewController {
             return viewController
         }
         
