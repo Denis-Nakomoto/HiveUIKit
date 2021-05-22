@@ -13,30 +13,23 @@ class FarmsInteractor: FarmsInteractorProtocol {
     
     var presenter: FarmsPresenterProtocol?
     
+    func loadWorkers(with farmId: Int) {
+        let url = "https://api2.hiveos.farm/api/v2/farms/\(farmId)/workers"
+        NetworkManager.shared.fetchData(with: url) { [weak self] (result: Workers?, error) in
+            guard let workers = result else {
+                self?.presenter?.fetchWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
+                return
+            }
+            
+            self?.presenter?.fetchWorkersSuccess(workers: workers)
+        }
+    }
+    
+    func logOut() {
+        let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
+        SceneDelegate.shared.rootViewController.switchToLogout()
+    }
+    
+    
+    
 }
-//protocol AnyInteractor {
-//    var presenter: AnyPresenter? { get set }
-//    
-//    func getUsers()
-//}
-//
-//class FarmInteractor: AnyInteractor {
-//    var presenter: AnyPresenter?
-//    
-//    func getUsers() {
-//        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
-//        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in
-//            guard let data = data, error == nil else {
-//                self?.presenter?.interatorDidFetchFarms(with: .failure(FetchError.failed))
-//                return
-//            }
-//            do {
-//                let entities = try JSONDecoder().decode([User].self, from: data)
-//                self?.presenter?.interatorDidFetchFarms(with: .success(entities))
-//            }
-//            catch {
-//                self?.presenter?.interatorDidFetchFarms(with: .failure(FetchError.failed))
-//            }
-//        }.resume()
-//    }
-//}

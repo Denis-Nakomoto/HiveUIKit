@@ -14,20 +14,20 @@ class LoginPresenter: LoginPresenterProtocol {
     
     var interactor: LoginInteractorProtocol?
     
-    var view: LoginViewProtocol?
+    weak var view: LoginViewProtocol?
     
     func viewDidLoad() {
         interactor?.checkTokenIsNil()
     }
     
-    func signIn(name: String?, password: String?, twoFa: String?) {
+    func signIn(name: String, password: String, twoFa: String?) {
         print(#function)
         interactor?.checkTextFields(name: name, password: password, twoFa: twoFa)
     }
     
     func fetchFarmsSuccess(farms: Farms) {
         print(#function)
-        router?.presentFarmsModule(on: view!, with: farms)
+        router?.pushToFarmsModule(on: view!, with: farms)
     }
     
     func fetchFarmsFailure(with error: String, and message: String) {

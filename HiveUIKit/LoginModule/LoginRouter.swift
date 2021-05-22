@@ -11,7 +11,9 @@ import UIKit
 class LoginRouter: LoginRouterProtocol {
     
     static func createLoginModule() -> UIViewController {
-        let view: LoginViewProtocol = LoginView()
+        print("Create login \(#function)")
+        let view = LoginView()
+        
         let presenter: LoginPresenterProtocol = LoginPresenter()
         
         view.presenter = presenter
@@ -20,15 +22,15 @@ class LoginRouter: LoginRouterProtocol {
         view.presenter?.interactor = LoginInteractor()
         view.presenter?.interactor?.presenter = presenter
         
-        return view as! UIViewController
+        return view
     }
     
-    func presentFarmsModule(on view: LoginViewProtocol, with farms: Farms) {
+    func pushToFarmsModule(on view: LoginViewProtocol, with farms: Farms) {
         print(#function)
-        let farmsVC = FarmsRouter.createFarmsModule(with: farms)
-        let viewController = view as! LoginView
-        farmsVC.modalPresentationStyle = .overFullScreen
-        viewController.present(farmsVC, animated: true, completion: nil)
+            let farmsVC = FarmsRouter.createFarmsModule(with: farms)
+            let viewController = view as! LoginView
+            viewController.navigationController?
+                .pushViewController(farmsVC, animated: true)
     }
 }
 

@@ -1,9 +1,9 @@
 //
-//  Worker.swift
+//  WorkersEntity.swift
 //  HiveUIKit
 //
-//  Created by Denis Svetlakov on 16.11.2020.
-//  Copyright © 2020 Denis Svetlakov. All rights reserved.
+//  Created by Denis Svetlakov on 29.04.2021.
+//  Copyright © 2021 Denis Svetlakov. All rights reserved.
 //
 
 import Foundation
@@ -15,7 +15,6 @@ struct Workers: Decodable {
         self.data = data
     }
 }
-
 
 struct Worker: Decodable, Hashable {
     
@@ -51,7 +50,7 @@ struct Worker: Decodable, Hashable {
     let asicInfo: ASICInfo?
     let asicStats: ASICStats?
     let messages: [Message]?
-    let watchdog: Watchdog?
+//    let watchdog: Watchdog?
     let options: Options?
     let hardwarePowerDraw, psuEfficiency: Int?
     let octofanCorrectPower: Bool?
@@ -106,7 +105,8 @@ struct Worker: Decodable, Hashable {
         case gpuStats = "gpu_stats"
         case asicInfo = "asic_info"
         case asicStats = "asic_stats"
-        case messages, watchdog, options
+        case messages, options
+//        case watchdog
         case hardwarePowerDraw = "hardware_power_draw"
         case psuEfficiency = "psu_efficiency"
         case octofanCorrectPower = "octofan_correct_power"
@@ -423,7 +423,7 @@ struct MinersStats: Codable {
 
 struct MinersStatsHashrate: Codable {
     let miner, algo, coin: String?
-    let hashes: [Int]?
+    let hashes: [Double]?
     let dalgo, dcoin: String?
     let dhashes, temps, fans, invalidShares: [Int]?
     let busNumbers, dbusNumbers: [Int]?
@@ -442,7 +442,7 @@ struct MinersSummary: Codable {
 
 struct MinersSummaryHashrate: Codable {
     let miner, ver, algo, coin: String?
-    let hash: Int?
+    let hash: Double?
     let dalgo, dcoin: String?
     let dhash: Int?
     let shares: Shares?
@@ -605,50 +605,51 @@ struct Versions: Codable {
     }
 }
 
-struct Watchdog: Codable {
-    let enabled: Bool?
-    let restartTimeout, rebootTimeout: Int?
-    let checkPower, checkConnection: Bool?
-    let minPower, maxPower: Int?
-    let powerAction: String?
-    let checkGPU: Bool?
-    let maxLa: Int?
-    let options: [Option]?
+//struct Watchdog: Codable {
+//    let enabled: Bool?
+//    let restartTimeout, rebootTimeout: Int?
+//    let checkPower, checkConnection: Bool?
+//    let minPower, maxPower: Int?
+//    let powerAction: String?
+//    let checkGPU: Bool?
+//    let maxLa: Int?
+//    let options: [Option]?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case enabled
+//        case restartTimeout = "restart_timeout"
+//        case rebootTimeout = "reboot_timeout"
+//        case checkPower = "check_power"
+//        case checkConnection = "check_connection"
+//        case minPower = "min_power"
+//        case maxPower = "max_power"
+//        case powerAction = "power_action"
+//        case checkGPU = "check_gpu"
+//        case maxLa = "max_la"
+//        case options
+//    }
+//}
+//
+//struct Option: Codable {
+//    let miner: String?
+//    let minhash: Int?
+//    let units: String?
+//}
+//
+//struct Tag: Codable {
+//    let id: Int?
+//    let name: String?
+//    let color, farmsCount, workersCount: Int?
+//    let isAuto: Bool?
+//    let farmID, userID: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, color
+//        case farmsCount = "farms_count"
+//        case workersCount = "workers_count"
+//        case isAuto = "is_auto"
+//        case farmID = "farm_id"
+//        case userID = "user_id"
+//    }
+//}
 
-    enum CodingKeys: String, CodingKey {
-        case enabled
-        case restartTimeout = "restart_timeout"
-        case rebootTimeout = "reboot_timeout"
-        case checkPower = "check_power"
-        case checkConnection = "check_connection"
-        case minPower = "min_power"
-        case maxPower = "max_power"
-        case powerAction = "power_action"
-        case checkGPU = "check_gpu"
-        case maxLa = "max_la"
-        case options
-    }
-}
-
-struct Option: Codable {
-    let miner: String?
-    let minhash: Int?
-    let units: String?
-}
-
-struct Tag: Codable {
-    let id: Int?
-    let name: String?
-    let color, farmsCount, workersCount: Int?
-    let isAuto: Bool?
-    let farmID, userID: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, color
-        case farmsCount = "farms_count"
-        case workersCount = "workers_count"
-        case isAuto = "is_auto"
-        case farmID = "farm_id"
-        case userID = "user_id"
-    }
-}

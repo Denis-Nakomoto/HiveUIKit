@@ -10,7 +10,7 @@ import UIKit
 
 class LoginView: UIViewController, LoginViewProtocol {
     
-    var presenter: LoginPresenterProtocol?
+    weak var presenter: LoginPresenterProtocol?
     
     let hiveLogo: UIImageView = {
         let image = UIImageView()
@@ -36,32 +36,42 @@ class LoginView: UIViewController, LoginViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNavigationBar() 
         presenter?.viewDidLoad()
         singnInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
     }
     
     @objc func signIn() {
-        presenter?.signIn(name: nameTextField.text, password: passwordTextField.text, twoFa: twoFaTextField.text)
+        presenter?.signIn(name: nameTextField.text ?? "", password: passwordTextField.text ?? "", twoFa: twoFaTextField.text)
     }
     
     func didGetFarmsFailure(with error: String, and message: String) {
         self.showAlert(with: error, and: message)
     }
     
+    // Remove it from protocol and here
     func dismissVC() {
         print(#function)
         self.dismiss(animated: false)
     }
     
     deinit {
-        print("LoginVC is DEINITED")
+        print("Login VC is deallocated")
     }
 }
 
 extension LoginView {
     
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .black
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+        navigationItem.leftBarButtonItem = backButton
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
     private func setupUI() {
-        view.backgroundColor = .darkGray
+        
+        view.backgroundColor = .black
         overrideUserInterfaceStyle = .dark
         view.addSubview(hiveLogo)
         view.addSubview(nameTextField)

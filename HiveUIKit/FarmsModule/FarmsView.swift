@@ -21,6 +21,15 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
     var collectionView: UICollectionView!
     
     var farms = Farms(data: [])
+    var iconsImages = [String : UIImage]()
+    {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+                print("ICONS IMAGES IN FARM VC \(self?.iconsImages.first)")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,67 +37,57 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
         setupCollectionView()
         createDataSource()
         reloadData()
-        setupUI()
-        view.backgroundColor = .systemBlue
+        self.overrideUserInterfaceStyle = .dark
     }
     
-    deinit {
-        print("FARMS VC is allocated")
-    }
-    
-    //MARK: - Data source
-    private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Farm>(collectionView: collectionView,
-                                                                        cellProvider: { (collectionView,
-                                                                                         indexPath, farm) -> UICollectionViewCell? in
-                                                                            guard let section = Section(rawValue: indexPath.section) else {
-                                                                                fatalError("Unknown section kind")
-                                                                            }
-                                                                            
-                                                                            switch section {
-                                                                            case .myFarms:
-                                                                                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FarmCell.reuseId, for: indexPath) as? FarmCell
-                                                                                else { fatalError() }
-                                                                                cell.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-                                                                                cell.setupLabelsData (with: self.farms.data[indexPath.row])
-                                                                                return cell
-                                                                            }
-                                                                        })
-    }
-    
-    private func reloadData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Farm>()
-        snapshot.appendSections([.myFarms])
-        snapshot.appendItems(farms.data, toSection: .myFarms)
-        dataSource?.apply(snapshot, animatingDifferences: true)
-    }
-    
-//    @IBAction @objc func logOut(_ sender: Any) {
-//        let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
-//    }
-}
-
-extension FarmsViewController {
-    
-    func setupUI() {
+    func layoutSubviews() {
         
     }
     
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.barTintColor = .darkGray
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.title = "Your Farms"
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        collectionView.backgroundColor = .darkGray
         view.addSubview(collectionView)
         collectionView.register(FarmCell.self, forCellWithReuseIdentifier: "farmCell")
-//        collectionView.delegate = self
+        collectionView.delegate = self
     }
+    
+    func dismissVC() {
+        print(#function)
+        self.dismiss(animated: true)
+    }
+    
+    deinit {
+        print("FARMS VC is deallocated")
+    }
+    
+    @objc func logOut() {
+        presenter?.logOut()
+    }
+}
+
+// Setup layout
+extension FarmsViewController {
+    
+    private func setupNavigationBar() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barTintColor = .black
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+        navigationItem.leftBarButtonItem = backButton
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.title = "Your Farms"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(logOut))
+    }
+}
+
+// Setup compositional layout
+extension FarmsViewController {
     
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
@@ -97,7 +96,7 @@ extension FarmsViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .absolute(140))
+                                                   heightDimension: .absolute(200))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
@@ -107,4 +106,49 @@ extension FarmsViewController {
         }
         return layout
     }
+    
+    //MARK: - Data source
+    private func createDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Farm>(collectionView: collectionView,
+                                                                       cellProvider: { [weak self] (collectionView,
+                                                                                                    indexPath, farm) -> UICollectionViewCell? in
+                                                                        guard let section = Section(rawValue: indexPath.section) else {
+                                                                            fatalError("Unknown section kind")
+                                                                        }
+                                                                        
+                                                                        switch section {
+                                                                        case .myFarms:
+                                                                            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FarmCell.reuseId, for: indexPath) as? FarmCell
+                                                                            else { fatalError() }
+                                                                            //Captured weak self leaded to forse unwrap below!!!
+                                                                            cell.setupLabelsData (with: (self?.farms.data[indexPath.row])!, and: self?.iconsImages ?? [:])
+                                                                            return cell
+                                                                        }
+                                                                       })
+    }
+    
+    private func reloadData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Farm>()
+        snapshot.appendSections([.myFarms])
+        snapshot.appendItems(farms.data, toSection: .myFarms)
+        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension FarmsViewController: UICollectionViewDelegate {
+    
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//            guard let farm = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            presenter?.didSelectItemAt(with: self.farms.data[indexPath.row].id)
+        }
+    
+    func fetchFarmsSuccess() {
+        // refresh control goes here
+    }
+    
+    func fetchWorkersFailure(with error: String, and message: String) {
+        self.showAlert(with: error, and: message)
+    }
+    
+    
 }

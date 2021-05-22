@@ -14,10 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let loginVC = LoginRouter.createLoginModule()
-        
+        let rootVC = RootViewController()
+
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = loginVC
+        window.rootViewController = rootVC
         self.window = window
         window.makeKeyAndVisible()
     }
@@ -49,7 +49,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+}
 
+extension SceneDelegate {
+    static var shared: SceneDelegate {
+        let scene = UIApplication.shared.connectedScenes.first
+        return (scene?.delegate as? SceneDelegate)!
+    }
 
+    var rootViewController: RootViewController {
+        return window!.rootViewController as! RootViewController
+    }
 }
 

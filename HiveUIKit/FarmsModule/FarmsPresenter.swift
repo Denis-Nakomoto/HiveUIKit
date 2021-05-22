@@ -10,11 +10,30 @@ import Foundation
 
 class FarmsPresenter: FarmsPresenterProtocol {
     
-    var router: FarmsRouterProtocol?
+    weak var router: FarmsRouterProtocol?
     
     var interactor: FarmsInteractorProtocol?
     
-    var view: FarmsViewProtocol?
+    weak var view: FarmsViewProtocol?
+    
+    func didSelectItemAt(with farmId: Int) {
+        interactor?.loadWorkers(with: farmId)
+    }
+    
+    func fetchWorkersSuccess(workers: Workers) {
+        print(#function)
+//        router?.presentWorkersModule(on: view!, with: workers)
+//        view?.fetchFarmsSuccess()
+    }
+    
+    func fetchWorkersFailure(with error: String, and message: String) {
+        print(#function)
+        view?.fetchWorkersFailure(with: error, and: message)
+    }
+    
+    func logOut() {
+        interactor?.logOut()
+    }
     
 }
 //

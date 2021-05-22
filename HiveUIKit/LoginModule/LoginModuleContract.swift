@@ -19,7 +19,7 @@ protocol LoginViewProtocol: class {
 protocol LoginInteractorProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
     
-    func checkTextFields(name: String?, password: String?, twoFa: String?)
+    func checkTextFields(name: String, password: String, twoFa: String?)
     func getAccessToken()
     func getFarms()
     func checkTokenIsNil()
@@ -30,7 +30,7 @@ protocol LoginPresenterProtocol: class {
     var interactor: LoginInteractorProtocol? { get set }
     var view: LoginViewProtocol? { get set}
     
-    func signIn(name: String?, password: String?, twoFa: String?)
+    func signIn(name: String, password: String, twoFa: String?)
     func signUp()
     func forgetPassword()
     func fetchFarmsSuccess(farms: Farms)
@@ -41,7 +41,7 @@ protocol LoginPresenterProtocol: class {
 protocol LoginRouterProtocol: class {
     static func createLoginModule() -> UIViewController
     
-    func presentFarmsModule(on view: LoginViewProtocol, with farms: Farms)
+    func pushToFarmsModule(on view: LoginViewProtocol, with farms: Farms)
 //    func presentSignUpModule()
 //    func presentForgetPasswordModule()
 }

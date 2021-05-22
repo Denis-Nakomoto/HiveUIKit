@@ -10,12 +10,17 @@ import UIKit
 
 class FarmsRouter: FarmsRouterProtocol {
     
-    
-    static func createFarmsModule(with farms: Farms) -> UINavigationController {
-        let view = FarmsViewController()
+    static func createFarmsModule(with farms: Farms) -> UIViewController {
+        let view: FarmsViewProtocol = FarmsViewController()
         view.farms = farms
-        let navigationController = UINavigationController(rootViewController: view)
-//        (UIApplication.shared.delegate as? SceneDelegate)?.window?.rootViewController = navigationController
+        
+        if SceneDelegate.shared.rootViewController.iconsImages.isEmpty {
+        CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
+            view.iconsImages = icons
+        })
+        } else {
+            view.iconsImages = SceneDelegate.shared.rootViewController.iconsImages
+        }
         
         let presenter: FarmsPresenterProtocol = FarmsPresenter()
         
@@ -25,16 +30,16 @@ class FarmsRouter: FarmsRouterProtocol {
         view.presenter?.interactor = FarmsInteractor()
         view.presenter?.interactor?.presenter = presenter
         
-        return navigationController
+        return view as! UIViewController
 
     }
     
     func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers) {
-//        let workerViewController = WorkerRouter.createModule(with: workers)
-//            
-//        let viewController = view as! FarmsViewController
-//        viewController.navigationController?
-//            .pushViewController(workerViewController, animated: true)
+        let workersViewController = WorkersRouter.createWorkersModule(with: workers)
+            
+        let viewController = view as! FarmsViewController
+        viewController.navigationController?
+            .pushViewController(workersViewController, animated: true)
     }
     
     
