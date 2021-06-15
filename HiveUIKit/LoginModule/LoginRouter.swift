@@ -27,10 +27,11 @@ class LoginRouter: LoginRouterProtocol {
     
     func pushToFarmsModule(on view: LoginViewProtocol, with farms: Farms) {
         print(#function)
-            let farmsVC = FarmsRouter.createFarmsModule(with: farms)
-            let viewController = view as! LoginView
-            viewController.navigationController?
-                .pushViewController(farmsVC, animated: true)
+        SceneDelegate.shared.rootViewController.prepareForSwitchToFarm(with: farms)
+//            let farmsVC = FarmsRouter.createFarmsModule(with: farms)
+//            let viewController = view as! LoginView
+//            viewController.navigationController?
+//                .pushViewController(farmsVC, animated: true)
     }
 }
 

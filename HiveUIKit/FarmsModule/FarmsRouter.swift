@@ -35,6 +35,7 @@ class FarmsRouter: FarmsRouterProtocol {
     }
     
     func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers) {
+        print(#function)
         let workersViewController = WorkersRouter.createWorkersModule(with: workers)
             
         let viewController = view as! FarmsViewController

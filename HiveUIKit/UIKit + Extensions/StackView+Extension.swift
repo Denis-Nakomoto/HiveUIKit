@@ -16,4 +16,9 @@ extension UIStackView {
         self.spacing = spacing
     }
     
+        func addGradientBackground() {
+            let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
+            gradientBackgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            insertSubview(gradientBackgroundView, at: 0)
+        }
 }

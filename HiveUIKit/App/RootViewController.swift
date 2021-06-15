@@ -56,6 +56,7 @@ class RootViewController: UIViewController {
     }
     
     func prepareForSwitchToFarm(with farms: Farms) {
+        print(#function)
         self.farms = farms
         CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
             self.iconsImages = icons

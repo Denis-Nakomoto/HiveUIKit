@@ -21,35 +21,27 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
     var collectionView: UICollectionView!
     
     var farms = Farms(data: [])
+
     var iconsImages = [String : UIImage]()
-    {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-                print("ICONS IMAGES IN FARM VC \(self?.iconsImages.first)")
-            }
-        }
-    }
     
+    // Var is used for cell height calculation
+    var coinsCount = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupCollectionView()
         createDataSource()
         reloadData()
+        coinsCount = 40 * iconsImages.count
         self.overrideUserInterfaceStyle = .dark
     }
-    
-    func layoutSubviews() {
-        
-    }
-    
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         view.addSubview(collectionView)
-        collectionView.register(FarmCell.self, forCellWithReuseIdentifier: "farmCell")
+        collectionView.register(FarmCell.self, forCellWithReuseIdentifier: FarmCell.reuseId)
         collectionView.delegate = self
     }
     
@@ -96,7 +88,7 @@ extension FarmsViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                   heightDimension: .absolute(200))
+                                                   heightDimension: .absolute(CGFloat(170 + self.coinsCount)))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
@@ -135,10 +127,10 @@ extension FarmsViewController {
     }
 }
 
+// Delegate extension for initiate workers fetching
 extension FarmsViewController: UICollectionViewDelegate {
     
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//            guard let farm = self.dataSource?.itemIdentifier(for: indexPath) else { return }
             presenter?.didSelectItemAt(with: self.farms.data[indexPath.row].id)
         }
     

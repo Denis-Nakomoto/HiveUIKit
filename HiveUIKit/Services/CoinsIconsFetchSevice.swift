@@ -5,6 +5,9 @@
 //  Created by Denis Svetlakov on 08.05.2021.
 //  Copyright © 2021 Denis Svetlakov. All rights reserved.
 //
+// 90f9f2d4bca38397eac8141441e29d2f388f7b7ea554e396bf072294f9a7f27c
+// https://www.cryptocompare.com/
+
 
 import UIKit
 
@@ -51,30 +54,27 @@ final class CoinsIconsFetchSevice {
             .map { $0.hashratesByCoin }
             .compactMap { $0 }
             .flatMap { $0 }
-        coinsMined
-            .compactMap({ coin in
-                let iconsUrl = CoinsIconsFetchSevice.shared.allIcons.filter({ icon in
-                    icon.name == coin.coin
-                })
-                iconsInUse = iconsUrl
-            })
+        iconsInUse = CoinsIconsFetchSevice.shared.allIcons.filter { icon in coinsMined.contains(where: { $0.coin == icon.name })}
         return iconsInUse
     }
     
     // MARK: - Gets actual UIImages of the coins icons
     
-    func fetchIconsImages(with urls: [Icons], completion: @escaping(_ icons: [String: UIImage]) -> Void){
+    func fetchIconsImages(with urls: [Icons], completion: @escaping(_ icons: [String: UIImage]) -> Void) {
+        let group = DispatchGroup()
         var coinsInUse: [String: UIImage] = [:]
         for url in urls {
-            if let icon = url.url {
-                let task = URLSession.shared.dataTask(with: URL(string: icon)!, completionHandler: { data, _, _ in
-                    if let data = data {
-                        coinsInUse[url.name] = UIImage(data: data)!
-                        completion(coinsInUse)
-                    }
-                })
-                task.resume()
-            }
+            group.enter()
+            let task = URLSession.shared.dataTask(with: URL(string: url.url!)!, completionHandler: { data, _, _ in
+                if let data = data {
+                    coinsInUse[url.name] = UIImage(data: data)!
+                }
+                group.leave()
+            })
+            task.resume()
+        }
+        group.notify(queue: DispatchQueue.main) {
+            completion(coinsInUse)
         }
     }
     
@@ -110,7 +110,3 @@ struct Icons: Decodable {
         case url
     }
 }
-
-
-
-

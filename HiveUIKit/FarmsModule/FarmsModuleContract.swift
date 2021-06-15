@@ -17,12 +17,8 @@ protocol FarmsViewProtocol: class {
     func fetchFarmsSuccess()
     func fetchWorkersFailure(with error: String, and message: String)
     
-    func dismissVC()
     // TODO:
     // Pull to refresh control
-    // logout button
-    // View collection delegate
-    // Review cell design
 
 }
 
@@ -35,8 +31,6 @@ protocol FarmsInteractorProtocol: class {
     
     // TODO:
     // View refresher
-    // Fetch workers logic
-    //
 
 }
 
@@ -53,7 +47,6 @@ protocol FarmsPresenterProtocol: class {
     
     // TODO:
     // Refresh view reference
-    // Logout refernece
     // Open workers page
 
 }

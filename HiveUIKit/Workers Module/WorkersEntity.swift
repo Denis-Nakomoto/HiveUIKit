@@ -324,10 +324,15 @@ struct PowerLimit: Codable {
 struct GPUStat: Codable {
     let busNumber, temp, fan, power: Int?
     let coreclk, memclk, memtemp: Int?
+    let busID: String?
+    let isOverheated: Bool?
+    let hash: Double?
 
     enum CodingKeys: String, CodingKey {
         case busNumber = "bus_number"
-        case temp, fan, power, coreclk, memclk, memtemp
+        case busID = "bus_id"
+        case temp, fan, power, coreclk, memclk, memtemp, hash
+        case isOverheated = "is_overheated"
     }
 }
 

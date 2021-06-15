@@ -11,22 +11,26 @@ import UIKit
 class FarmCell: UICollectionViewCell {
     
     static let reuseId: String = "farmCell"
+    var stackHeight = 40
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     let powerLabel = UILabel(text: "PWR", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.1960784314, green: 0.5882352941, blue: 0.8392156863, alpha: 1))
     let workersQtyLabel = UILabel(text: "WRK", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
+    let workersOfflineQtyLabel = UILabel(text: "110", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
     let effectivencyLabel = UILabel(text: "Effectiv", font: .systemFont(ofSize: 18, weight: .medium), color: .white)
     let gPUQtyLabel = UILabel(text: "GPU", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
+    let gPUOfflineQtyLabel = UILabel(text: "150", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
     let ballanceLabel = UILabel(text: "BLNS", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let farmNameLabel = UILabel(text: "FRMName", font: .systemFont(ofSize: 22, weight: .bold), color: .white)
     let priceLabel = UILabel(text: "PRICE", font: .systemFont(ofSize: 18, weight: .medium), color: .white)
-    let hashRateLabel = UILabel(text: "HSRT", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    let hashRateLabel = UILabel(text: "HSRT", font: .systemFont(ofSize: 18, weight: .medium), color: .white)
     let workersLblName = UILabel(text: "Workers", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let GPUsLblName = UILabel(text: "GPU", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let effectivencyLblName = UILabel(text: "Effectivency", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let ballanceLblName = UILabel(text: "Ballance", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let priceLblName = UILabel(text: "Daily price",  font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
-    var allCoinsAndHashStackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 6)
+    var allConinsHashrateAndIconsStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
     let powerLblName = UILabel(text: "Consumation", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    
     
     let separator: UIView = {
         let separator = UIView(frame: .zero)
@@ -40,12 +44,13 @@ class FarmCell: UICollectionViewCell {
         return view
     }()
     
-    let iconImageView: UIImageView = {
-        let iconImageView = UIImageView()
-        iconImageView.contentMode = .scaleAspectFit
-        iconImageView.layer.cornerRadius = iconImageView.frame.height / 2
-        iconImageView.clipsToBounds = true
-        return iconImageView
+    var iconImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.layer.cornerRadius = image.frame.height / 2
+        image.clipsToBounds = true
+        image.frame = CGRect(x: 0, y: 0, width: 26, height: 26)
+        return image
     }()
     
     override init(frame: CGRect) {
@@ -62,18 +67,26 @@ class FarmCell: UICollectionViewCell {
 //MARK: - Setup constraints
 extension FarmCell {
     private func setupConstraints() {
-        let workersStack = UIStackView(arrangedSubviews: [workersQtyLabel, workersLblName],
+        
+        let workersOnOffStack = UIStackView(arrangedSubviews: [workersQtyLabel, workersOfflineQtyLabel], axis: .horizontal, spacing: 3)
+        workersOnOffStack.distribution = .fillEqually
+        
+        let workersStack = UIStackView(arrangedSubviews: [workersOnOffStack, workersLblName],
                                        axis: .vertical,
                                        spacing: 5)
-        let gpuStack = UIStackView(arrangedSubviews: [gPUQtyLabel, GPUsLblName],
+        
+        let gpusOnOffStack = UIStackView(arrangedSubviews: [gPUQtyLabel, gPUOfflineQtyLabel], axis: .horizontal, spacing: 3)
+        gpusOnOffStack.distribution = .fillEqually
+        
+        let gpuStack = UIStackView(arrangedSubviews: [gpusOnOffStack, GPUsLblName],
                                    axis: .vertical,
                                    spacing: 5)
         let effectivencyStack = UIStackView(arrangedSubviews: [effectivencyLabel, effectivencyLblName],
                                             axis: .vertical,
                                             spacing: 5)
         let powerStack = UIStackView(arrangedSubviews: [powerLabel, powerLblName],
-                                            axis: .vertical,
-                                            spacing: 5)
+                                     axis: .vertical,
+                                     spacing: 5)
         let ballanceStack = UIStackView(arrangedSubviews: [ballanceLabel, ballanceLblName],
                                         axis: .vertical,
                                         spacing: 5)
@@ -91,9 +104,11 @@ extension FarmCell {
         farmIndictorView.translatesAutoresizingMaskIntoConstraints = false
         powerStack.translatesAutoresizingMaskIntoConstraints = false
         farmNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        allCoinsAndHashStackView.translatesAutoresizingMaskIntoConstraints = false
-        allCoinsAndHashStackView.alignment = .fill
+        allConinsHashrateAndIconsStack.translatesAutoresizingMaskIntoConstraints = false
+        allConinsHashrateAndIconsStack.distribution = .fill
+        allConinsHashrateAndIconsStack.alignment = .leading
         separator.translatesAutoresizingMaskIntoConstraints = false
+        
         
         addSubview(gradientBackgroundView)
         addSubview(workersStack)
@@ -104,7 +119,9 @@ extension FarmCell {
         addSubview(farmIndictorView)
         addSubview(farmNameLabel)
         addSubview(powerStack)
-        addSubview(allCoinsAndHashStackView)
+        addSubview(allConinsHashrateAndIconsStack)
+        allConinsHashrateAndIconsStack.distribution = .fill
+        allConinsHashrateAndIconsStack.alignment = .fill
         addSubview(separator)
         
         NSLayoutConstraint.activate([
@@ -150,7 +167,8 @@ extension FarmCell {
         
         NSLayoutConstraint.activate([
             powerStack.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10),
-            powerStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            powerStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            powerStack.leadingAnchor.constraint(equalTo: effectivencyStack.trailingAnchor, constant: 8)
         ])
         
         NSLayoutConstraint.activate([
@@ -164,10 +182,10 @@ extension FarmCell {
         ])
         
         NSLayoutConstraint.activate([
-            allCoinsAndHashStackView.topAnchor.constraint(equalTo: ballanceStack.bottomAnchor, constant: 14),
-            allCoinsAndHashStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            allCoinsAndHashStackView.heightAnchor.constraint(equalToConstant: 26),
-            allCoinsAndHashStackView.widthAnchor.constraint(equalToConstant: 200)
+            allConinsHashrateAndIconsStack.topAnchor.constraint(equalTo: ballanceStack.bottomAnchor, constant: 16),
+            allConinsHashrateAndIconsStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
+            allConinsHashrateAndIconsStack.widthAnchor.constraint(equalToConstant: 200),
+            allConinsHashrateAndIconsStack.heightAnchor.constraint(equalToConstant: CGFloat(stackHeight))
         ])
         
     }
@@ -180,23 +198,33 @@ extension FarmCell {
         ballanceLabel.text = "\(value.money!.balance)$"
         farmNameLabel.text = String(value.name)
         priceLabel.text = "\(value.money!.dailyPrice)$"
-        hashRateLabel.text = "\(String(format: "%.1f", (value.hashratesByCoin?.first?.hashrate ?? 0.0)/1000))MHs"
-        iconImageView.image = icons[(value.hashratesByCoin?.first!.coin)!]
         configureCoinsStack(with: value, and: icons)
+        setupWorkersOnlineLabel(value: value)
+    }
+    
+    func setupWorkersOnlineLabel(value: Farm) {
+        if value.stats?.workersOffline == 0 {
+            workersOfflineQtyLabel.isHidden = true
+        } else {
+            workersOfflineQtyLabel.text = String(value.stats!.workersOffline)
+        }
+        
+        if value.stats?.gpusOnline == 0 {
+            gPUOfflineQtyLabel.isHidden = true
+        } else {
+            gPUOfflineQtyLabel.text = String(value.stats!.workersOffline)
+        }
     }
     
     func configureCoinsStack(with value: Farm, and icons: [String : UIImage]) {
-        let hashrateStack = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 3)
-        hashrateStack.distribution = .fillEqually
-        hashrateStack.alignment = .fill
         for coin in value.hashratesByCoin! {
             for (key, icon) in icons {
                 if key == coin.coin {
-                    hashRateLabel.text = "\(String(format: "%.1f", (coin.hashrate )/1000))MHs"
-                    iconImageView.image = icon
-                    hashrateStack.addArrangedSubview(iconImageView)
-                    hashrateStack.addArrangedSubview(hashRateLabel)
-                    allCoinsAndHashStackView.addArrangedSubview(hashrateStack)
+                    stackHeight += 40
+                    let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
+                    container.iconImage.image = icon
+                    container.hashRateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
+                    allConinsHashrateAndIconsStack.addArrangedSubview(container.view)
                 }
             }
         }
@@ -209,3 +237,4 @@ extension FarmCell {
     }
     
 }
+

@@ -11,8 +11,11 @@ import UIKit
 class WorkersRouter: WorkersRouterProtocol {
     
     static func createWorkersModule(with: Workers) -> UIViewController {
-        let view: WorkersViewProtocol = WorkersView()
+        let view: WorkersViewProtocol = WorkersViewController()
         let presenter: WorkersPresenterProtocol = WorkersPresenter()
+        
+        view.workers = with
+        view.iconsImages = SceneDelegate.shared.rootViewController.iconsImages
         
         view.presenter = presenter
         view.presenter?.router = WorkersRouter()
