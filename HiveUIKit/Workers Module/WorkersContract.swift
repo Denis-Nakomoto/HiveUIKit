@@ -13,7 +13,7 @@ protocol WorkersViewProtocol: class {
     var workers: Workers? { get set }
     var iconsImages:[String : UIImage] { get set }
     func calculateWorkerUpTime(with value: Worker) -> String
-    func prepareHeaderCellHeight(stacksHeights: [Int]) -> Int
+    func prepareShortViewHeight(stacksHeights: [Int]) -> Int
 }
 
 protocol WorkersInteractorProtocol: class {

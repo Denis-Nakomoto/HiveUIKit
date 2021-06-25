@@ -49,10 +49,12 @@
 		92C788EC263E960C003D681E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C788EB263E960C003D681E /* SplashViewController.swift */; };
 		92C788F0263FBEDA003D681E /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C788EF263FBEDA003D681E /* UINavigationController+Extension.swift */; };
 		92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBD8D92558C01500D851B4 /* StackView+Extension.swift */; };
+		92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D696B426830C9A00277EA7 /* ShortWorkerView.swift */; };
 		92E05A94266BB233007A03A8 /* GpusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E05A93266BB233007A03A8 /* GpusContainerView.swift */; };
 		92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */; };
 		92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */; };
 		92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */; };
+		92FEE2B32679A66C0006BB28 /* DetailedWorkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2B22679A66C0006BB28 /* DetailedWorkerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,10 +103,12 @@
 		92C788EB263E960C003D681E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		92C788EF263FBEDA003D681E /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		92CBD8D92558C01500D851B4 /* StackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+Extension.swift"; sourceTree = "<group>"; };
+		92D696B426830C9A00277EA7 /* ShortWorkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWorkerView.swift; sourceTree = "<group>"; };
 		92E05A93266BB233007A03A8 /* GpusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpusContainerView.swift; sourceTree = "<group>"; };
 		92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsViewController.swift; sourceTree = "<group>"; };
 		92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCell.swift; sourceTree = "<group>"; };
 		92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSingleGPUView.swift; sourceTree = "<group>"; };
+		92FEE2B22679A66C0006BB28 /* DetailedWorkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWorkerView.swift; sourceTree = "<group>"; };
 		DCF93D0354DDB8F0E3858F5B /* Pods_HiveUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiveUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */,
+				92D696B426830C9A00277EA7 /* ShortWorkerView.swift */,
+				92FEE2B22679A66C0006BB28 /* DetailedWorkerView.swift */,
 				92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */,
 				92E05A93266BB233007A03A8 /* GpusContainerView.swift */,
 			);
@@ -406,6 +412,7 @@
 				9214E4D22657222100F5EF27 /* GradientView.swift in Sources */,
 				926BAAEF264689F000A1F703 /* CoinsIconsFetchSevice.swift in Sources */,
 				92C718DF263238160016B2EB /* LoginPresenter.swift in Sources */,
+				92FEE2B32679A66C0006BB28 /* DetailedWorkerView.swift in Sources */,
 				923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */,
 				92BD0F52263A284B005463CB /* WorkersRouter.swift in Sources */,
 				92C718CE262FF98B0016B2EB /* FarmsPresenter.swift in Sources */,
@@ -427,6 +434,7 @@
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
 				92C788E7263E9453003D681E /* RootViewController.swift in Sources */,
+				92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */,
 				92C788EC263E960C003D681E /* SplashViewController.swift in Sources */,
 				92C718E2263238240016B2EB /* LoginEntity.swift in Sources */,
 				9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */,
