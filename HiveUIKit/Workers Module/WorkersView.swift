@@ -48,7 +48,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
             
             if showFullDetails[indexPath.row] {
                 cell.detailedView.isHidden = false
-                cell.detailedView.setupDatailedGPUView(with: workers[indexPath.row])
+                cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row])
                 return cell
             } else {
                 cell.detailedView.isHidden = true
