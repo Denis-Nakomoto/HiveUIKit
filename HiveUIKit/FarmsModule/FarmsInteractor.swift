@@ -20,16 +20,13 @@ class FarmsInteractor: FarmsInteractorProtocol {
                 self?.presenter?.fetchWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
                 return
             }
-            
-            self?.presenter?.fetchWorkersSuccess(workers: workers)
+            self?.presenter?.fetchWorkersSuccess(workers: workers, farmId: farmId)
         }
     }
     
     func logOut() {
+        UserDefaults.standard.removeObject(forKey: "CoinsCache")
         let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
         SceneDelegate.shared.rootViewController.switchToLogout()
     }
-    
-    
-    
 }

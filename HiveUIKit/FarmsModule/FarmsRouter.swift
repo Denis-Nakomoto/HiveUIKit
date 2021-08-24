@@ -10,12 +10,13 @@ import UIKit
 
 class FarmsRouter: FarmsRouterProtocol {
     
+    
     static func createFarmsModule(with farms: Farms) -> UIViewController {
         let view: FarmsViewProtocol = FarmsViewController()
         view.farms = farms
         
         if SceneDelegate.shared.rootViewController.iconsImages.isEmpty {
-        CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
+            CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
             view.iconsImages = icons
         })
         } else {
@@ -34,17 +35,13 @@ class FarmsRouter: FarmsRouterProtocol {
 
     }
     
-    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers) {
-        print(#function)
-        let workersViewController = WorkersRouter.createWorkersModule(with: workers)
+    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int) {
+        let workersViewController = WorkersRouter.createWorkersModule(with: workers, farmId: farmId)
             
         let viewController = view as! FarmsViewController
         viewController.navigationController?
             .pushViewController(workersViewController, animated: true)
     }
-    
-    
-    
 }
 
 

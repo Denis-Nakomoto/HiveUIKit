@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoginViewProtocol: class {
+protocol LoginViewProtocol: AnyObject {
     var presenter: LoginPresenterProtocol? { get set }
 
     func didGetFarmsFailure(with error: String, and message: String)
@@ -16,7 +16,7 @@ protocol LoginViewProtocol: class {
     func dismissVC()
 }
 
-protocol LoginInteractorProtocol: class {
+protocol LoginInteractorProtocol: AnyObject {
     var presenter: LoginPresenterProtocol? { get set }
     
     func checkTextFields(name: String, password: String, twoFa: String?)
@@ -25,7 +25,7 @@ protocol LoginInteractorProtocol: class {
     func checkTokenIsNil()
 }
 
-protocol LoginPresenterProtocol: class {
+protocol LoginPresenterProtocol: AnyObject {
     var router: LoginRouterProtocol? { get set }
     var interactor: LoginInteractorProtocol? { get set }
     var view: LoginViewProtocol? { get set}
@@ -38,7 +38,7 @@ protocol LoginPresenterProtocol: class {
     func viewDidLoad()
 }
 
-protocol LoginRouterProtocol: class {
+protocol LoginRouterProtocol: AnyObject {
     static func createLoginModule() -> UIViewController
     
     func pushToFarmsModule(on view: LoginViewProtocol, with farms: Farms)

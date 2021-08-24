@@ -29,11 +29,11 @@ class WorkersInteractor: WorkersInteractorProtocol {
     
     // Calculates time of work for each worker
     // TODO: It would great to reafactor it
-   func calculateWorkerUpTime(with value: Worker) -> String {
+   func convertTime(with value: Int?) -> String {
     
         var bootTime: [String] = []
 
-        let interval = Date() - (value.stats?.bootTime?.fromUnixTimeStamp()!)!
+    let interval = Date() - (value!.fromUnixTimeStamp()!)
         
         if let months = interval.month, interval.month != 0 {
             bootTime.append("\(months)M:")
@@ -77,7 +77,7 @@ class WorkersInteractor: WorkersInteractorProtocol {
         return ""
     }
     
-    func prepareHeaderCellHeight(stacksHeights: [Int]) -> Int {
+    func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
         if let gpuStackHeight = stacksHeights.first, let coinsStackHeight =  stacksHeights.last {
             if gpuStackHeight > 25 && coinsStackHeight > 40 {
                 return max(gpuStackHeight, coinsStackHeight)
@@ -86,6 +86,19 @@ class WorkersInteractor: WorkersInteractorProtocol {
             return 0
         }
         return 0
+    }
+    
+    // Pull to fetch and refresh workers view
+    
+    func refreshWorkers(farmId: Int) {
+        let url = "https://api2.hiveos.farm/api/v2/farms/\(farmId)/workers"
+        NetworkManager.shared.fetchData(with: url) { [weak self] (result: Workers?, error) in
+            guard let workers = result else {
+                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
+                return
+            }
+            self?.presenter?.refreshWorkersSuccess(workers: workers)
+        }
     }
 }
 

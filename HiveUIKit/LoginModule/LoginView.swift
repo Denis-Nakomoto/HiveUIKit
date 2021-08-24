@@ -39,6 +39,9 @@ class LoginView: UIViewController, LoginViewProtocol {
         setupNavigationBar() 
         presenter?.viewDidLoad()
         singnInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        nameTextField.delegate = self
+        passwordTextField.delegate = self
+        twoFaTextField.delegate = self
     }
     
     @objc func signIn() {
@@ -86,7 +89,7 @@ extension LoginView {
         singnInButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            hiveLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            hiveLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             hiveLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             hiveLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             hiveLogo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
@@ -123,5 +126,32 @@ extension LoginView {
             singnInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             singnInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
+    }
+}
+
+// Text fields delegate
+
+extension LoginView: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            textField.resignFirstResponder()
+            twoFaTextField.becomeFirstResponder()
+        } else {
+            signIn()
+        }
+        return true
     }
 }

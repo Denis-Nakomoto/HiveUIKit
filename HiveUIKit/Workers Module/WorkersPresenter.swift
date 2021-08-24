@@ -20,12 +20,28 @@ class WorkersPresenter: WorkersPresenterProtocol {
         interactor?.prepareIconAndGPUStacks(worker: worker, and: icons) ?? []
     }
     
-    func calculateWorkerUpTime(with value: Worker) -> String {
-        interactor?.calculateWorkerUpTime(with: value) ?? ""
+    func convertTime(with value: Int?) -> String {
+        interactor?.convertTime(with: value) ?? ""
     }
     
-    func prepareHeaderCellHeight(stacksHeights: [Int]) -> Int {
-        (interactor?.prepareHeaderCellHeight(stacksHeights: stacksHeights))!
+    func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
+        (interactor?.prepareShortViewHeight(stacksHeights: stacksHeights))!
     }
+    
+    // Pull to refresh methods
+    
+    func refreshWorkers(farmId: Int) {
+        interactor?.refreshWorkers(farmId: farmId)
+    }
+    
+    func refreshWorkersSuccess(workers: Workers) {
+        view?.onRefreshWorkersSuccess(workers: workers)
+    }
+    
+    func refreshWorkersFailure(with: String, and: String) {
+        view?.onRefreshWorkersFailure(with: with, and: and)
+    }
+    
+
 
 }

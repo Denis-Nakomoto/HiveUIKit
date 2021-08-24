@@ -35,6 +35,7 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
         reloadData()
         coinsCount = 40 * iconsImages.count
         self.overrideUserInterfaceStyle = .dark
+//        NetworkManager.shared.tokenRefresh()
     }
     
     private func setupCollectionView() {

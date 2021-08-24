@@ -16,7 +16,9 @@
 		9214E4E8265B5E3100F5EF27 /* CoinsIconContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E4E7265B5E3000F5EF27 /* CoinsIconContainerView.swift */; };
 		9214E51326609DAF00F5EF27 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E51226609DAF00F5EF27 /* Int+Extension.swift */; };
 		9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E5152660A12000F5EF27 /* Date+Extension.swift */; };
+		923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AF84E26C3583900AD54B2 /* String+Extension.swift */; };
 		923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D87FD2550FFA4003465C0 /* FarmCell.swift */; };
+		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
 		9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261CD0C2552D8C900F78CED /* UILabel+extension.swift */; };
 		9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F67F2509AA2700F45271 /* AppDelegate.swift */; };
 		9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6812509AA2700F45271 /* SceneDelegate.swift */; };
@@ -68,7 +70,9 @@
 		9214E4E7265B5E3000F5EF27 /* CoinsIconContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsIconContainerView.swift; sourceTree = "<group>"; };
 		9214E51226609DAF00F5EF27 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		9214E5152660A12000F5EF27 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		923AF84E26C3583900AD54B2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		923D87FD2550FFA4003465C0 /* FarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCell.swift; sourceTree = "<group>"; };
+		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
 		9261CD0C2552D8C900F78CED /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
 		9267F67C2509AA2700F45271 /* HiveUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiveUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9267F67F2509AA2700F45271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				92C788EF263FBEDA003D681E /* UINavigationController+Extension.swift */,
 				9214E51226609DAF00F5EF27 /* Int+Extension.swift */,
 				9214E5152660A12000F5EF27 /* Date+Extension.swift */,
+				923AF84E26C3583900AD54B2 /* String+Extension.swift */,
 			);
 			path = "UIKit + Extensions";
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				9203A8EB25492236004AE522 /* ViewControllers */,
 				9203A8EA25492229004AE522 /* StoryBoards */,
 				9267F6882509AA2900F45271 /* Assets.xcassets */,
+				92555E1D26D52391006D1429 /* DummyCoin.png */,
 				9267F68D2509AA2900F45271 /* Info.plist */,
 			);
 			path = HiveUIKit;
@@ -323,7 +329,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Denis Svetlakov";
 				TargetAttributes = {
 					9267F67B2509AA2700F45271 = {
@@ -355,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */,
+				92555E1E26D52391006D1429 /* DummyCoin.png in Resources */,
 				9267F6892509AA2900F45271 /* Assets.xcassets in Resources */,
 				9267F6872509AA2700F45271 /* Main.storyboard in Resources */,
 			);
@@ -434,6 +441,7 @@
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
 				92C788E7263E9453003D681E /* RootViewController.swift in Sources */,
+				923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */,
 				92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */,
 				92C788EC263E960C003D681E /* SplashViewController.swift in Sources */,
 				92C718E2263238240016B2EB /* LoginEntity.swift in Sources */,
@@ -504,6 +512,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -564,6 +573,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

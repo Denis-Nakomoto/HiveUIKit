@@ -15,10 +15,10 @@ class FarmCell: UICollectionViewCell {
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     let powerLabel = UILabel(text: "PWR", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.1960784314, green: 0.5882352941, blue: 0.8392156863, alpha: 1))
     let workersQtyLabel = UILabel(text: "WRK", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
-    let workersOfflineQtyLabel = UILabel(text: "110", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
+    let workersOfflineQtyLabel = UILabel(text: "0", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
     let effectivencyLabel = UILabel(text: "Effectiv", font: .systemFont(ofSize: 18, weight: .medium), color: .white)
     let gPUQtyLabel = UILabel(text: "GPU", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
-    let gPUOfflineQtyLabel = UILabel(text: "150", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
+    let gPUOfflineQtyLabel = UILabel(text: "0", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
     let ballanceLabel = UILabel(text: "BLNS", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let farmNameLabel = UILabel(text: "FRMName", font: .systemFont(ofSize: 22, weight: .bold), color: .white)
     let priceLabel = UILabel(text: "PRICE", font: .systemFont(ofSize: 18, weight: .medium), color: .white)
@@ -209,7 +209,7 @@ extension FarmCell {
             workersOfflineQtyLabel.text = String(value.stats!.workersOffline)
         }
         
-        if value.stats?.gpusOnline == 0 {
+        if value.stats?.gpusOffline == 0 {
             gPUOfflineQtyLabel.isHidden = true
         } else {
             gPUOfflineQtyLabel.text = String(value.stats!.workersOffline)
@@ -217,14 +217,16 @@ extension FarmCell {
     }
     
     func configureCoinsStack(with value: Farm, and icons: [String : UIImage]) {
-        for coin in value.hashratesByCoin! {
-            for (key, icon) in icons {
-                if key == coin.coin {
-                    stackHeight += 40
-                    let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
-                    container.iconImage.image = icon
-                    container.hashRateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
-                    allConinsHashrateAndIconsStack.addArrangedSubview(container.view)
+        if let value = value.hashratesByCoin {
+            for coin in value {
+                for (key, icon) in icons {
+                    if key == coin.coin {
+                        stackHeight += 40
+                        let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
+                        container.iconImage.image = icon
+                        container.hashRateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
+                        allConinsHashrateAndIconsStack.addArrangedSubview(container.view)
+                    }
                 }
             }
         }

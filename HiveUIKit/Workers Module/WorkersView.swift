@@ -15,9 +15,17 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
     
     var workers: Workers?
     
+    var farmId: Int?
+    
     var iconsImages = [String : UIImage]()
     
     var showFullDetails = [Bool]()
+    
+    lazy var workersRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshWorkers), for: .allEvents)
+        return refreshControl
+    } ()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         tableView.delegate = self
         tableView.dataSource = self
         showFullDetails = [Bool](repeating: false, count: workers?.data?.count ?? 0)
+        tableView.addSubview(workersRefreshControl)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,12 +52,15 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
             let stackHieghts = self.prepareIconAndGPUStacks(worker: workers[indexPath.row], and: self.iconsImages)
             let shortViewHeightAdd = prepareShortViewHeight(stacksHeights: stackHieghts)
             cell.shortViewHeigth += shortViewHeightAdd
-            let upTime = self.calculateWorkerUpTime(with: (self.workers?.data![indexPath.row])!)
-            cell.shortView.setupWorkerShortView(with: workers[indexPath.row], and: iconsImages, stackHieghts: stackHieghts, upTime: upTime)
-            
+            var minerBootTime = ""
+            let workerBootTime = self.convertTime(with: (self.workers?.data![indexPath.row].stats?.bootTime))
+            if let minerTime = (self.workers?.data![indexPath.row].stats?.minerStartTime) {
+            minerBootTime = self.convertTime(with: minerTime)
+            }
+            cell.shortView.setupWorkerShortView(with: workers[indexPath.row], and: iconsImages, stackHieghts: stackHieghts, upTime: workerBootTime)
             if showFullDetails[indexPath.row] {
                 cell.detailedView.isHidden = false
-                cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row])
+                cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row], workerUBootTime: workerBootTime, minerBootTime: minerBootTime)
                 return cell
             } else {
                 cell.detailedView.isHidden = true
@@ -73,17 +85,36 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         return presenter?.prepareIconAndGPUStacks(worker: worker, and: icons) ?? []
     }
     
-    func calculateWorkerUpTime(with value: Worker) -> String {
-        presenter?.calculateWorkerUpTime(with: value) ?? ""
+    func convertTime(with value: Int?) -> String {
+        presenter?.convertTime(with: value) ?? ""
     }
     
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
-        (presenter?.prepareHeaderCellHeight(stacksHeights: stacksHeights))!
+        (presenter?.prepareShortViewHeight(stacksHeights: stacksHeights))!
     }
     
+    // Pull to refresh methods
+    
+    @objc func refreshWorkers() {
+        presenter?.refreshWorkers(farmId: self.farmId!)
+    }
+    
+    func onRefreshWorkersSuccess(workers: Workers) {
+        print(#function)
+        self.workers = workers
+        self.tableView.reloadData()
+        self.workersRefreshControl.endRefreshing()
+    }
+
+    func onRefreshWorkersFailure(with: String, and: String) {
+        print(#function)
+        self.workersRefreshControl.endRefreshing()
+    }
 }
 
 extension WorkersViewController {
+    
+    // Show/hide details view
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        guard let cell = tableView.cellForRow(at: indexPath) as? WorkerCell else { return }

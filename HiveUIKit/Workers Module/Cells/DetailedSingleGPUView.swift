@@ -21,9 +21,13 @@ class DetailedSingleGPUView: UIViewController {
     
     func createGpuContainer(temp: Int, fan: Int, hash: String, spacing: CGFloat, fanColor: UIColor) {
         
-        let container: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 42, height: 52))
-        container.backgroundColor = .white
-    
+        let container: UIView = {
+           let containerView = UIView()
+            containerView.backgroundColor = #colorLiteral(red: 0.2235294118, green: 0.2431372549, blue: 0.2901960784, alpha: 1)
+            containerView.layer.cornerRadius = 3
+            return containerView
+        }()
+
         let gpuTemperature = UILabel(text: "\(temp)°", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
         
         let fanSpeed: UILabel = {
@@ -46,8 +50,9 @@ class DetailedSingleGPUView: UIViewController {
         
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: self.view.topAnchor),
-            container.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             container.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: spacing),
+            container.heightAnchor.constraint(equalToConstant: 52),
+            container.widthAnchor.constraint(equalToConstant: 39)
         ])
         
         NSLayoutConstraint.activate([

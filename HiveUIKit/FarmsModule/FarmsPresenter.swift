@@ -20,9 +20,8 @@ class FarmsPresenter: FarmsPresenterProtocol {
         interactor?.loadWorkers(with: farmId)
     }
     
-    func fetchWorkersSuccess(workers: Workers) {
-        print(#function)
-        router?.pushToWorkersModule(on: view!, with: workers)
+    func fetchWorkersSuccess(workers: Workers, farmId: Int) {
+        router?.pushToWorkersModule(on: view!, with: workers, farmId: farmId)
     }
     
     func fetchWorkersFailure(with error: String, and message: String) {

@@ -18,7 +18,6 @@ class LoginInteractor: LoginInteractorProtocol {
     var twoFa = ""
     
     func checkTextFields(name: String, password: String, twoFa: String?) {
-        print(#function)
             if name == "" || password == "" {
                 presenter?.fetchFarmsFailure(with: "ERROR", and: "Name and password are mandatory")
                 return
@@ -31,7 +30,6 @@ class LoginInteractor: LoginInteractorProtocol {
         }
     
     func getAccessToken() {
-        print(#function)
             NetworkManager.shared.loginRequest(name: name,
                                                password: password,
                                                twoFA: twoFa) { [weak self] token, error in

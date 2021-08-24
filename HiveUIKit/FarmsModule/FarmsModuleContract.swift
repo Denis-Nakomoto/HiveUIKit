@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FarmsViewProtocol: class {
+protocol FarmsViewProtocol: AnyObject {
     var presenter: FarmsPresenterProtocol? { get set }
     
     var farms: Farms { get set }
@@ -22,7 +22,7 @@ protocol FarmsViewProtocol: class {
 
 }
 
-protocol FarmsInteractorProtocol: class {
+protocol FarmsInteractorProtocol: AnyObject {
     var presenter: FarmsPresenterProtocol? { get set }
     
     func loadWorkers(with farmId: Int)
@@ -34,13 +34,13 @@ protocol FarmsInteractorProtocol: class {
 
 }
 
-protocol FarmsPresenterProtocol: class {
+protocol FarmsPresenterProtocol: AnyObject {
     var router: FarmsRouterProtocol? { get set }
     var interactor: FarmsInteractorProtocol? { get set }
     var view: FarmsViewProtocol? { get set}
     
     func didSelectItemAt(with farmId: Int)
-    func fetchWorkersSuccess(workers: Workers)
+    func fetchWorkersSuccess(workers: Workers, farmId: Int)
     func fetchWorkersFailure(with error: String, and message: String)
     
     func logOut()
@@ -51,9 +51,9 @@ protocol FarmsPresenterProtocol: class {
 
 }
 
-protocol FarmsRouterProtocol: class {
+protocol FarmsRouterProtocol: AnyObject {
     
     static func createFarmsModule(with farms: Farms) -> UIViewController
     
-    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers)
+    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int)
 }

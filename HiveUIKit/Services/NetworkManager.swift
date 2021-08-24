@@ -48,7 +48,6 @@ class NetworkManager {
             }
     }
 
-    
     func fetchData<T: Decodable>(with url: String, completition: @escaping(_ result: T?, _ error: String?)->(), status: ((_ statusCode: Int)->())? = nil) {
         print(#function)
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
@@ -67,10 +66,10 @@ class NetworkManager {
                 if (200..<300).contains(statusCode) {
                     switch response.result {
                     case .success(let data):
-                        print ("SUCCESS")
-                        let dataString = String(decoding: data, as: UTF8.self)
+//                        print ("SUCCESS")
+//                        let dataString = String(decoding: data, as: UTF8.self)
 //                        status!(statusCode)
-                        print("JSON: \(dataString)")
+//                        print("JSON: \(dataString)")
                         do {
                             let farms = try JSONDecoder().decode(T.self, from: data)
                             completition(farms, nil)
@@ -86,6 +85,38 @@ class NetworkManager {
                 } else {
                     print("AF REQUEST FAILURE: \(String(describing: response.response?.statusCode))")
                     completition(nil, "Request failure: \(String(describing: response.response?.statusCode))")
+                }
+            }
+    }
+    
+    // TEST of token refresh
+
+    func tokenRefresh(completition: @escaping(_ result: String, _ error: Error?)->()) {
+
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json"
+        ]
+
+        AF.request("https://api2.hiveos.farm/api/v2/auth/refresh",
+                   method: .post,
+                   parameters: "",
+                   encoder: JSONParameterEncoder.default,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success (let data):
+                    do {
+                        let token = try JSONDecoder().decode(Login.self, from: data)
+                        completition(token.accessToken ?? "", nil)
+                    }
+                    catch let error {
+                        print ("ENCODING ERROR \(error)")
+                    }
+                case .failure (let error):
+                  print("refresh error: \(error)")
                 }
             }
     }

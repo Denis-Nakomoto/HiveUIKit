@@ -8,33 +8,41 @@
 
 import UIKit
 
-protocol WorkersViewProtocol: class {
+protocol WorkersViewProtocol: AnyObject {
     var presenter: WorkersPresenterProtocol? { get set }
     var workers: Workers? { get set }
+    var farmId: Int? { get set }
     var iconsImages:[String : UIImage] { get set }
-    func calculateWorkerUpTime(with value: Worker) -> String
+    func convertTime(with value: Int?) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
+    func refreshWorkers()
+    func onRefreshWorkersSuccess(workers: Workers)
+    func onRefreshWorkersFailure(with: String, and: String)
 }
 
-protocol WorkersInteractorProtocol: class {
+protocol WorkersInteractorProtocol: AnyObject {
     var presenter: WorkersPresenterProtocol? { get set }
     func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int]
-    func calculateWorkerUpTime(with value: Worker) -> String
+    func convertTime(with value: Int?) -> String
     func dateFormatter(from timestamp: String) -> String
-    func prepareHeaderCellHeight(stacksHeights: [Int]) -> Int
+    func prepareShortViewHeight(stacksHeights: [Int]) -> Int
+    func refreshWorkers(farmId: Int)
 }
 
-protocol WorkersPresenterProtocol: class {
+protocol WorkersPresenterProtocol: AnyObject {
     var router: WorkersRouterProtocol? { get set }
     var interactor: WorkersInteractorProtocol? { get set }
     var view: WorkersViewProtocol? { get set}
     func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int]
-    func calculateWorkerUpTime(with value: Worker) -> String
-    func prepareHeaderCellHeight(stacksHeights: [Int]) -> Int 
+    func convertTime(with value: Int?) -> String
+    func prepareShortViewHeight(stacksHeights: [Int]) -> Int
+    func refreshWorkers(farmId: Int)
+    func refreshWorkersSuccess(workers: Workers)
+    func refreshWorkersFailure(with: String, and: String)
 }
 
-protocol WorkersRouterProtocol: class {
+protocol WorkersRouterProtocol: AnyObject {
     
-    static func createWorkersModule(with: Workers) -> UIViewController 
+    static func createWorkersModule(with: Workers, farmId: Int) -> UIViewController 
 
 }
