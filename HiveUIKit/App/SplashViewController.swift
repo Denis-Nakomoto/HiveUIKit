@@ -12,11 +12,10 @@ import SwiftKeychainWrapper
 class SplashViewController: UIViewController {
     
     private let activityIndicator = UIActivityIndicatorView(style: .large)
-    
+
     override func viewDidLoad() {
-        print("Splash \(#function)")
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .black
         view.addSubview(activityIndicator)
         activityIndicator.frame = view.bounds
         activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
@@ -31,6 +30,11 @@ class SplashViewController: UIViewController {
         if accessToken != nil {
             let url = "https://api2.hiveos.farm/api/v2/farms"
             NetworkManager.shared.fetchData(with: url) { (result: Farms?, error) in
+// TODO: Handle long fenching or connection absance
+                
+//                if let error = error {
+//                    self.showAlert(with:"Error", and:"Something went wrong, check internet connection \(error)")
+//                }
                 if let farms = result {
                     SceneDelegate.shared.rootViewController.prepareForSwitchToFarm(with: farms)
                     self.activityIndicator.stopAnimating()

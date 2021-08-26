@@ -61,6 +61,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
             if showFullDetails[indexPath.row] {
                 cell.detailedView.isHidden = false
                 cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row], workerUBootTime: workerBootTime, minerBootTime: minerBootTime)
+                cell.detailedView.minerInfoField.setData(worker: workers[indexPath.row])
                 return cell
             } else {
                 cell.detailedView.isHidden = true
@@ -74,8 +75,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barTintColor = .black
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.title = "Your Workers"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -107,7 +107,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
     }
 
     func onRefreshWorkersFailure(with: String, and: String) {
-        print(#function)
+        self.showAlert(with: "Error", and: "Something went wrong. Cannot refresh workers")
         self.workersRefreshControl.endRefreshing()
     }
 }

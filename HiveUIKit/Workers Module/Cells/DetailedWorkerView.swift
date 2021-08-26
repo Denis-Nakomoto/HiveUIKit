@@ -28,6 +28,14 @@ class DetailedWorkerView: UIView {
     let hiveVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let linuxVersionImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
     let linuxVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    let minerInfoField = MinerInfoSubView()
+//    let hiveUpdateButton: UIButton = {
+//        let button = UIButton()
+//        button.isHidden = true
+//        button.tintColor = .orange
+//        button.addTarget(self, action: #selector(updateHive), for: .touchUpInside)
+//        return  button
+//    }()
     
     var allDetailedGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
     
@@ -40,6 +48,10 @@ class DetailedWorkerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    @objc func updateHive() {
+//        print("Update hive")
+//    }
     
     // Adjusts detailed GPUs cell view when cell is expanded
     func setupDatailedGPUView(with gpu: Worker) {
@@ -56,7 +68,6 @@ class DetailedWorkerView: UIView {
                 // Max qty of detailed gpus view in one row in stack view is 6
                 for arrView in 0..<arrangedViewQty {
                     let detailedGpuContainerView = DetailedSingleGPUView(frame: CGRect(x: 0, y: 0, width: 230, height: 52))
-                    let detailedGpuBackgroundView = DetailedSingleGPUView(frame: CGRect(x: 0, y: 0, width: 230, height: 52))
                     var spacing: CGFloat = 0
                     var tempArraySlice: ArraySlice<Int> = []
                     var fanArraySlice: ArraySlice<Int> = []
@@ -110,6 +121,12 @@ class DetailedWorkerView: UIView {
         if value.active == false {
             minerOnlineLabel.text = "WORKER OFFLINE"
         }
+        hiveVersion.text = value.versions?.hive
+        linuxVersion.text = value.versions?.kernel
+//        if value.needsUpgrade == true {
+//            hiveUpdateButton.isHidden = false
+//        }
+//        hiveUpdateButton.setTitle(value.name, for: .normal)
     }
     
     func setupConstraints() {
@@ -148,6 +165,9 @@ class DetailedWorkerView: UIView {
         iPStack.translatesAutoresizingMaskIntoConstraints = false
         hiveVersionStack.translatesAutoresizingMaskIntoConstraints = false
         linuxVersionStack.translatesAutoresizingMaskIntoConstraints = false
+        minerInfoField.translatesAutoresizingMaskIntoConstraints = false
+//        hiveUpdateButton.translatesAutoresizingMaskIntoConstraints = false
+        
         
         addSubview(allDetailedGpusStack)
         allDetailedGpusStack.distribution = .fillEqually
@@ -161,10 +181,20 @@ class DetailedWorkerView: UIView {
         addSubview(iPStack)
         addSubview(hiveVersionStack)
         addSubview(linuxVersionStack)
+        addSubview(minerInfoField)
+//        addSubview(hiveUpdateButton)
+        
         
         NSLayoutConstraint.activate([
-            allDetailedGpusStack.topAnchor.constraint(equalTo: topAnchor),
-            allDetailedGpusStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            minerInfoField.topAnchor.constraint(equalTo: topAnchor),
+            minerInfoField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            minerInfoField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            minerInfoField.heightAnchor.constraint(equalToConstant: 35)
+        ])
+        
+        NSLayoutConstraint.activate([
+            allDetailedGpusStack.topAnchor.constraint(equalTo: minerInfoField.bottomAnchor, constant: 10),
+            allDetailedGpusStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             allDetailedGpusStack.widthAnchor.constraint(equalToConstant: 230),
             allDetailedGpusStack.heightAnchor.constraint(equalToConstant: 52)
         ])
@@ -207,6 +237,11 @@ class DetailedWorkerView: UIView {
             hiveVersionStack.topAnchor.constraint(equalTo: minerOnlineStack.bottomAnchor, constant: 8),
             hiveVersionStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
+        
+//        NSLayoutConstraint.activate([
+//            hiveUpdateButton.leadingAnchor.constraint(equalTo: hiveVersionStack.trailingAnchor, constant: 10),
+//            hiveUpdateButton.bottomAnchor.constraint(equalTo: hiveVersion.bottomAnchor)
+//        ])
         
         NSLayoutConstraint.activate([
             linuxVersionStack.topAnchor.constraint(equalTo: hiveVersionStack.bottomAnchor, constant: 8),

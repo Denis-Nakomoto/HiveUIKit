@@ -25,7 +25,6 @@ class FarmsInteractor: FarmsInteractorProtocol {
     }
     
     func logOut() {
-        UserDefaults.standard.removeObject(forKey: "CoinsCache")
         let _ = KeychainWrapper.standard.removeObject(forKey: "accessToken")
         SceneDelegate.shared.rootViewController.switchToLogout()
     }

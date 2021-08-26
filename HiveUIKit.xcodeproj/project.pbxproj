@@ -19,6 +19,8 @@
 		923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AF84E26C3583900AD54B2 /* String+Extension.swift */; };
 		923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D87FD2550FFA4003465C0 /* FarmCell.swift */; };
 		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
+		92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */; };
+		92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */; };
 		9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261CD0C2552D8C900F78CED /* UILabel+extension.swift */; };
 		9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F67F2509AA2700F45271 /* AppDelegate.swift */; };
 		9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6812509AA2700F45271 /* SceneDelegate.swift */; };
@@ -73,6 +75,8 @@
 		923AF84E26C3583900AD54B2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		923D87FD2550FFA4003465C0 /* FarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCell.swift; sourceTree = "<group>"; };
 		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
+		92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerInfoSubView.swift; sourceTree = "<group>"; };
 		9261CD0C2552D8C900F78CED /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
 		9267F67C2509AA2700F45271 /* HiveUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiveUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9267F67F2509AA2700F45271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */,
 				92D696B426830C9A00277EA7 /* ShortWorkerView.swift */,
 				92FEE2B22679A66C0006BB28 /* DetailedWorkerView.swift */,
+				92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */,
 				92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */,
 				92E05A93266BB233007A03A8 /* GpusContainerView.swift */,
 			);
@@ -274,6 +279,7 @@
 				9267F67F2509AA2700F45271 /* AppDelegate.swift */,
 				92C788E6263E9453003D681E /* RootViewController.swift */,
 				92C788EB263E960C003D681E /* SplashViewController.swift */,
+				92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 				9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */,
 				92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */,
 				92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */,
+				92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */,
 				9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */,
 				92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */,
 				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
@@ -453,6 +460,7 @@
 				9298081E2634FF37002D66BC /* UIViewController+Extension.swift in Sources */,
 				92C718D1262FF99B0016B2EB /* FarmsEntity.swift in Sources */,
 				9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */,
+				92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */,
 				92C718D4262FF9A90016B2EB /* FarmsRouter.swift in Sources */,
 				92C718C8262FF96A0016B2EB /* FarmsView.swift in Sources */,
 				92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */,

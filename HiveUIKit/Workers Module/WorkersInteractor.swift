@@ -59,7 +59,7 @@ class WorkersInteractor: WorkersInteractorProtocol {
             if minutes >= 60 {
                 bootTime.append("\(minutes % 60)m")
             } else {
-                bootTime.append("\(minutes)m:")
+                bootTime.append("\(minutes)m")
             }
         }
 

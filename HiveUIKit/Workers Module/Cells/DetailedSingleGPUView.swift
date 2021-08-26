@@ -23,8 +23,8 @@ class DetailedSingleGPUView: UIViewController {
         
         let container: UIView = {
            let containerView = UIView()
-            containerView.backgroundColor = #colorLiteral(red: 0.2235294118, green: 0.2431372549, blue: 0.2901960784, alpha: 1)
-            containerView.layer.cornerRadius = 3
+            containerView.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2078431373, blue: 0.2352941176, alpha: 1)
+            containerView.layer.cornerRadius = 4
             return containerView
         }()
 

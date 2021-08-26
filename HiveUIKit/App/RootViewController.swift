@@ -10,7 +10,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     
-    private var current: UIViewController
+    private var current: UIViewController = SplashViewController()
     
     var farms: Farms?
     var iconsImages = [String : UIImage]()
@@ -23,9 +23,7 @@ class RootViewController: UIViewController {
     }
     
     init() {
-        self.current = SplashViewController()
         super.init(nibName: nil, bundle: nil)
-        overrideUserInterfaceStyle = .dark
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +38,7 @@ class RootViewController: UIViewController {
         current.view.frame = view.bounds
         view.addSubview(current.view)
         current.didMove(toParent: self)
+        overrideUserInterfaceStyle = .dark
     }
     
     func showLoginScreen() {
@@ -60,6 +59,11 @@ class RootViewController: UIViewController {
         CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
             self.iconsImages = icons
         })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if self.iconsImages.isEmpty == true {
+                self.showAlert(with: "Error", and: "Something went wrong, check internet connection")
+            }
+        }
     }
     
     func switchToFarmsScreen(with farms: Farms) {

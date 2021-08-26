@@ -67,8 +67,6 @@ extension FarmsViewController {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barTintColor = .black
-        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.title = "Your Farms"
         navigationController?.navigationBar.prefersLargeTitles = true

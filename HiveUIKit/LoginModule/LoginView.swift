@@ -89,7 +89,7 @@ extension LoginView {
         singnInButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            hiveLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            hiveLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height / 8),
             hiveLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             hiveLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             hiveLogo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
