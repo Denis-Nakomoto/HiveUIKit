@@ -9,8 +9,7 @@
 import UIKit
 
 class FarmsRouter: FarmsRouterProtocol {
-    
-    
+
     static func createFarmsModule(with farms: Farms) -> UIViewController {
         let view: FarmsViewProtocol = FarmsViewController()
         view.farms = farms
@@ -35,8 +34,8 @@ class FarmsRouter: FarmsRouterProtocol {
 
     }
     
-    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int) {
-        let workersViewController = WorkersRouter.createWorkersModule(with: workers, farmId: farmId)
+    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int, farmSelected: Farm) {
+        let workersViewController = WorkersRouter.createWorkersModule(with: workers, farmId: farmId, farmSelected: farmSelected)
             
         let viewController = view as! FarmsViewController
         viewController.navigationController?

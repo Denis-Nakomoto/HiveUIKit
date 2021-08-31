@@ -54,7 +54,6 @@ class LoginView: UIViewController, LoginViewProtocol {
     
     // Remove it from protocol and here
     func dismissVC() {
-        print(#function)
         self.dismiss(animated: false)
     }
     

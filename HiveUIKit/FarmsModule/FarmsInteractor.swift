@@ -14,13 +14,33 @@ class FarmsInteractor: FarmsInteractorProtocol {
     var presenter: FarmsPresenterProtocol?
     
     func loadWorkers(with farmId: Int) {
+        let group = DispatchGroup()
+        var loadedWorkers: Workers?
+        var loadedFarm: Farm?
         let url = "https://api2.hiveos.farm/api/v2/farms/\(farmId)/workers"
+        let url1 = "https://api2.hiveos.farm/api/v2/farms/\(farmId)"
+        group.enter()
         NetworkManager.shared.fetchData(with: url) { [weak self] (result: Workers?, error) in
+            defer { group.leave() }
             guard let workers = result else {
                 self?.presenter?.fetchWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
                 return
             }
-            self?.presenter?.fetchWorkersSuccess(workers: workers, farmId: farmId)
+            loadedWorkers = workers
+        }
+        group.enter()
+        NetworkManager.shared.fetchData(with: url1) { [weak self] (result: Farm?, error) in
+            defer { group.leave() }
+            guard let farm = result else {
+                self?.presenter?.fetchWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
+                return
+            }
+            loadedFarm = farm
+        }
+        group.notify(queue: .main) {
+            if let wrks = loadedWorkers, let frm = loadedFarm {
+                self.presenter?.fetchWorkersSuccess(workers: wrks, farmId: farmId, farmSelected: frm)
+            }
         }
     }
     

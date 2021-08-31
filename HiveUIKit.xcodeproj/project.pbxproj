@@ -55,6 +55,7 @@
 		92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBD8D92558C01500D851B4 /* StackView+Extension.swift */; };
 		92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D696B426830C9A00277EA7 /* ShortWorkerView.swift */; };
 		92E05A94266BB233007A03A8 /* GpusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E05A93266BB233007A03A8 /* GpusContainerView.swift */; };
+		92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */; };
 		92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */; };
 		92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */; };
 		92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */; };
@@ -113,6 +114,7 @@
 		92CBD8D92558C01500D851B4 /* StackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+Extension.swift"; sourceTree = "<group>"; };
 		92D696B426830C9A00277EA7 /* ShortWorkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWorkerView.swift; sourceTree = "<group>"; };
 		92E05A93266BB233007A03A8 /* GpusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpusContainerView.swift; sourceTree = "<group>"; };
+		92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewForHeader.swift; sourceTree = "<group>"; };
 		92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsViewController.swift; sourceTree = "<group>"; };
 		92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCell.swift; sourceTree = "<group>"; };
 		92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSingleGPUView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */,
 				92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */,
 				92E05A93266BB233007A03A8 /* GpusContainerView.swift */,
+				92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
 				9214E4E8265B5E3100F5EF27 /* CoinsIconContainerView.swift in Sources */,
+				92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */,
 				9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */,
 				92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */,
 				92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */,

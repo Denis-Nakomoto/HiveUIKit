@@ -11,7 +11,6 @@ import UIKit
 class LoginRouter: LoginRouterProtocol {
     
     static func createLoginModule() -> UIViewController {
-        print("Create login \(#function)")
         let view = LoginView()
         
         let presenter: LoginPresenterProtocol = LoginPresenter()
@@ -26,7 +25,6 @@ class LoginRouter: LoginRouterProtocol {
     }
     
     func pushToFarmsModule(on view: LoginViewProtocol, with farms: Farms) {
-        print(#function)
         SceneDelegate.shared.rootViewController.prepareForSwitchToFarm(with: farms)
 //            let farmsVC = FarmsRouter.createFarmsModule(with: farms)
 //            let viewController = view as! LoginView

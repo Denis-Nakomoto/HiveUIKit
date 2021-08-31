@@ -21,17 +21,14 @@ class LoginPresenter: LoginPresenterProtocol {
     }
     
     func signIn(name: String, password: String, twoFa: String?) {
-        print(#function)
         interactor?.checkTextFields(name: name, password: password, twoFa: twoFa)
     }
     
     func fetchFarmsSuccess(farms: Farms) {
-        print(#function)
         router?.pushToFarmsModule(on: view!, with: farms)
     }
     
     func fetchFarmsFailure(with error: String, and message: String) {
-        print(#function)
         view?.didGetFarmsFailure(with: error, and: message)
     }
     

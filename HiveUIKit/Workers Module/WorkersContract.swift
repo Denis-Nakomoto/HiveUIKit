@@ -12,6 +12,7 @@ protocol WorkersViewProtocol: AnyObject {
     var presenter: WorkersPresenterProtocol? { get set }
     var workers: Workers? { get set }
     var farmId: Int? { get set }
+    var farm: Farm? { get set }
     var iconsImages:[String : UIImage] { get set }
     func convertTime(with value: Int?) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
@@ -43,6 +44,6 @@ protocol WorkersPresenterProtocol: AnyObject {
 
 protocol WorkersRouterProtocol: AnyObject {
     
-    static func createWorkersModule(with: Workers, farmId: Int) -> UIViewController 
+    static func createWorkersModule(with: Workers, farmId: Int, farmSelected: Farm) -> UIViewController 
 
 }

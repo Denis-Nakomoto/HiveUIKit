@@ -6,6 +6,7 @@ target 'HiveUIKit' do
   use_frameworks!
 pod 'Alamofire'
 pod 'SwiftKeychainWrapper'
+pod 'TinyConstraints'
   # Pods for HiveUIKit
 
 end

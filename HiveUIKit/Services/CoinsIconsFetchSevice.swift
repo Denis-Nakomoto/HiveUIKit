@@ -14,14 +14,12 @@ final class CoinsIconsFetchSevice {
     static let shared = CoinsIconsFetchSevice()
     let dispatchGroupAllCoins = DispatchGroup()
     let dispatchGroupIcons = DispatchGroup()
-    let queueAllCoins = DispatchQueue(label: "DonloadIconsUrls")
-    let queueAllIcons = DispatchQueue(label: "DonloadCoinIconsImages", qos: .userInitiated )
     
     var allIcons: [Icons] = []
     
     private struct Constants {
         static let apiKey = "811363D0-6A09-4B4F-B957-6642CB1EB391"
-        static let url = "https://rest-sandbox.coinapi.io/v1/assets/icons/55"
+        static let iconsUrl = "https://rest-sandbox.coinapi.io/v1/assets/icons/55"
     }
     
     init() {}
@@ -30,7 +28,7 @@ final class CoinsIconsFetchSevice {
     
     func fetchAllCoinsIcons() {
         dispatchGroupAllCoins.enter()
-        guard let url = URL(string: Constants.url + "?apikey=" + Constants.apiKey) else { return }
+        guard let url = URL(string: Constants.iconsUrl + "?apikey=" + Constants.apiKey) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             defer { self?.dispatchGroupAllCoins.leave() }
@@ -55,13 +53,14 @@ final class CoinsIconsFetchSevice {
             .map { $0.hashratesByCoin }
             .compactMap { $0 }
             .flatMap { $0 }
+        print(coinsMined)
         iconsInUse = CoinsIconsFetchSevice.shared.allIcons.filter { icon in
             coinsMined.contains(where: { $0.coin == icon.name })}
+        print(iconsInUse)
         // If icon of the coin is not found in API list than his logo will be covered with dymmy logo
         for coin in coinsMined {
-            iconsInUse.map { icon in
-                if icon.name != coin.coin {
-                    iconsInUse.append(Icons(name: coin.coin, url: "DummyCoin")) }
+            if iconsInUse.contains(where: { $0.name == coin.coin }) == false {
+                iconsInUse.append(Icons(name: coin.coin, url: "DummyCoin"))
             }
         }
         return iconsInUse
@@ -70,47 +69,48 @@ final class CoinsIconsFetchSevice {
     // MARK: - Gets actual UIImages of the coins icons
     
     func fetchIconsImages(with urls: [Icons], completion: @escaping(_ icons: [String: UIImage]) -> Void) {
-        dispatchGroupIcons.enter()
-            var coinsInUse: [String: UIImage] = [:]
-            if urls.isEmpty {
+        
+        var coinsInUse: [String: UIImage] = [:]
+        if urls.isEmpty {
+            completion(coinsInUse)
+        }
+        // Check if the coin logo image is already stored in user defaults
+        for url in urls {
+//            if let dict = UserDefaults.standard.object(forKey: "CoinsCache") as? [String:String] {
+//                if let path = dict[url.url!] {
+//                    if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+//                        let img = UIImage(data: data)
+//                        coinsInUse[url.name] = img
+//                        completion(coinsInUse)
+//                    }
+//                }
+//            }
+            // If logo is not stored locally than proceed with logo request from server and save it in user defaults
+            var taskUrl = URL(string: url.url!)
+            if url.url == "DummyCoin" {
+                let path = Bundle.main.path(forResource: "DummyCoin", ofType: "png")
+                taskUrl = URL(fileURLWithPath: path!)
+            } else {
+                taskUrl = URL(string: url.url!)
+            }
+            dispatchGroupIcons.enter()
+            let task = URLSession.shared.dataTask(with: taskUrl!, completionHandler: { data, _, _ in
+                defer { self.dispatchGroupIcons.leave() }
+                if let data = data {
+                    if let image = UIImage(data: data) {
+//                        self.storeCoinImageInCache(urlString: url.url!, image: image)
+                        coinsInUse[url.name] = UIImage(data: data) ?? UIImage(named: "DummyCoin")
+                    } else {
+//                        self.storeCoinImageInCache(urlString: url.url!, image: UIImage(named: "DummyCoin")!)
+                        coinsInUse[url.name] = UIImage(named: "DummyCoin")
+                    }
+                }
+            })
+            task.resume()
+            dispatchGroupIcons.notify(queue: DispatchQueue.main) {
                 completion(coinsInUse)
             }
-            // Check if the coin logo image is already stored in user defaults
-            for url in urls {
-                if let dict = UserDefaults.standard.object(forKey: "CoinsCache") as? [String:String] {
-                    if let path = dict[url.url!] {
-                        if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-                            let img = UIImage(data: data)
-                            coinsInUse[url.name] = img
-                            completion(coinsInUse)
-                        }
-                    }
-                }
-                // If logo is not stored locally than proceed with logo request from server and save it in user defaults
-                var taskUrl = URL(string: url.url!)
-                if url.url == "DummyCoin" {
-                    let path = Bundle.main.path(forResource: "DummyCoin", ofType: "png")
-                    taskUrl = URL(fileURLWithPath: path!)
-                } else {
-                    taskUrl = URL(string: url.url!)
-                }
-                let task = URLSession.shared.dataTask(with: taskUrl!, completionHandler: { data, _, _ in
-                    defer { self.dispatchGroupIcons.leave() }
-                    if let data = data {
-                        if let image = UIImage(data: data) {
-                            self.storeCoinImageInCache(urlString: url.url!, image: image)
-                            coinsInUse[url.name] = UIImage(data: data) ?? UIImage(named: "DummyCoin")
-                        } else {
-                            self.storeCoinImageInCache(urlString: url.url!, image: UIImage(named: "DummyCoin")!)
-                            coinsInUse[url.name] = UIImage(named: "DummyCoin")
-                        }
-                    }
-                })
-                task.resume()
-                dispatchGroupIcons.notify(queue: DispatchQueue.main) {
-                    completion(coinsInUse)
-                }
-            }
+        }
     }
     
     // MARK: - Gets array of coins names and their icons which are currently in mining by the farm
@@ -127,19 +127,9 @@ final class CoinsIconsFetchSevice {
     
     // MARK: - Stores coins logos locally in user defaults
     
-    func storeCoinImageInCache(urlString: String, image: UIImage) {
-        let path = NSTemporaryDirectory().appending(UUID().uuidString)
-        let url = URL(fileURLWithPath: path)
-        let data = image.pngData()
-        
-        try? data?.write(to: url)
-        var dict = UserDefaults.standard.object(forKey: "CoinsCache") as? [String:String]
-        if dict == nil {
-            dict = [String:String]()
-        }
-        dict![urlString] = path
-        UserDefaults.standard.setValue(dict, forKey: "CoinsCache")
-    }
+//    func storeCoinImageInCache(urlString: String, image: UIImage) {
+//
+//    }
 }
 
 // MARK: - Coins icons model

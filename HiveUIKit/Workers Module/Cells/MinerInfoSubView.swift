@@ -62,7 +62,7 @@ class MinerInfoSubView: UIView {
         
         NSLayoutConstraint.activate([
             bottomStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 6),
-            bottomStack.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 2)
+            bottomStack.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 1)
         ])
     }
 }

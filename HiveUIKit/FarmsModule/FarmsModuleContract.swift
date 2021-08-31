@@ -14,11 +14,8 @@ protocol FarmsViewProtocol: AnyObject {
     var farms: Farms { get set }
     var iconsImages: [String : UIImage] { get set }
     
-    func fetchFarmsSuccess()
+//    func fetchFarmsSuccess()
     func fetchWorkersFailure(with error: String, and message: String)
-    
-    // TODO:
-    // Pull to refresh control
 
 }
 
@@ -29,9 +26,6 @@ protocol FarmsInteractorProtocol: AnyObject {
     
     func logOut() 
     
-    // TODO:
-    // View refresher
-
 }
 
 protocol FarmsPresenterProtocol: AnyObject {
@@ -40,14 +34,10 @@ protocol FarmsPresenterProtocol: AnyObject {
     var view: FarmsViewProtocol? { get set}
     
     func didSelectItemAt(with farmId: Int)
-    func fetchWorkersSuccess(workers: Workers, farmId: Int)
+    func fetchWorkersSuccess(workers: Workers, farmId: Int, farmSelected: Farm)
     func fetchWorkersFailure(with error: String, and message: String)
     
     func logOut()
-    
-    // TODO:
-    // Refresh view reference
-    // Open workers page
 
 }
 
@@ -55,5 +45,5 @@ protocol FarmsRouterProtocol: AnyObject {
     
     static func createFarmsModule(with farms: Farms) -> UIViewController
     
-    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int)
+    func pushToWorkersModule(on view: FarmsViewProtocol, with workers: Workers, farmId: Int, farmSelected: Farm)
 }

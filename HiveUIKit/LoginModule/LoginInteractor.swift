@@ -43,7 +43,6 @@ class LoginInteractor: LoginInteractorProtocol {
     }
 
     func getFarms() {
-        print(#function)
         let url = "https://api2.hiveos.farm/api/v2/farms"
         NetworkManager.shared.fetchData(with: url) { [weak self] (result: Farms?, error) in
             guard let farms = result else {

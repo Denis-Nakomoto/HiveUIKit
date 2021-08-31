@@ -47,7 +47,6 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
     }
     
     func dismissVC() {
-        print(#function)
         self.dismiss(animated: true)
     }
     
@@ -132,11 +131,11 @@ extension FarmsViewController: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             presenter?.didSelectItemAt(with: self.farms.data[indexPath.row].id)
         }
-    
-    func fetchFarmsSuccess() {
-        // refresh control goes here
-    }
-    
+//
+//    func fetchFarmsSuccess() {
+//        // refresh control goes here
+//    }
+//
     func fetchWorkersFailure(with error: String, and message: String) {
         self.showAlert(with: error, and: message)
     }

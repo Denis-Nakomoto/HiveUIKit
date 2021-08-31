@@ -29,6 +29,7 @@ class DetailedWorkerView: UIView {
     let linuxVersionImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
     let linuxVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let minerInfoField = MinerInfoSubView()
+    
 //    let hiveUpdateButton: UIButton = {
 //        let button = UIButton()
 //        button.isHidden = true
@@ -95,7 +96,7 @@ class DetailedWorkerView: UIView {
                             detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.0634246245, green: 0.5824196935, blue: 0.9887700677, alpha: 1))
                             spacing += 42
                         } else if (60..<80).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1))
+                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.6742147645, green: 0.6965720248, blue: 0.1999287951, alpha: 1))
                             spacing += 42
                         } else {
                             detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.999709247, green: 0.05831817317, blue: 0.01927470519, alpha: 1))
@@ -189,7 +190,7 @@ class DetailedWorkerView: UIView {
             minerInfoField.topAnchor.constraint(equalTo: topAnchor),
             minerInfoField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             minerInfoField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            minerInfoField.heightAnchor.constraint(equalToConstant: 35)
+            minerInfoField.heightAnchor.constraint(equalToConstant: 38)
         ])
         
         NSLayoutConstraint.activate([

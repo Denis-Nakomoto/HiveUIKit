@@ -15,6 +15,8 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
     
     var workers: Workers?
     
+    var farm: Farm?
+    
     var farmId: Int?
     
     var iconsImages = [String : UIImage]()
@@ -100,7 +102,6 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
     }
     
     func onRefreshWorkersSuccess(workers: Workers) {
-        print(#function)
         self.workers = workers
         self.tableView.reloadData()
         self.workersRefreshControl.endRefreshing()
@@ -117,7 +118,6 @@ extension WorkersViewController {
     // Show/hide details view
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let cell = tableView.cellForRow(at: indexPath) as? WorkerCell else { return }
         print(showFullDetails)
         showFullDetails[indexPath.row].toggle()
         self.tableView.beginUpdates()
@@ -131,5 +131,25 @@ extension WorkersViewController {
             return UITableView.automaticDimension
         } else { return 100 }
         
+    }
+}
+
+// Header for section methods
+
+extension WorkersViewController {
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let scrollView = ScrollViewForHeader()
+        
+        if let frm = farm {
+            scrollView.farm = frm
+        }
+
+        return scrollView.view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
     }
 }

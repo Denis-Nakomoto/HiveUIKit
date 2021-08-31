@@ -31,7 +31,6 @@ class RootViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print("Root \(#function)")
         super.viewDidLoad()
         view.backgroundColor = .red
         addChild(current)
@@ -40,6 +39,8 @@ class RootViewController: UIViewController {
         current.didMove(toParent: self)
         overrideUserInterfaceStyle = .dark
     }
+    
+    //Shows login view
     
     func showLoginScreen() {
         let loginVC = LoginRouter.createLoginModule()
@@ -54,17 +55,21 @@ class RootViewController: UIViewController {
         current = new
     }
     
+    // Prepares coins icons before show farms screen
+    
     func prepareForSwitchToFarm(with farms: Farms) {
         self.farms = farms
         CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: farms, completion: { icons in
             self.iconsImages = icons
         })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if self.iconsImages.isEmpty == true {
-                self.showAlert(with: "Error", and: "Something went wrong, check internet connection")
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            if self.iconsImages.isEmpty == true {
+//                self.showAlert(with: "Error", and: "Something went wrong, check internet connection")
+//            }
+//        }
     }
+    
+    // Handles transitions from login to farm view
     
     func switchToFarmsScreen(with farms: Farms) {
         let farmsViewController = FarmsRouter.createFarmsModule(with: farms)
@@ -79,6 +84,8 @@ class RootViewController: UIViewController {
        let loginVC = UINavigationController(rootViewController: loginViewController, backButtonHide: true, setTitle: "")
        animateDismissTransition(to: loginVC)
     }
+    
+    // Methods for transition animations
     
     private func animateDismissTransition(to new: UIViewController, completion: (() -> Void)? = nil) {
         current.willMove(toParent: nil)
