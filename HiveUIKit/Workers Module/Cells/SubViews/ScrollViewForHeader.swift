@@ -10,26 +10,26 @@ import UIKit
 
 class ScrollViewForHeader: UIViewController {
     
-    var farm: Farm? = nil
+    var farm: Farm?
     
     var stackWidth = 0
     
-    lazy var contentSize = CGSize(width: self.view.frame.width + 500, height: 65)
+    lazy var contentSize = CGSize(width: self.view.frame.width + 30, height: 65)
     
     lazy var  mainContainerView: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 8
         view.frame.size = contentSize
-        view.backgroundColor = .clear
+        view.backgroundColor = .black
         return view
     }()
     
     lazy var headerScrollView: UIScrollView = {
         let view = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 65))
-        view.backgroundColor = .clear
-//        view.frame = self.view.bounds
+        view.backgroundColor = .black
         view.autoresizingMask = .flexibleWidth
         view.bounces = true
-        view.showsVerticalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
         view.contentSize = contentSize
         return view
     }()
@@ -46,6 +46,8 @@ class ScrollViewForHeader: UIViewController {
         
         let coinsWithHash = farm.hashratesByCoin
         
+        var iterrationsCounter = 0
+        
         let sourceDict = ["WorkersOn": String(farm.workersCount),
                           "WorkersOff": String(farm.stats!.gpusOffline),
                           "GPU On": String(farm.stats!.gpusOnline),
@@ -60,7 +62,14 @@ class ScrollViewForHeader: UIViewController {
             if !item.value.isEmpty && item.value != "0" {
                 let arrangedView = createContainerViewForEachLabelPair(topLabelText: item.key,
                                                                        bottomLabelText: item.value)
+                iterrationsCounter += 1
                 self.stackWidth += 100
+                // Add to scroll view width
+                if iterrationsCounter > 3 {
+                    mainContainerView.frame.size.width += CGFloat(100)
+                    headerScrollView.contentSize.width += CGFloat(100)
+                }
+                
                 self.mainStackView.addArrangedSubview(arrangedView)
             }
         }
@@ -68,6 +77,9 @@ class ScrollViewForHeader: UIViewController {
             let arrangedView = createContainerViewForEachLabelPair(topLabelText: String(coin.coin),
                                                                    bottomLabelText: String(coin.hashrate))
             self.stackWidth += 100
+            // Add to scroll view width
+            mainContainerView.frame.size.width += CGFloat(100)
+            headerScrollView.contentSize.width += CGFloat(100)
             self.mainStackView.addArrangedSubview(arrangedView)
         })
     }
@@ -75,14 +87,14 @@ class ScrollViewForHeader: UIViewController {
     func createContainerViewForEachLabelPair(topLabelText: String, bottomLabelText: String) -> UIView {
 
         let containerView: UIView = {
-            let contntainer = UIView(frame: CGRect(x: 0, y: 0, width: 95, height: 65))
+            let contntainer = UIView(frame: CGRect(x: 0, y: 0, width: 95, height: 55))
             contntainer.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2078431373, blue: 0.2352941176, alpha: 1)
             contntainer.layer.cornerRadius = 8
             return contntainer
         }()
 
-        let topLabel = UILabel(text: topLabelText, font: .systemFont(ofSize: 14, weight: .regular), color: .white)
-        let bottomLabel = UILabel(text: bottomLabelText, font: .systemFont(ofSize: 14, weight: .regular), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+        let topLabel = UILabel(text: topLabelText, font: .systemFont(ofSize: 14, weight: .thin), color: .white)
+        let bottomLabel = UILabel(text: bottomLabelText, font: .systemFont(ofSize: 14, weight: .thin), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
         topLabel.adjustsFontSizeToFitWidth = true
         bottomLabel.adjustsFontSizeToFitWidth = true
         topLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,10 +127,10 @@ class ScrollViewForHeader: UIViewController {
         mainStackView.alignment = .fill
         
         NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: mainContainerView.leadingAnchor, constant: 5),
+            mainStackView.leadingAnchor.constraint(equalTo: mainContainerView.leadingAnchor,constant: 8),
             mainStackView.widthAnchor.constraint(equalToConstant: CGFloat(stackWidth)),
-            mainStackView.topAnchor.constraint(equalTo: mainContainerView.topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: mainContainerView.bottomAnchor, constant: -5)
+            mainStackView.topAnchor.constraint(equalTo: mainContainerView.topAnchor, constant: 8),
+            mainStackView.bottomAnchor.constraint(equalTo: mainContainerView.bottomAnchor,constant: -8)
         ])
     }
 }

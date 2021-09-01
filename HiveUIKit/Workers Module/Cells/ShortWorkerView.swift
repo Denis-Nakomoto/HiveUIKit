@@ -10,8 +10,24 @@ import UIKit
 
 class ShortWorkerView: UIView {
     
+    var showRigViewDelegate: TransitionToRigProtocol?
+    
+    var workerId: Int?
+    
+    var farmId: Int?
+    
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
-    let workerName = UILabel(text: "WRKRName", font: .systemFont(ofSize: 14, weight: .regular), color: .white)
+    
+    let workerNameButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(showRigView), for: .touchUpInside)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
+        button.titleLabel?.textAlignment = .left
+        button.frame = CGRect(x: 0, y: 0, width: 200, height: 15)
+        return button
+    }()
+    
     let upTimeLabel = UILabel(text: "UpTime", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let fanLabelName = UILabel(text: "FAN", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let maxFanSpeedLabel = UILabel(text: "MaxFan", font: .systemFont(ofSize: 10, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
@@ -44,7 +60,7 @@ class ShortWorkerView: UIView {
     // Configures all the inforamtion in the cell
     func setupWorkerShortView(with value: Worker, and icons: [String : UIImage], stackHieghts: [Int], upTime: String) {
         setupConstraints(heightsOfStacks: stackHieghts)
-        workerName.text = value.name
+        workerNameButton.setTitle(value.name, for: .normal)
         upTimeLabel.text = upTime
         configureCoinsStack(with: value, and: icons)
         configureGpuView(with: value)
@@ -119,6 +135,12 @@ class ShortWorkerView: UIView {
             isNvidiaLabel.isHidden = false
         }
     }
+    
+    // Methos of TransitionToRigProtocol, initiate show single rig view
+    
+    @objc func showRigView() {
+        showRigViewDelegate?.showRigView(rigId: self.workerId!, farmId: self.farmId!)
+    }
 }
 
 extension ShortWorkerView {
@@ -126,7 +148,7 @@ extension ShortWorkerView {
     // Places all the view elements on the cell. Incoming paramenter is heights of gpus and Icons stacks
     func setupConstraints(heightsOfStacks: [Int]) {
         
-        workerName.translatesAutoresizingMaskIntoConstraints = false
+        workerNameButton.translatesAutoresizingMaskIntoConstraints = false
         upTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         allConinsHashrateAndIconsStack.translatesAutoresizingMaskIntoConstraints = false
         maxFanSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +157,7 @@ extension ShortWorkerView {
         isAmdLabel.translatesAutoresizingMaskIntoConstraints = false
         fanLabelName.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(workerName)
+        addSubview(workerNameButton)
         addSubview(upTimeLabel)
         addSubview(allConinsHashrateAndIconsStack)
         allConinsHashrateAndIconsStack.distribution = .fillEqually
@@ -150,8 +172,8 @@ extension ShortWorkerView {
         addSubview(fanLabelName)
         
         NSLayoutConstraint.activate([
-            workerName.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            workerName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            workerNameButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            workerNameButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
         
         NSLayoutConstraint.activate([
@@ -187,7 +209,7 @@ extension ShortWorkerView {
         ])
 
         NSLayoutConstraint.activate([
-            allConinsHashrateAndIconsStack.topAnchor.constraint(equalTo: workerName.bottomAnchor, constant: 16),
+            allConinsHashrateAndIconsStack.topAnchor.constraint(equalTo: workerNameButton.bottomAnchor, constant: 16),
             allConinsHashrateAndIconsStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             allConinsHashrateAndIconsStack.widthAnchor.constraint(equalToConstant: 200),
             allConinsHashrateAndIconsStack.heightAnchor.constraint(equalToConstant: CGFloat(heightsOfStacks.last ?? 0))

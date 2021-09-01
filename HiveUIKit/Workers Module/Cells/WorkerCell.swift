@@ -14,7 +14,7 @@ class WorkerCell: UITableViewCell {
     var shortView = ShortWorkerView()
     var detailedView = DetailedWorkerView()
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
-    var shortViewHeigth = 90
+    var shortViewHeigth = 95
     var detailedViewHeigth = 335
     
     required init?(coder: NSCoder) {
@@ -27,8 +27,8 @@ class WorkerCell: UITableViewCell {
         
         selectionStyle = .none
         addSubview(gradientBackgroundView)
-        addSubview(shortView)
-        addSubview(detailedView)
+        contentView.addSubview(shortView)
+        contentView.addSubview(detailedView)
         gradientBackgroundView.layer.cornerRadius = 15
         gradientBackgroundView.clipsToBounds = true
         
@@ -37,18 +37,18 @@ class WorkerCell: UITableViewCell {
         gradientBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            shortView.topAnchor.constraint(equalTo: self.topAnchor),
-            shortView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            shortView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            shortView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             shortView.heightAnchor.constraint(equalToConstant: CGFloat(shortViewHeigth)),
-            shortView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            shortView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
             detailedView.topAnchor.constraint(equalTo: shortView.bottomAnchor),
-            detailedView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            detailedView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            detailedView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            detailedView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             detailedView.heightAnchor.constraint(equalToConstant: CGFloat(detailedViewHeigth)),
-            detailedView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            detailedView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([

@@ -6,10 +6,8 @@
 //  Copyright (c) 2021 Denis Svetlakov. All rights reserved.
 
 import UIKit
-import SwiftKeychainWrapper
 
-
-class WorkersViewController: UITableViewController, WorkersViewProtocol {
+class WorkersViewController: UITableViewController, WorkersViewProtocol, TransitionToRigProtocol {
 
     var presenter: WorkersPresenterProtocol?
     
@@ -50,10 +48,20 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: WorkerCell.reuseId, for: indexPath) as! WorkerCell
         
+        // Set delegate for to rig transition on button press
+        cell.shortView.showRigViewDelegate = self
+        
         if let workers = workers?.data {
+            // Set worker ID to be able terform transition to particular rig ob button press in th cell
+            cell.shortView.workerId = workers[indexPath.row].id
+            cell.shortView.farmId = farm?.id
             let stackHieghts = self.prepareIconAndGPUStacks(worker: workers[indexPath.row], and: self.iconsImages)
             let shortViewHeightAdd = prepareShortViewHeight(stacksHeights: stackHieghts)
+            let detailedViewHieghtAdd = prepareDetailedViewHeight(worker: workers[indexPath.row])
+            // Calculating adds for cell to fit the content
             cell.shortViewHeigth += shortViewHeightAdd
+            cell.detailedViewHeigth += detailedViewHieghtAdd
+            // Calculete worker and miner boot time
             var minerBootTime = ""
             let workerBootTime = self.convertTime(with: (self.workers?.data![indexPath.row].stats?.bootTime))
             if let minerTime = (self.workers?.data![indexPath.row].stats?.minerStartTime) {
@@ -82,17 +90,21 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         navigationItem.title = "Your Workers"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
+    // Calculates height of the icons and hashrate stack and GPU stack for short view of the cell
     func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int] {
         return presenter?.prepareIconAndGPUStacks(worker: worker, and: icons) ?? []
     }
-    
+    // Converts unix time recieved from server to normal format
     func convertTime(with value: Int?) -> String {
         presenter?.convertTime(with: value) ?? ""
     }
-    
+    // Finally calculates short view height
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
         (presenter?.prepareShortViewHeight(stacksHeights: stacksHeights))!
+    }
+    // Calculates Detailed view height of teh cell
+    func prepareDetailedViewHeight(worker: Worker) -> Int {
+        presenter?.prepareDetailedViewHeight(worker: worker) ?? 0
     }
     
     // Pull to refresh methods
@@ -101,8 +113,9 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
         presenter?.refreshWorkers(farmId: self.farmId!)
     }
     
-    func onRefreshWorkersSuccess(workers: Workers) {
+    func onRefreshWorkersSuccess(workers: Workers, farm: Farm) {
         self.workers = workers
+        self.farm = farm
         self.tableView.reloadData()
         self.workersRefreshControl.endRefreshing()
     }
@@ -110,6 +123,11 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol {
     func onRefreshWorkersFailure(with: String, and: String) {
         self.showAlert(with: "Error", and: "Something went wrong. Cannot refresh workers")
         self.workersRefreshControl.endRefreshing()
+    }
+    
+    // Method of the TransitionToRigProtocol
+    func showRigView(rigId: Int, farmId: Int) {
+        presenter?.showRigView(rigId: rigId, farmId: farmId)
     }
 }
 
@@ -129,12 +147,12 @@ extension WorkersViewController {
 
         if showFullDetails[indexPath.row] {
             return UITableView.automaticDimension
-        } else { return 100 }
+        } else { return 95 }
         
     }
 }
 
-// Header for section methods
+// Header with horisontal scroll view in section
 
 extension WorkersViewController {
     

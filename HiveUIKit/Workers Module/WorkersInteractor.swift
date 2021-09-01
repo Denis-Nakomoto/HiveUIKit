@@ -14,12 +14,18 @@ class WorkersInteractor: WorkersInteractorProtocol {
     
     var farms: Farms?
     var workers: Workers?
+    var selectedFarm: Farm?
+    
+    
     var iconsImages = [String : UIImage]()
     {
         didSet {
             print(iconsImages)
             DispatchQueue.main.async { [weak self] in
-                self?.presenter?.refreshWorkersSuccess(workers: (self?.workers)!)
+                if let wrkr = self?.workers, let frm = self?.selectedFarm {
+                    self?.presenter?.refreshWorkersSuccess(workers: wrkr, farm: frm)
+                }
+                else { return }
             }
         }
     }
@@ -90,6 +96,8 @@ class WorkersInteractor: WorkersInteractorProtocol {
         return ""
     }
     
+    // Calculates additional height for short wiew based on the qty of the coins currently in mining
+    
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
         if let gpuStackHeight = stacksHeights.first, let coinsStackHeight =  stacksHeights.last {
             if gpuStackHeight > 25 && coinsStackHeight > 40 {
@@ -101,22 +109,37 @@ class WorkersInteractor: WorkersInteractorProtocol {
         return 0
     }
     
+    // Calculates additional height for detailed wiew based on the qty of the GPUs
+    
+    func prepareDetailedViewHeight(worker: Worker) -> Int {
+        var heightAdd = 0
+        if let gpuOnline = worker.stats?.gpusOnline {
+            let qtyOfStackRows = gpuOnline % 6
+            if qtyOfStackRows < 1 {
+                heightAdd = 0
+            } else if qtyOfStackRows > 1 {
+                heightAdd = Int(qtyOfStackRows) * 60
+            }
+            return heightAdd
+        } else { return 0}
+    }
+    
     // Pull to fetch and refresh workers view
     
     func refreshWorkers(farmId: Int) {
         
         let group = DispatchGroup()
         // ulr - workers refresh
-        // url1 - all farms refresh done to refresh icon and total farm hashrate
-        // url2 - to refresh header which shows gereral infor for selected farm
+        // url1 - all farms refresh, done to refresh icon and total farm hashrate
+        // url2 - to refresh header which shows gereral info for selected farm
         let url = "https://api2.hiveos.farm/api/v2/farms/\(farmId)/workers"
         let url1 = "https://api2.hiveos.farm/api/v2/farms"
-//        let url2 = "https://api2.hiveos.farm/api/v2/farms/\(farmId)"
+        let url2 = "https://api2.hiveos.farm/api/v2/farms/\(farmId)"
         group.enter()
         NetworkManager.shared.fetchData(with: url) { [weak self] (result: Workers?, error) in
             defer { group.leave() }
             guard let resultWorkers = result else {
-                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Farms interactor)")
+                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Workers interactor)")
                 return
             }
             self?.workers = resultWorkers
@@ -125,23 +148,50 @@ class WorkersInteractor: WorkersInteractorProtocol {
         NetworkManager.shared.fetchData(with: url1) { [weak self] (result: Farms?, error) in
             defer { group.leave() }
             guard let resultFarms = result else {
-                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading coins failure. Error: \(String(describing: error)) (Farms interactor)")
+                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading coins failure. Error: \(String(describing: error)) (Workers interactor)")
                 return
             }
             self?.farms = resultFarms
         }
-//        group.enter()
-//        NetworkManager.shared.fetchData(with: url2) { [weak self] (result: Workers?, error) in
-//            defer { group.leave() }
-//            guard let resultWorkers = result else {
-//                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading farm info failure. Error: \(String(describing: error)) (Farms interactor)")
-//                return
-//            }
-//            self?.workers = resultWorkers
-//        }
+        group.enter()
+        NetworkManager.shared.fetchData(with: url2) { [weak self] (result: Farm?, error) in
+            defer { group.leave() }
+            guard let selectedFarm = result else {
+                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading farm info failure. Error: \(String(describing: error)) (Workers interactor)")
+                return
+            }
+            self?.selectedFarm = selectedFarm
+        }
         group.notify(queue: .global()) {
             CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: self.farms!) { result in
                 self.iconsImages = result
+            }
+        }
+    }
+    
+    //Handeles transition to selected rig
+    
+    func showRigView(rigId: Int, farmId: Int) {
+        
+        let group = DispatchGroup()
+        let url = "https://api2.hiveos.farm/api/v2/farms/\(farmId)/workers"
+        group.enter()
+        NetworkManager.shared.fetchData(with: url) { [weak self] (result: Workers?, error) in
+            defer { group.leave() }
+            guard let resultWorkers = result else {
+                self?.presenter?.refreshWorkersFailure(with: "ERROR", and: "Loading workers failure. Error: \(String(describing: error)) (Workers interactor)")
+                return
+            }
+            self?.workers = resultWorkers
+        }
+        
+        group.notify(queue: .main) {
+            if let workers = self.workers?.data {
+                for item in workers {
+                    if item.id == rigId {
+                        self.presenter?.showRigViewSuccess(rig: item)
+                    }
+                }
             }
         }
     }

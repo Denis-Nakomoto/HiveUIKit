@@ -34,14 +34,24 @@ class WorkersPresenter: WorkersPresenterProtocol {
         interactor?.refreshWorkers(farmId: farmId)
     }
     
-    func refreshWorkersSuccess(workers: Workers) {
-        view?.onRefreshWorkersSuccess(workers: workers)
+    func refreshWorkersSuccess(workers: Workers, farm: Farm) {
+        view?.onRefreshWorkersSuccess(workers: workers, farm: farm)
     }
     
     func refreshWorkersFailure(with: String, and: String) {
         view?.onRefreshWorkersFailure(with: with, and: and)
     }
     
-
-
+    func showRigView(rigId: Int, farmId: Int) {
+        interactor?.showRigView(rigId: rigId, farmId: farmId)
+    }
+    
+    func showRigViewSuccess(rig: Worker) {
+        router?.showRigModule(view: view!, rig: rig)
+    }
+    
+    func prepareDetailedViewHeight(worker: Worker) -> Int {
+        interactor?.prepareDetailedViewHeight(worker: worker) ?? 0
+    }
+    
 }

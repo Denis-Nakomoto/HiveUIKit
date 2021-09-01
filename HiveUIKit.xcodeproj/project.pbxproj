@@ -21,6 +21,11 @@
 		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
 		92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */; };
 		92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */; };
+		9261695E26DE28FB002C9029 /* RigContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695D26DE28FB002C9029 /* RigContract.swift */; };
+		9261696026DE2939002C9029 /* RigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695F26DE2939002C9029 /* RigView.swift */; };
+		9261696226DE294F002C9029 /* RigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696126DE294F002C9029 /* RigInteractor.swift */; };
+		9261696426DE297F002C9029 /* RigPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696326DE297F002C9029 /* RigPresenter.swift */; };
+		9261696826DE29AA002C9029 /* RigRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696726DE29AA002C9029 /* RigRouter.swift */; };
 		9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261CD0C2552D8C900F78CED /* UILabel+extension.swift */; };
 		9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F67F2509AA2700F45271 /* AppDelegate.swift */; };
 		9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6812509AA2700F45271 /* SceneDelegate.swift */; };
@@ -78,6 +83,11 @@
 		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
 		92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerInfoSubView.swift; sourceTree = "<group>"; };
+		9261695D26DE28FB002C9029 /* RigContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigContract.swift; sourceTree = "<group>"; };
+		9261695F26DE2939002C9029 /* RigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigView.swift; sourceTree = "<group>"; };
+		9261696126DE294F002C9029 /* RigInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigInteractor.swift; sourceTree = "<group>"; };
+		9261696326DE297F002C9029 /* RigPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigPresenter.swift; sourceTree = "<group>"; };
+		9261696726DE29AA002C9029 /* RigRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigRouter.swift; sourceTree = "<group>"; };
 		9261CD0C2552D8C900F78CED /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
 		9267F67C2509AA2700F45271 /* HiveUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiveUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9267F67F2509AA2700F45271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,12 +198,32 @@
 				92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */,
 				92D696B426830C9A00277EA7 /* ShortWorkerView.swift */,
 				92FEE2B22679A66C0006BB28 /* DetailedWorkerView.swift */,
+				9261695C26DE2826002C9029 /* SubViews */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		9261695C26DE2826002C9029 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
 				92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */,
 				92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */,
 				92E05A93266BB233007A03A8 /* GpusContainerView.swift */,
 				92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */,
 			);
-			path = Cells;
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		9261696926DE29B2002C9029 /* Rig Module */ = {
+			isa = PBXGroup;
+			children = (
+				9261695D26DE28FB002C9029 /* RigContract.swift */,
+				9261695F26DE2939002C9029 /* RigView.swift */,
+				9261696126DE294F002C9029 /* RigInteractor.swift */,
+				9261696326DE297F002C9029 /* RigPresenter.swift */,
+				9261696726DE29AA002C9029 /* RigRouter.swift */,
+			);
+			path = "Rig Module";
 			sourceTree = "<group>";
 		};
 		9261CD0F2552D8EA00F78CED /* UIKit + Extensions */ = {
@@ -236,6 +266,7 @@
 				92C718D7263235670016B2EB /* LoginModule */,
 				92FC6CC9262AE12500CDA647 /* FarmsModule */,
 				92BD0F39263A264A005463CB /* Workers Module */,
+				9261696926DE29B2002C9029 /* Rig Module */,
 				92C788EA263E95F3003D681E /* App */,
 				9261CD0F2552D8EA00F78CED /* UIKit + Extensions */,
 				9203A8F925492565004AE522 /* Services */,
@@ -425,8 +456,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9261695E26DE28FB002C9029 /* RigContract.swift in Sources */,
 				9214E4D22657222100F5EF27 /* GradientView.swift in Sources */,
 				926BAAEF264689F000A1F703 /* CoinsIconsFetchSevice.swift in Sources */,
+				9261696426DE297F002C9029 /* RigPresenter.swift in Sources */,
 				92C718DF263238160016B2EB /* LoginPresenter.swift in Sources */,
 				92FEE2B32679A66C0006BB28 /* DetailedWorkerView.swift in Sources */,
 				923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */,
@@ -439,8 +472,10 @@
 				92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
 				9214E4E8265B5E3100F5EF27 /* CoinsIconContainerView.swift in Sources */,
+				9261696026DE2939002C9029 /* RigView.swift in Sources */,
 				92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */,
 				9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */,
+				9261696226DE294F002C9029 /* RigInteractor.swift in Sources */,
 				92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */,
 				92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */,
 				92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */,
@@ -455,6 +490,7 @@
 				923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */,
 				92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */,
 				92C788EC263E960C003D681E /* SplashViewController.swift in Sources */,
+				9261696826DE29AA002C9029 /* RigRouter.swift in Sources */,
 				92C718E2263238240016B2EB /* LoginEntity.swift in Sources */,
 				9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */,
 				9214E51326609DAF00F5EF27 /* Int+Extension.swift in Sources */,

@@ -17,8 +17,9 @@ protocol WorkersViewProtocol: AnyObject {
     func convertTime(with value: Int?) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
     func refreshWorkers()
-    func onRefreshWorkersSuccess(workers: Workers)
+    func onRefreshWorkersSuccess(workers: Workers, farm: Farm)
     func onRefreshWorkersFailure(with: String, and: String)
+    func prepareDetailedViewHeight(worker: Worker) -> Int
 }
 
 protocol WorkersInteractorProtocol: AnyObject {
@@ -28,6 +29,8 @@ protocol WorkersInteractorProtocol: AnyObject {
     func dateFormatter(from timestamp: String) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
     func refreshWorkers(farmId: Int)
+    func showRigView(rigId: Int, farmId: Int)
+    func prepareDetailedViewHeight(worker: Worker) -> Int
 }
 
 protocol WorkersPresenterProtocol: AnyObject {
@@ -38,12 +41,19 @@ protocol WorkersPresenterProtocol: AnyObject {
     func convertTime(with value: Int?) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
     func refreshWorkers(farmId: Int)
-    func refreshWorkersSuccess(workers: Workers)
+    func refreshWorkersSuccess(workers: Workers, farm: Farm)
     func refreshWorkersFailure(with: String, and: String)
+    func showRigView(rigId: Int, farmId: Int)
+    func showRigViewSuccess(rig: Worker)
+    func prepareDetailedViewHeight(worker: Worker) -> Int
 }
 
 protocol WorkersRouterProtocol: AnyObject {
     
-    static func createWorkersModule(with: Workers, farmId: Int, farmSelected: Farm) -> UIViewController 
+   func showRigModule(view: WorkersViewProtocol, rig: Worker)
 
+}
+
+protocol TransitionToRigProtocol {
+    func showRigView(rigId: Int, farmId: Int)
 }
