@@ -38,8 +38,7 @@ class FarmsRouter: FarmsRouterProtocol {
         let workersViewController = WorkersRouter.createWorkersModule(with: workers, farmId: farmId, farmSelected: farmSelected)
             
         let viewController = view as! FarmsViewController
-        viewController.navigationController?
-            .pushViewController(workersViewController, animated: true)
+        viewController.navigationController?.pushViewController(workersViewController, animated: true)
     }
     
 }

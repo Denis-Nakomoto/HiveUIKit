@@ -38,7 +38,7 @@ class DetailedWorkerView: UIView {
 //        return  button
 //    }()
     
-    var allDetailedGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
+    let allDetailedGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

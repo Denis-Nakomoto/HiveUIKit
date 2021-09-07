@@ -16,8 +16,8 @@
 		9214E4E8265B5E3100F5EF27 /* CoinsIconContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E4E7265B5E3000F5EF27 /* CoinsIconContainerView.swift */; };
 		9214E51326609DAF00F5EF27 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E51226609DAF00F5EF27 /* Int+Extension.swift */; };
 		9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E5152660A12000F5EF27 /* Date+Extension.swift */; };
-		923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AF84E26C3583900AD54B2 /* String+Extension.swift */; };
 		923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D87FD2550FFA4003465C0 /* FarmCell.swift */; };
+		9243EB0426E6E0F20059FB97 /* XAxisValuesFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */; };
 		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
 		92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */; };
 		92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */; };
@@ -27,6 +27,10 @@
 		9261696426DE297F002C9029 /* RigPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696326DE297F002C9029 /* RigPresenter.swift */; };
 		9261696826DE29AA002C9029 /* RigRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696726DE29AA002C9029 /* RigRouter.swift */; };
 		9261CD0D2552D8C900F78CED /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261CD0C2552D8C900F78CED /* UILabel+extension.swift */; };
+		9266B9BA26E19DA100D6A707 /* GpusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266B9B926E19DA100D6A707 /* GpusCell.swift */; };
+		9266B9BC26E19DC100D6A707 /* MetricsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266B9BB26E19DC100D6A707 /* MetricsCell.swift */; };
+		9266B9BE26E19DD400D6A707 /* GeneralDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266B9BD26E19DD400D6A707 /* GeneralDataCell.swift */; };
+		9266B9C026E1ADE800D6A707 /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266B9BF26E1ADE800D6A707 /* NSObject+extension.swift */; };
 		9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F67F2509AA2700F45271 /* AppDelegate.swift */; };
 		9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6812509AA2700F45271 /* SceneDelegate.swift */; };
 		9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9267F6832509AA2700F45271 /* LoginViewController.swift */; };
@@ -34,6 +38,11 @@
 		9267F6892509AA2900F45271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6882509AA2900F45271 /* Assets.xcassets */; };
 		9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */; };
 		926BAAEF264689F000A1F703 /* CoinsIconsFetchSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BAAEE264689F000A1F703 /* CoinsIconsFetchSevice.swift */; };
+		929404C926E05D8F00EB9D9F /* MetricsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404C826E05D8F00EB9D9F /* MetricsModel.swift */; };
+		929404CB26E0642400EB9D9F /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404CA26E0642400EB9D9F /* MessagesModel.swift */; };
+		929404D026E07A1100EB9D9F /* GeneralRigDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404CF26E07A1100EB9D9F /* GeneralRigDataCell.swift */; };
+		929404D526E084EF00EB9D9F /* RigDataSourceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404D426E084EF00EB9D9F /* RigDataSourceEntity.swift */; };
+		929803CD26E0FDE10091C03C /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929803CC26E0FDE10091C03C /* UICollectionViewCell+Extension.swift */; };
 		929808192634F2D9002D66BC /* FarmsModuleContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929808182634F2D9002D66BC /* FarmsModuleContract.swift */; };
 		9298081E2634FF37002D66BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298081D2634FF37002D66BC /* UIViewController+Extension.swift */; };
 		9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298082A2637D8A0002D66BC /* UITextField+Extension.swift */; };
@@ -61,6 +70,8 @@
 		92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D696B426830C9A00277EA7 /* ShortWorkerView.swift */; };
 		92E05A94266BB233007A03A8 /* GpusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E05A93266BB233007A03A8 /* GpusContainerView.swift */; };
 		92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */; };
+		92F5552726E1BE9300E1EFA9 /* TableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5552626E1BE9300E1EFA9 /* TableViewCell+Extension.swift */; };
+		92F5552926E1C2D900E1EFA9 /* FormCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */; };
 		92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */; };
 		92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */; };
 		92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */; };
@@ -78,8 +89,8 @@
 		9214E4E7265B5E3000F5EF27 /* CoinsIconContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsIconContainerView.swift; sourceTree = "<group>"; };
 		9214E51226609DAF00F5EF27 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		9214E5152660A12000F5EF27 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		923AF84E26C3583900AD54B2 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		923D87FD2550FFA4003465C0 /* FarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCell.swift; sourceTree = "<group>"; };
+		9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAxisValuesFormatter.swift; sourceTree = "<group>"; };
 		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
 		92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerInfoSubView.swift; sourceTree = "<group>"; };
@@ -89,6 +100,10 @@
 		9261696326DE297F002C9029 /* RigPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigPresenter.swift; sourceTree = "<group>"; };
 		9261696726DE29AA002C9029 /* RigRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigRouter.swift; sourceTree = "<group>"; };
 		9261CD0C2552D8C900F78CED /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
+		9266B9B926E19DA100D6A707 /* GpusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpusCell.swift; sourceTree = "<group>"; };
+		9266B9BB26E19DC100D6A707 /* MetricsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsCell.swift; sourceTree = "<group>"; };
+		9266B9BD26E19DD400D6A707 /* GeneralDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDataCell.swift; sourceTree = "<group>"; };
+		9266B9BF26E1ADE800D6A707 /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
 		9267F67C2509AA2700F45271 /* HiveUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiveUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9267F67F2509AA2700F45271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9267F6812509AA2700F45271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +113,11 @@
 		9267F68B2509AA2900F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9267F68D2509AA2900F45271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926BAAEE264689F000A1F703 /* CoinsIconsFetchSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsIconsFetchSevice.swift; sourceTree = "<group>"; };
+		929404C826E05D8F00EB9D9F /* MetricsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsModel.swift; sourceTree = "<group>"; };
+		929404CA26E0642400EB9D9F /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
+		929404CF26E07A1100EB9D9F /* GeneralRigDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRigDataCell.swift; sourceTree = "<group>"; };
+		929404D426E084EF00EB9D9F /* RigDataSourceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigDataSourceEntity.swift; sourceTree = "<group>"; };
+		929803CC26E0FDE10091C03C /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		929808182634F2D9002D66BC /* FarmsModuleContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsModuleContract.swift; sourceTree = "<group>"; };
 		9298081D2634FF37002D66BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		9298082A2637D8A0002D66BC /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -125,6 +145,8 @@
 		92D696B426830C9A00277EA7 /* ShortWorkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWorkerView.swift; sourceTree = "<group>"; };
 		92E05A93266BB233007A03A8 /* GpusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpusContainerView.swift; sourceTree = "<group>"; };
 		92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewForHeader.swift; sourceTree = "<group>"; };
+		92F5552626E1BE9300E1EFA9 /* TableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompositionalLayout.swift; sourceTree = "<group>"; };
 		92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsViewController.swift; sourceTree = "<group>"; };
 		92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCell.swift; sourceTree = "<group>"; };
 		92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSingleGPUView.swift; sourceTree = "<group>"; };
@@ -217,6 +239,8 @@
 		9261696926DE29B2002C9029 /* Rig Module */ = {
 			isa = PBXGroup;
 			children = (
+				929404CE26E0715700EB9D9F /* Entities */,
+				929404D126E07BD500EB9D9F /* Cells */,
 				9261695D26DE28FB002C9029 /* RigContract.swift */,
 				9261695F26DE2939002C9029 /* RigView.swift */,
 				9261696126DE294F002C9029 /* RigInteractor.swift */,
@@ -229,7 +253,10 @@
 		9261CD0F2552D8EA00F78CED /* UIKit + Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9266B9BF26E1ADE800D6A707 /* NSObject+extension.swift */,
 				9261CD0C2552D8C900F78CED /* UILabel+extension.swift */,
+				929803CC26E0FDE10091C03C /* UICollectionViewCell+Extension.swift */,
+				92F5552626E1BE9300E1EFA9 /* TableViewCell+Extension.swift */,
 				9214E4D12657222100F5EF27 /* GradientView.swift */,
 				92CBD8D92558C01500D851B4 /* StackView+Extension.swift */,
 				9298081D2634FF37002D66BC /* UIViewController+Extension.swift */,
@@ -237,7 +264,6 @@
 				92C788EF263FBEDA003D681E /* UINavigationController+Extension.swift */,
 				9214E51226609DAF00F5EF27 /* Int+Extension.swift */,
 				9214E5152660A12000F5EF27 /* Date+Extension.swift */,
-				923AF84E26C3583900AD54B2 /* String+Extension.swift */,
 			);
 			path = "UIKit + Extensions";
 			sourceTree = "<group>";
@@ -277,6 +303,29 @@
 				9267F68D2509AA2900F45271 /* Info.plist */,
 			);
 			path = HiveUIKit;
+			sourceTree = "<group>";
+		};
+		929404CE26E0715700EB9D9F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				929404D426E084EF00EB9D9F /* RigDataSourceEntity.swift */,
+				929404C826E05D8F00EB9D9F /* MetricsModel.swift */,
+				929404CA26E0642400EB9D9F /* MessagesModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		929404D126E07BD500EB9D9F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				929404CF26E07A1100EB9D9F /* GeneralRigDataCell.swift */,
+				9266B9B926E19DA100D6A707 /* GpusCell.swift */,
+				9266B9BB26E19DC100D6A707 /* MetricsCell.swift */,
+				9266B9BD26E19DD400D6A707 /* GeneralDataCell.swift */,
+				92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */,
+				9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		92BD0F39263A264A005463CB /* Workers Module */ = {
@@ -462,32 +511,41 @@
 				9261696426DE297F002C9029 /* RigPresenter.swift in Sources */,
 				92C718DF263238160016B2EB /* LoginPresenter.swift in Sources */,
 				92FEE2B32679A66C0006BB28 /* DetailedWorkerView.swift in Sources */,
+				9243EB0426E6E0F20059FB97 /* XAxisValuesFormatter.swift in Sources */,
 				923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */,
 				92BD0F52263A284B005463CB /* WorkersRouter.swift in Sources */,
 				92C718CE262FF98B0016B2EB /* FarmsPresenter.swift in Sources */,
+				9266B9C026E1ADE800D6A707 /* NSObject+extension.swift in Sources */,
 				9203A8FC25492583004AE522 /* NetworkManager.swift in Sources */,
 				92C718E826323CD30016B2EB /* LoginModuleContract.swift in Sources */,
+				92F5552726E1BE9300E1EFA9 /* TableViewCell+Extension.swift in Sources */,
+				929404CB26E0642400EB9D9F /* MessagesModel.swift in Sources */,
 				92BD0F58263A2DC4005463CB /* WorkersEntity.swift in Sources */,
 				92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */,
 				92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */,
+				9266B9BA26E19DA100D6A707 /* GpusCell.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
 				9214E4E8265B5E3100F5EF27 /* CoinsIconContainerView.swift in Sources */,
 				9261696026DE2939002C9029 /* RigView.swift in Sources */,
 				92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */,
+				929404D526E084EF00EB9D9F /* RigDataSourceEntity.swift in Sources */,
 				9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */,
 				9261696226DE294F002C9029 /* RigInteractor.swift in Sources */,
+				9266B9BE26E19DD400D6A707 /* GeneralDataCell.swift in Sources */,
 				92C718DC263237DC0016B2EB /* LoginInteractor.swift in Sources */,
 				92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */,
 				92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */,
 				9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */,
 				92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */,
+				929404D026E07A1100EB9D9F /* GeneralRigDataCell.swift in Sources */,
 				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
 				9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */,
+				929404C926E05D8F00EB9D9F /* MetricsModel.swift in Sources */,
 				92C718D9263235AA0016B2EB /* LoginView.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
+				92F5552926E1C2D900E1EFA9 /* FormCompositionalLayout.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
 				92C788E7263E9453003D681E /* RootViewController.swift in Sources */,
-				923AF84F26C3583900AD54B2 /* String+Extension.swift in Sources */,
 				92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */,
 				92C788EC263E960C003D681E /* SplashViewController.swift in Sources */,
 				9261696826DE29AA002C9029 /* RigRouter.swift in Sources */,
@@ -498,9 +556,11 @@
 				92BD0F53263A284B005463CB /* WorkersView.swift in Sources */,
 				92E05A94266BB233007A03A8 /* GpusContainerView.swift in Sources */,
 				9298081E2634FF37002D66BC /* UIViewController+Extension.swift in Sources */,
+				9266B9BC26E19DC100D6A707 /* MetricsCell.swift in Sources */,
 				92C718D1262FF99B0016B2EB /* FarmsEntity.swift in Sources */,
 				9267F6822509AA2700F45271 /* SceneDelegate.swift in Sources */,
 				92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */,
+				929803CD26E0FDE10091C03C /* UICollectionViewCell+Extension.swift in Sources */,
 				92C718D4262FF9A90016B2EB /* FarmsRouter.swift in Sources */,
 				92C718C8262FF96A0016B2EB /* FarmsView.swift in Sources */,
 				92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */,

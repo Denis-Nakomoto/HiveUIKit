@@ -9,7 +9,7 @@
 import UIKit
 
 class WorkersPresenter: WorkersPresenterProtocol {
-    
+
     var router: WorkersRouterProtocol?
     
     var interactor: WorkersInteractorProtocol?
@@ -42,12 +42,12 @@ class WorkersPresenter: WorkersPresenterProtocol {
         view?.onRefreshWorkersFailure(with: with, and: and)
     }
     
-    func showRigView(rigId: Int, farmId: Int) {
-        interactor?.showRigView(rigId: rigId, farmId: farmId)
+    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int]) {
+        interactor?.showRigView(rigId: rigId, farmId: farmId, heightsOfStacks: heightsOfStacks)
     }
     
-    func showRigViewSuccess(rig: Worker) {
-        router?.showRigModule(view: view!, rig: rig)
+    func showRigViewSuccess(rig: Worker, metrics: MetricsModel, messages: MessagesModel, heightsOfStacks: [Int]) {
+        router?.showRigModule(view: view!, rig: rig, metrics: metrics, messages: messages, heightsOfStacks: heightsOfStacks)
     }
     
     func prepareDetailedViewHeight(worker: Worker) -> Int {

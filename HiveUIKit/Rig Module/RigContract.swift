@@ -11,6 +11,10 @@ import UIKit
 protocol RigViewProtocol: AnyObject {
     var presenter: RigPresenterProtocol? { get set }
     var worker: Worker? { get set }
+    var metrics: MetricsModel? { get set }
+    var messages: MessagesModel? { get set }
+    var heightsOfStacks: [Int]? { get set }
+//    var rigSummary: RigDataSourceModel? { get set }
 }
 
 protocol RigInteractorProtocol: AnyObject {
@@ -25,6 +29,6 @@ protocol RigPresenterProtocol: AnyObject {
 
 protocol RigRouterProtocol: AnyObject {
     
-    static func createRigModule(rig: Worker) -> UIViewController
+    static func createRigModule(rig: Worker, metrics: MetricsModel, messages: MessagesModel, heightsOfStacks: [Int]) -> UIViewController
 
 }

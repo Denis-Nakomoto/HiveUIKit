@@ -16,6 +16,8 @@ class ShortWorkerView: UIView {
     
     var farmId: Int?
     
+    var heightsOfStacks: [Int]?
+    
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     
     let workerNameButton: UIButton = {
@@ -31,9 +33,7 @@ class ShortWorkerView: UIView {
     let upTimeLabel = UILabel(text: "UpTime", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let fanLabelName = UILabel(text: "FAN", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let maxFanSpeedLabel = UILabel(text: "MaxFan", font: .systemFont(ofSize: 10, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
-    let powerConsumingLabel = UILabel(text: "PWRConsuming", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     var allConinsHashrateAndIconsStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
-    let powerConsuming = UILabel(text: "Consuming", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let isNvidiaLabel = UILabel(text: "N", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let isAmdLabel = UILabel(text: "A", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
     var allGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
@@ -136,10 +136,10 @@ class ShortWorkerView: UIView {
         }
     }
     
-    // Methos of TransitionToRigProtocol, initiate show single rig view
+    // Methods of TransitionToRigProtocol, initiates show single rig view
     
     @objc func showRigView() {
-        showRigViewDelegate?.showRigView(rigId: self.workerId!, farmId: self.farmId!)
+        showRigViewDelegate?.showRigView(rigId: self.workerId!, farmId: self.farmId!, heightsOfStacks: self.heightsOfStacks!)
     }
 }
 
@@ -147,6 +147,8 @@ extension ShortWorkerView {
     
     // Places all the view elements on the cell. Incoming paramenter is heights of gpus and Icons stacks
     func setupConstraints(heightsOfStacks: [Int]) {
+        
+        self.heightsOfStacks = heightsOfStacks
         
         workerNameButton.translatesAutoresizingMaskIntoConstraints = false
         upTimeLabel.translatesAutoresizingMaskIntoConstraints = false

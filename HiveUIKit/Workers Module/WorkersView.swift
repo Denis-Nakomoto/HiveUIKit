@@ -126,8 +126,8 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
     }
     
     // Method of the TransitionToRigProtocol
-    func showRigView(rigId: Int, farmId: Int) {
-        presenter?.showRigView(rigId: rigId, farmId: farmId)
+    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int]) {
+        presenter?.showRigView(rigId: rigId, farmId: farmId, heightsOfStacks: heightsOfStacks)
     }
 }
 

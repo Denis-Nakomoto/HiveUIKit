@@ -1,24 +1,30 @@
 PODS:
   - Alamofire (5.2.2)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - SwiftKeychainWrapper (3.4.0)
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
   - Alamofire
+  - Charts
   - SwiftKeychainWrapper
   - TinyConstraints
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Charts
     - SwiftKeychainWrapper
     - TinyConstraints
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: fff694eddf5a8d341b113690dbc4be96671ef07d
+PODFILE CHECKSUM: 1e10dd720dd9317559f4480747cca2881fcc3c25
 
 COCOAPODS: 1.10.1

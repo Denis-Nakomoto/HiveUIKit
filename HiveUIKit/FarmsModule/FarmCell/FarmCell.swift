@@ -10,7 +10,6 @@ import UIKit
 
 class FarmCell: UICollectionViewCell {
     
-    static let reuseId: String = "farmCell"
     var stackHeight = 40
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     let powerLabel = UILabel(text: "PWR", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.1960784314, green: 0.5882352941, blue: 0.8392156863, alpha: 1))
@@ -230,12 +229,6 @@ extension FarmCell {
                 }
             }
         }
-    }
-    
-    private func setupCardView() {
-        self.layer.cornerRadius = 15
-        self.clipsToBounds = true
-        self.backgroundColor = .black
     }
     
 }

@@ -50,10 +50,6 @@ class FarmsViewController: UIViewController, FarmsViewProtocol {
         self.dismiss(animated: true)
     }
     
-    deinit {
-        print("FARMS VC is deallocated")
-    }
-    
     @objc func logOut() {
         presenter?.logOut()
     }

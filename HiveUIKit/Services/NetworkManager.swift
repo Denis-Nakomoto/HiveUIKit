@@ -43,11 +43,11 @@ class NetworkManager {
                         completition("", error)
                     }
                 case .failure (let error):
-                  completition("", error)
+                    completition("", error)
                 }
             }
     }
-
+    
     func fetchData<T: Decodable>(with url: String, completition: @escaping(_ result: T?, _ error: String?)->(), status: ((_ statusCode: Int)->())? = nil) {
         print(#function)
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
@@ -66,10 +66,10 @@ class NetworkManager {
                 if (200..<300).contains(statusCode) {
                     switch response.result {
                     case .success(let data):
-//                        print ("SUCCESS")
-//                        let dataString = String(decoding: data, as: UTF8.self)
-//                        status!(statusCode)
-//                        print("JSON: \(dataString)")
+                        //                        print ("SUCCESS")
+//                                                let dataString = String(decoding: data, as: UTF8.self)
+                        //                        status!(statusCode)
+//                                                print("JSON: \(dataString)")
                         do {
                             let farms = try JSONDecoder().decode(T.self, from: data)
                             completition(farms, nil)
@@ -89,16 +89,16 @@ class NetworkManager {
             }
     }
     
-    // TEST of token refresh
-
+    // TEST of token refresh TEMP
+    
     func tokenRefresh(completition: @escaping(_ result: String, _ error: Error?)->()) {
-
+        
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken ?? "")",
             "Accept": "application/json"
         ]
-
+        
         AF.request("https://api2.hiveos.farm/api/v2/auth/refresh",
                    method: .post,
                    parameters: "",
@@ -116,8 +116,51 @@ class NetworkManager {
                         print ("ENCODING ERROR \(error)")
                     }
                 case .failure (let error):
-                  print("refresh error: \(error)")
+                    print("refresh error: \(error)")
                 }
             }
     }
+    
+    
+    // Get entityes TEMP
+    
+    func getEntity(with url: String) {
+        print(#function)
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (response) in
+                guard let statusCode = response.response?.statusCode else { return }
+                if (200..<300).contains(statusCode) {
+                    switch response.result {
+                    case .success(let data):
+                        //                        print ("SUCCESS")
+                        let dataString = String(decoding: data, as: UTF8.self)
+                        //                        status!(statusCode)
+                        print("METRICS: \(dataString)")
+                    //                    do {
+                    //                        let farms = try JSONDecoder().decode(T.self, from: data)
+                    //                        completition(farms, nil)
+                    //                    }
+                    //                    catch let err {
+                    //                        print ("ENCOIDNG ERROR \(err)")
+                    //                    }
+                    case .failure (let error):
+                        print("AF REQUEST FAILURE \(error)")
+                    }
+                } else {
+                    print("AF REQUEST FAILURE: \(String(describing: response.response?.statusCode))")
+                }
+            }
+    }
+    
 }
+
