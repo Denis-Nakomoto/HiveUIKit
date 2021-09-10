@@ -9,20 +9,13 @@
 import UIKit
 
 class RigViewController: UIViewController, RigViewProtocol {
-    
-    enum Section: Int, CaseIterable {
-        case grigSection
-        case gpuSection
-        case metricSection
-        case generalRigDataSection
-    }
 
     var presenter: RigPresenterProtocol?
     
     var worker: Worker?
     var metrics: MetricsModel?
     var messages: MessagesModel?
-    var heightsOfStacks: [Int]?
+    var icons: [String : UIImage]?
     
     private lazy var compLayout = FormCompositionalLayout()
     private lazy var dataSource = makeDataSource()
@@ -40,6 +33,7 @@ class RigViewController: UIViewController, RigViewProtocol {
     
     override func loadView() {
         super.loadView()
+        navigationItem.title = worker?.name
         setupConstraints()
         updateDateSource()
     }
@@ -77,12 +71,16 @@ class RigViewController: UIViewController, RigViewProtocol {
         return content
     }
     
+    func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int] {
+        return presenter?.prepareIconAndGPUStacks(worker: worker, and: icons) ?? []
+    }
+    
 }
 
 extension RigViewController {
     
     func setupConstraints() {
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         collectionView.dataSource = dataSource
         view.addSubview(collectionView)
         
@@ -99,7 +97,8 @@ extension RigViewController {
             switch item {
             case is RigItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GeneralRigDataCell.reuseId, for: indexPath) as! GeneralRigDataCell
-                cell.bind(item, heightsOfStacks: self.heightsOfStacks!)
+                cell.bind(item)
+                self.setupGeneralRigDataCell(on: cell)
                 return cell
             case is GpuItem:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GpusCell.reuseId, for: indexPath) as! GpusCell
@@ -136,4 +135,40 @@ extension RigViewController {
             
         }
     }
+    
+    // Set data for general rig data cell
+    func setupGeneralRigDataCell(on cell: GeneralRigDataCell) {
+        if let worker = self.worker, let icons = self.icons {
+            cell.setupCellData(with: worker, and: icons)
+            // Use the same method which for short wirker view but without gpu stack
+            let iconAndHashStacksHeightAdd = prepareIconAndGPUStacks(worker: worker, and: icons)
+            let i = iconAndHashStacksHeightAdd.last!
+            cell.iconAndHashStacksHeightAdd += CGFloat(i)
+            
+            let detailedViewHieghtAdd = prepareDetailedViewHeight(worker: worker)
+            cell.detailedViewHeightAdd += CGFloat(detailedViewHieghtAdd)
+            // Calculate worker and miner boot time
+            var minerBootTime = ""
+            let workerBootTime = convertTime(with: (worker.stats?.bootTime))
+            if let minerTime = (worker.stats?.minerStartTime) {
+                minerBootTime = convertTime(with: minerTime)
+                cell.detailedView.setupWorkerDetailedView(with: worker,
+                                                          workerBootTime: workerBootTime,
+                                                          minerBootTime: minerBootTime)
+            }
+            cell.detailedView.minerInfoField.setData(worker: worker)
+        }
+    }
+    
+    // Calculates Detailed view height
+    func prepareDetailedViewHeight(worker: Worker) -> Int {
+        presenter?.prepareDetailedViewHeight(worker: worker) ?? 0
+    }
+    
+    // Converts unix time recieved from server to normal format
+    func convertTime(with value: Int?) -> String {
+        presenter?.convertTime(with: value) ?? ""
+    }
+    
+
 }

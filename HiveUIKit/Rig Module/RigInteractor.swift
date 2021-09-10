@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RigInteractor: RigInteractorProtocol {
+class RigInteractor: RigInteractorProtocol, DatePrepareableProtocol, HeightCalculatorProtocol, StacksAndViewsPreparableProtocol {
     
     var presenter: RigPresenterProtocol?
     

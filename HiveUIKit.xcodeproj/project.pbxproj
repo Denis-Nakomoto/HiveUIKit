@@ -18,9 +18,13 @@
 		9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214E5152660A12000F5EF27 /* Date+Extension.swift */; };
 		923D87FE2550FFA4003465C0 /* FarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D87FD2550FFA4003465C0 /* FarmCell.swift */; };
 		9243EB0426E6E0F20059FB97 /* XAxisValuesFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */; };
+		9243EB0626E706D90059FB97 /* DatePrepareableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243EB0526E706D90059FB97 /* DatePrepareableProtocol.swift */; };
+		9243EB0826E707FB0059FB97 /* HeightCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243EB0726E707FB0059FB97 /* HeightCalculatorProtocol.swift */; };
+		9243EB0A26E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243EB0926E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift */; };
 		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
 		92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */; };
 		92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */; };
+		925F63F526EADF5B00FCBA75 /* CardTypeContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F63F426EADF5B00FCBA75 /* CardTypeContainerView.swift */; };
 		9261695E26DE28FB002C9029 /* RigContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695D26DE28FB002C9029 /* RigContract.swift */; };
 		9261696026DE2939002C9029 /* RigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695F26DE2939002C9029 /* RigView.swift */; };
 		9261696226DE294F002C9029 /* RigInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261696126DE294F002C9029 /* RigInteractor.swift */; };
@@ -38,6 +42,8 @@
 		9267F6892509AA2900F45271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9267F6882509AA2900F45271 /* Assets.xcassets */; };
 		9267F68C2509AA2900F45271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9267F68A2509AA2900F45271 /* LaunchScreen.storyboard */; };
 		926BAAEF264689F000A1F703 /* CoinsIconsFetchSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BAAEE264689F000A1F703 /* CoinsIconsFetchSevice.swift */; };
+		926DB73B26E9584E00B5A783 /* MessageSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926DB73A26E9584E00B5A783 /* MessageSubView.swift */; };
+		926DB73E26E97AD800B5A783 /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926DB73D26E97AD800B5A783 /* Sequence+Extension.swift */; };
 		929404C926E05D8F00EB9D9F /* MetricsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404C826E05D8F00EB9D9F /* MetricsModel.swift */; };
 		929404CB26E0642400EB9D9F /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404CA26E0642400EB9D9F /* MessagesModel.swift */; };
 		929404D026E07A1100EB9D9F /* GeneralRigDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929404CF26E07A1100EB9D9F /* GeneralRigDataCell.swift */; };
@@ -91,9 +97,13 @@
 		9214E5152660A12000F5EF27 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		923D87FD2550FFA4003465C0 /* FarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCell.swift; sourceTree = "<group>"; };
 		9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAxisValuesFormatter.swift; sourceTree = "<group>"; };
+		9243EB0526E706D90059FB97 /* DatePrepareableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePrepareableProtocol.swift; sourceTree = "<group>"; };
+		9243EB0726E707FB0059FB97 /* HeightCalculatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightCalculatorProtocol.swift; sourceTree = "<group>"; };
+		9243EB0926E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StacksAndViewsPreparableProtocol.swift; sourceTree = "<group>"; };
 		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
 		92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerInfoSubView.swift; sourceTree = "<group>"; };
+		925F63F426EADF5B00FCBA75 /* CardTypeContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeContainerView.swift; sourceTree = "<group>"; };
 		9261695D26DE28FB002C9029 /* RigContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigContract.swift; sourceTree = "<group>"; };
 		9261695F26DE2939002C9029 /* RigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigView.swift; sourceTree = "<group>"; };
 		9261696126DE294F002C9029 /* RigInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigInteractor.swift; sourceTree = "<group>"; };
@@ -113,6 +123,8 @@
 		9267F68B2509AA2900F45271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9267F68D2509AA2900F45271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926BAAEE264689F000A1F703 /* CoinsIconsFetchSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsIconsFetchSevice.swift; sourceTree = "<group>"; };
+		926DB73A26E9584E00B5A783 /* MessageSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSubView.swift; sourceTree = "<group>"; };
+		926DB73D26E97AD800B5A783 /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		929404C826E05D8F00EB9D9F /* MetricsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsModel.swift; sourceTree = "<group>"; };
 		929404CA26E0642400EB9D9F /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
 		929404CF26E07A1100EB9D9F /* GeneralRigDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRigDataCell.swift; sourceTree = "<group>"; };
@@ -200,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				9203A8FB25492583004AE522 /* NetworkManager.swift */,
+				9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */,
 				926BAAEE264689F000A1F703 /* CoinsIconsFetchSevice.swift */,
 			);
 			path = Services;
@@ -225,10 +238,21 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		9243EB0B26E720F00059FB97 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9243EB0526E706D90059FB97 /* DatePrepareableProtocol.swift */,
+				9243EB0926E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift */,
+				9243EB0726E707FB0059FB97 /* HeightCalculatorProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		9261695C26DE2826002C9029 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
 				92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */,
+				925F63F426EADF5B00FCBA75 /* CardTypeContainerView.swift */,
 				92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */,
 				92E05A93266BB233007A03A8 /* GpusContainerView.swift */,
 				92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */,
@@ -264,6 +288,7 @@
 				92C788EF263FBEDA003D681E /* UINavigationController+Extension.swift */,
 				9214E51226609DAF00F5EF27 /* Int+Extension.swift */,
 				9214E5152660A12000F5EF27 /* Date+Extension.swift */,
+				926DB73D26E97AD800B5A783 /* Sequence+Extension.swift */,
 			);
 			path = "UIKit + Extensions";
 			sourceTree = "<group>";
@@ -294,6 +319,7 @@
 				92BD0F39263A264A005463CB /* Workers Module */,
 				9261696926DE29B2002C9029 /* Rig Module */,
 				92C788EA263E95F3003D681E /* App */,
+				9243EB0B26E720F00059FB97 /* Protocols */,
 				9261CD0F2552D8EA00F78CED /* UIKit + Extensions */,
 				9203A8F925492565004AE522 /* Services */,
 				9203A8EB25492236004AE522 /* ViewControllers */,
@@ -303,6 +329,14 @@
 				9267F68D2509AA2900F45271 /* Info.plist */,
 			);
 			path = HiveUIKit;
+			sourceTree = "<group>";
+		};
+		926DB73C26E958EF00B5A783 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				926DB73A26E9584E00B5A783 /* MessageSubView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		929404CE26E0715700EB9D9F /* Entities */ = {
@@ -323,7 +357,7 @@
 				9266B9BB26E19DC100D6A707 /* MetricsCell.swift */,
 				9266B9BD26E19DD400D6A707 /* GeneralDataCell.swift */,
 				92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */,
-				9243EB0326E6E0F20059FB97 /* XAxisValuesFormatter.swift */,
+				926DB73C26E958EF00B5A783 /* SubViews */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -522,6 +556,7 @@
 				929404CB26E0642400EB9D9F /* MessagesModel.swift in Sources */,
 				92BD0F58263A2DC4005463CB /* WorkersEntity.swift in Sources */,
 				92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */,
+				926DB73B26E9584E00B5A783 /* MessageSubView.swift in Sources */,
 				92C718CB262FF97B0016B2EB /* FarmsInteractor.swift in Sources */,
 				9266B9BA26E19DA100D6A707 /* GpusCell.swift in Sources */,
 				9203A900254926E7004AE522 /* ForgotPasswordViewController.swift in Sources */,
@@ -529,6 +564,7 @@
 				9261696026DE2939002C9029 /* RigView.swift in Sources */,
 				92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */,
 				929404D526E084EF00EB9D9F /* RigDataSourceEntity.swift in Sources */,
+				926DB73E26E97AD800B5A783 /* Sequence+Extension.swift in Sources */,
 				9214E5162660A12000F5EF27 /* Date+Extension.swift in Sources */,
 				9261696226DE294F002C9029 /* RigInteractor.swift in Sources */,
 				9266B9BE26E19DD400D6A707 /* GeneralDataCell.swift in Sources */,
@@ -537,12 +573,15 @@
 				92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */,
 				9298082B2637D8A0002D66BC /* UITextField+Extension.swift in Sources */,
 				92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */,
+				9243EB0626E706D90059FB97 /* DatePrepareableProtocol.swift in Sources */,
 				929404D026E07A1100EB9D9F /* GeneralRigDataCell.swift in Sources */,
 				9267F6842509AA2700F45271 /* LoginViewController.swift in Sources */,
 				9203A9042549277A004AE522 /* SignUpViewController.swift in Sources */,
 				929404C926E05D8F00EB9D9F /* MetricsModel.swift in Sources */,
 				92C718D9263235AA0016B2EB /* LoginView.swift in Sources */,
+				9243EB0826E707FB0059FB97 /* HeightCalculatorProtocol.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
+				9243EB0A26E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift in Sources */,
 				92F5552926E1C2D900E1EFA9 /* FormCompositionalLayout.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
 				92C788E7263E9453003D681E /* RootViewController.swift in Sources */,
@@ -564,6 +603,7 @@
 				92C718D4262FF9A90016B2EB /* FarmsRouter.swift in Sources */,
 				92C718C8262FF96A0016B2EB /* FarmsView.swift in Sources */,
 				92CBD8DA2558C01500D851B4 /* StackView+Extension.swift in Sources */,
+				925F63F526EADF5B00FCBA75 /* CardTypeContainerView.swift in Sources */,
 				929808192634F2D9002D66BC /* FarmsModuleContract.swift in Sources */,
 				92C718E52632382D0016B2EB /* LoginRouter.swift in Sources */,
 				92BD0F50263A284B005463CB /* WorkersPresenter.swift in Sources */,

@@ -70,7 +70,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
             cell.shortView.setupWorkerShortView(with: workers[indexPath.row], and: iconsImages, stackHieghts: stackHieghts, upTime: workerBootTime)
             if showFullDetails[indexPath.row] {
                 cell.detailedView.isHidden = false
-                cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row], workerUBootTime: workerBootTime, minerBootTime: minerBootTime)
+                cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row], workerBootTime: workerBootTime, minerBootTime: minerBootTime)
                 cell.detailedView.minerInfoField.setData(worker: workers[indexPath.row])
                 return cell
             } else {
@@ -102,7 +102,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int {
         (presenter?.prepareShortViewHeight(stacksHeights: stacksHeights))!
     }
-    // Calculates Detailed view height of teh cell
+    // Calculates Detailed view height of the cell
     func prepareDetailedViewHeight(worker: Worker) -> Int {
         presenter?.prepareDetailedViewHeight(worker: worker) ?? 0
     }
@@ -126,8 +126,8 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
     }
     
     // Method of the TransitionToRigProtocol
-    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int]) {
-        presenter?.showRigView(rigId: rigId, farmId: farmId, heightsOfStacks: heightsOfStacks)
+    func showRigView(rigId: Int, farmId: Int, icons: [String : UIImage]) {
+        presenter?.showRigView(rigId: rigId, farmId: farmId, icons: icons)
     }
 }
 

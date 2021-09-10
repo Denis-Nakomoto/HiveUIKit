@@ -16,4 +16,16 @@ class RigPresenter: RigPresenterProtocol {
     
     var view: RigViewProtocol?
     
+    func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int] {
+        interactor?.prepareIconAndGPUStacks(worker: worker, and: icons) ?? []
+    }
+    
+    func prepareDetailedViewHeight(worker: Worker) -> Int {
+        interactor?.prepareDetailedViewHeight(worker: worker) ?? 0
+    }
+    
+    func convertTime(with value: Int?) -> String {
+        interactor?.convertTime(with: value) ?? ""
+    }
+    
 }

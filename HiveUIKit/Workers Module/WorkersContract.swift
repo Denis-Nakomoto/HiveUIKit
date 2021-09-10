@@ -29,7 +29,7 @@ protocol WorkersInteractorProtocol: AnyObject {
     func dateFormatter(from timestamp: String) -> String
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
     func refreshWorkers(farmId: Int)
-    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int])
+    func showRigView(rigId: Int, farmId: Int, icons: [String : UIImage])
     func prepareDetailedViewHeight(worker: Worker) -> Int
 }
 
@@ -43,11 +43,11 @@ protocol WorkersPresenterProtocol: AnyObject {
     func refreshWorkers(farmId: Int)
     func refreshWorkersSuccess(workers: Workers, farm: Farm)
     func refreshWorkersFailure(with: String, and: String)
-    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int])
+    func showRigView(rigId: Int, farmId: Int, icons: [String : UIImage])
     func showRigViewSuccess(rig: Worker,
                             metrics: MetricsModel,
                             messages: MessagesModel,
-                            heightsOfStacks: [Int])
+                            icons: [String : UIImage])
     func prepareDetailedViewHeight(worker: Worker) -> Int
 }
 
@@ -57,10 +57,9 @@ protocol WorkersRouterProtocol: AnyObject {
                       rig: Worker,
                       metrics: MetricsModel,
                       messages: MessagesModel,
-                      heightsOfStacks: [Int])
-
+                      icons: [String : UIImage])
 }
 
 protocol TransitionToRigProtocol {
-    func showRigView(rigId: Int, farmId: Int, heightsOfStacks: [Int])
+    func showRigView(rigId: Int, farmId: Int, icons: [String : UIImage])
 }

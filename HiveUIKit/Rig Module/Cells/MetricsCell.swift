@@ -11,9 +11,11 @@ import Charts
 
 class MetricsCell: UICollectionViewCell {
     
-    let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     
     var algo: String?
+    
+    let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
+    
     lazy var hashBarChartView: BarChartView = {
         let view = BarChartView()
         view.backgroundColor = .clear
@@ -22,7 +24,6 @@ class MetricsCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init (frame: frame)
- 
     }
     
     required init?(coder: NSCoder) {
@@ -105,6 +106,8 @@ extension MetricsCell {
         hashBarChartView.xAxis.setLabelCount(4, force: true)
         hashBarChartView.xAxis.labelTextColor = .white
         hashBarChartView.xAxis.axisLineColor = .green
+        hashBarChartView.xAxis.axisMinimum = Double(metrics.data.first!.time / 300)
+        hashBarChartView.xAxis.axisMaximum = Double(metrics.data.last!.time / 300)
         
         // Format X values as date
         hashBarChartView.xAxis.valueFormatter = XAxisValuesFormatter()

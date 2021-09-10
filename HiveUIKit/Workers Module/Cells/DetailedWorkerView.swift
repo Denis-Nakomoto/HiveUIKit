@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailedWorkerView: UIView {
+class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
     
     let fanNameLabel = UILabel(text: "FAN", font: .systemFont(ofSize: 14, weight: .regular), color: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1))
     var fanLabel = UILabel(text: "Fan", font: .systemFont(ofSize: 14, weight: .thin), color: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1))
@@ -28,17 +28,14 @@ class DetailedWorkerView: UIView {
     let hiveVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let linuxVersionImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
     let linuxVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    
+    let driversStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
+    
     let minerInfoField = MinerInfoSubView()
     
-//    let hiveUpdateButton: UIButton = {
-//        let button = UIButton()
-//        button.isHidden = true
-//        button.tintColor = .orange
-//        button.addTarget(self, action: #selector(updateHive), for: .touchUpInside)
-//        return  button
-//    }()
-    
     let allDetailedGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
+    
+    let typeOfGpuStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,85 +47,26 @@ class DetailedWorkerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    @objc func updateHive() {
-//        print("Update hive")
-//    }
-    
-    // Adjusts detailed GPUs cell view when cell is expanded
-    func setupDatailedGPUView(with gpu: Worker) {
-        allDetailedGpusStack.removeAllArrangedSubviews()
-        if let miners = gpu.minersStats?.hashrates {
-            // Row of the stack view
-            var arrangedViewQty = 0
-            // Miner means t-rex or claymore or any another mining software
-            for miner in miners {
-                arrangedViewQty += Int((miner.temps?.count ?? 0) / 6)
-                if (miner.temps?.count ?? 0) % 6 != 0 {
-                    arrangedViewQty += 1
-                }
-                // Max qty of detailed gpus view in one row in stack view is 6
-                for arrView in 0..<arrangedViewQty {
-                    let detailedGpuContainerView = DetailedSingleGPUView(frame: CGRect(x: 0, y: 0, width: 230, height: 52))
-                    var spacing: CGFloat = 0
-                    var tempArraySlice: ArraySlice<Int> = []
-                    var fanArraySlice: ArraySlice<Int> = []
-                    var hashArraySlice: ArraySlice<Double> = []
-                    
-                    if arrangedViewQty == 1 {
-                        tempArraySlice = miner.temps![0...]
-                        fanArraySlice = miner.fans![0...]
-                        hashArraySlice = miner.hashes![0...]
-                    } else if arrView > 1, arrView != arrangedViewQty - 1 {
-                        tempArraySlice = miner.temps![arrView * 6...(arrView * 6) + 5]
-                        fanArraySlice = miner.fans![arrView * 6...(arrView * 6) + 5]
-                        hashArraySlice = miner.hashes![arrView * 6...(arrView * 6) + 5]
-                    } else if arrView == arrangedViewQty - 1 {
-                        tempArraySlice = miner.temps![(arrView * 6)...]
-                        fanArraySlice = miner.fans![(arrView * 6)...]
-                        hashArraySlice = miner.hashes![(arrView * 6)...]
-                    }
-                    
-                    for (temp, (fan, hash)) in zip(tempArraySlice, zip(fanArraySlice, hashArraySlice)) {
-                        if (0..<30).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
-                            spacing += 42
-                        } else if (30..<60).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.0634246245, green: 0.5824196935, blue: 0.9887700677, alpha: 1))
-                            spacing += 42
-                        } else if (60..<80).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.6742147645, green: 0.6965720248, blue: 0.1999287951, alpha: 1))
-                            spacing += 42
-                        } else {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.999709247, green: 0.05831817317, blue: 0.01927470519, alpha: 1))
-                            spacing += 42
-                        }
-                    }
-                    allDetailedGpusStack.addArrangedSubview(detailedGpuContainerView.view)
-                }
-            }
-        }
-    }
-    
-    func setupWorkerDetailedView(with value: Worker, workerUBootTime: String?, minerBootTime: String?) {
-        setupDatailedGPUView(with: value)
+    func setupWorkerDetailedView(with worker: Worker, workerBootTime: String?, minerBootTime: String?) {
+        setupDatailedGPUView(with: worker, on: allDetailedGpusStack)
         // TODO AMD overclocking labels
-        fanLabel.text = value.overclock?.nvidia?.fanSpeed
-        coreLabel.text = value.overclock?.nvidia?.coreClock
-        memLabel.text = value.overclock?.nvidia?.memClock
-        plLabel.text = value.overclock?.nvidia?.powerLimit
-        workerOnline.text = workerUBootTime
+        fanLabel.text = worker.overclock?.nvidia?.fanSpeed
+        coreLabel.text = worker.overclock?.nvidia?.coreClock
+        memLabel.text = worker.overclock?.nvidia?.memClock
+        plLabel.text = worker.overclock?.nvidia?.powerLimit
+        workerOnline.text = workerBootTime
         minerOnline.text = minerBootTime
-        iP.text = value.ipAddresses?.first
-        if value.active == false {
+        iP.text = worker.ipAddresses?.first
+        if worker.active == false {
             minerOnlineLabel.text = "WORKER OFFLINE"
         }
-        hiveVersion.text = value.versions?.hive
-        linuxVersion.text = value.versions?.kernel
-//        if value.needsUpgrade == true {
-//            hiveUpdateButton.isHidden = false
-//        }
-//        hiveUpdateButton.setTitle(value.name, for: .normal)
+        hiveVersion.text = worker.versions?.hive
+        linuxVersion.text = worker.versions?.kernel
+        setupDriversStack(with: worker, on: driversStack)
+        typeOfGpuStackSetup(with: worker, on: typeOfGpuStack)
     }
+    
+
     
     func setupConstraints() {
         
@@ -152,10 +90,10 @@ class DetailedWorkerView: UIView {
         hiveVersionImage.contentMode = .scaleAspectFit
         linuxVersionImage.image = UIImage(named: "LinuxLogo")
         linuxVersionImage.contentMode = .scaleAspectFit
-
+        
         let hiveVersionStack = UIStackView(arrangedSubviews: [hiveVersionImage, hiveVersion], axis: .horizontal, spacing: 4)
         let linuxVersionStack = UIStackView(arrangedSubviews: [linuxVersionImage, linuxVersion], axis: .horizontal, spacing: 4)
-            
+        
         allDetailedGpusStack.translatesAutoresizingMaskIntoConstraints = false
         fanStack.translatesAutoresizingMaskIntoConstraints = false
         coreStack.translatesAutoresizingMaskIntoConstraints = false
@@ -167,8 +105,8 @@ class DetailedWorkerView: UIView {
         hiveVersionStack.translatesAutoresizingMaskIntoConstraints = false
         linuxVersionStack.translatesAutoresizingMaskIntoConstraints = false
         minerInfoField.translatesAutoresizingMaskIntoConstraints = false
-//        hiveUpdateButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        driversStack.translatesAutoresizingMaskIntoConstraints = false
+        typeOfGpuStack.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(allDetailedGpusStack)
         allDetailedGpusStack.distribution = .fillEqually
@@ -183,8 +121,8 @@ class DetailedWorkerView: UIView {
         addSubview(hiveVersionStack)
         addSubview(linuxVersionStack)
         addSubview(minerInfoField)
-//        addSubview(hiveUpdateButton)
-        
+        addSubview(driversStack)
+        addSubview(typeOfGpuStack)
         
         NSLayoutConstraint.activate([
             minerInfoField.topAnchor.constraint(equalTo: topAnchor),
@@ -239,16 +177,20 @@ class DetailedWorkerView: UIView {
             hiveVersionStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
         
-//        NSLayoutConstraint.activate([
-//            hiveUpdateButton.leadingAnchor.constraint(equalTo: hiveVersionStack.trailingAnchor, constant: 10),
-//            hiveUpdateButton.bottomAnchor.constraint(equalTo: hiveVersion.bottomAnchor)
-//        ])
-        
         NSLayoutConstraint.activate([
             linuxVersionStack.topAnchor.constraint(equalTo: hiveVersionStack.bottomAnchor, constant: 8),
             linuxVersionStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
         
+        NSLayoutConstraint.activate([
+            driversStack.leadingAnchor.constraint(equalTo: linuxVersionStack.trailingAnchor, constant: 16),
+            driversStack.topAnchor.constraint(equalTo: linuxVersionStack.topAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            typeOfGpuStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            typeOfGpuStack.topAnchor.constraint(equalTo: linuxVersionStack.bottomAnchor, constant: 8)
+        ])
     }
     
 }

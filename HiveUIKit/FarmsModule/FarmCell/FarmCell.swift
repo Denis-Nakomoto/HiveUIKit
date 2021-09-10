@@ -223,7 +223,8 @@ extension FarmCell {
                         stackHeight += 40
                         let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
                         container.iconImage.image = icon
-                        container.hashRateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
+                        container.coinLabel.text = coin.coin
+                        container.hashrateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
                         allConinsHashrateAndIconsStack.addArrangedSubview(container.view)
                     }
                 }

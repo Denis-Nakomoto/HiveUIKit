@@ -12,12 +12,15 @@ class ContainerView: UIViewController {
     
     var iconImage = UIImageView()
     
-    var hashRateLabel = UILabel(text: "HSRT", font: .systemFont(ofSize: 14, weight: .semibold), color: .white)
+    var hashrateLabel = UILabel(text: "HSRT", font: .systemFont(ofSize: 14, weight: .semibold), color: .white)
+    
+    var coinLabel = UILabel(text: "Coin", font: .systemFont(ofSize: 14, weight: .semibold), color: .white)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(iconImage)
-        view.addSubview(hashRateLabel)
+        view.addSubview(coinLabel)
+        view.addSubview(hashrateLabel)
         setupConstraints()
     }
     
@@ -32,7 +35,8 @@ class ContainerView: UIViewController {
     
     private func setupConstraints() {
         iconImage.translatesAutoresizingMaskIntoConstraints = false
-        hashRateLabel.translatesAutoresizingMaskIntoConstraints = false
+        hashrateLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             iconImage.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -42,9 +46,15 @@ class ContainerView: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            hashRateLabel.centerYAnchor.constraint(equalTo: iconImage.centerYAnchor),
-            hashRateLabel.leadingAnchor.constraint(equalTo: iconImage.trailingAnchor, constant: 8),
+            coinLabel.centerYAnchor.constraint(equalTo: iconImage.centerYAnchor),
+            coinLabel.leadingAnchor.constraint(equalTo: iconImage.trailingAnchor, constant: 8),
         ])
+        
+        NSLayoutConstraint.activate([
+            hashrateLabel.centerYAnchor.constraint(equalTo: iconImage.centerYAnchor),
+            hashrateLabel.leadingAnchor.constraint(equalTo: coinLabel.trailingAnchor, constant: 4),
+        ])
+
     }
     
 }

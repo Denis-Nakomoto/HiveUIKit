@@ -28,8 +28,11 @@ class WorkersRouter: WorkersRouterProtocol {
         return view as! UIViewController
     }
     
-    func showRigModule(view: WorkersViewProtocol, rig: Worker, metrics: MetricsModel, messages: MessagesModel, heightsOfStacks: [Int]) {
-        let rigViewController = RigRouter.createRigModule(rig: rig, metrics: metrics, messages: messages, heightsOfStacks: heightsOfStacks)
+    func showRigModule(view: WorkersViewProtocol, rig: Worker,
+                       metrics: MetricsModel,
+                       messages: MessagesModel,
+                       icons: [String : UIImage]) {
+        let rigViewController = RigRouter.createRigModule(rig: rig, metrics: metrics, messages: messages, icons: icons)
         let viewController = view as! WorkersViewController
         viewController.navigationController?.pushViewController(rigViewController, animated: true)
     }

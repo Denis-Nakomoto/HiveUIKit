@@ -658,3 +658,16 @@ struct Versions: Codable {
 //    }
 //}
 
+class CardType {
+    
+    let card: String
+    let brand: String
+    let qty: String
+    
+    init(card: String, brand: String, qty: String) {
+        self.card = card
+        self.brand = brand
+        self.qty = qty
+    }
+}
+
