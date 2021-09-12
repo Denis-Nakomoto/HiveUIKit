@@ -66,8 +66,6 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
         typeOfGpuStackSetup(with: worker, on: typeOfGpuStack)
     }
     
-
-    
     func setupConstraints() {
         
         fanNameLabel.backgroundColor = #colorLiteral(red: 0.2470588235, green: 0.3137254902, blue: 0.1921568627, alpha: 1)
@@ -189,7 +187,7 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
         
         NSLayoutConstraint.activate([
             typeOfGpuStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            typeOfGpuStack.topAnchor.constraint(equalTo: linuxVersionStack.bottomAnchor, constant: 8)
+            typeOfGpuStack.topAnchor.constraint(equalTo: linuxVersionStack.bottomAnchor, constant: 8),
         ])
     }
     

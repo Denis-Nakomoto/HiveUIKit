@@ -93,7 +93,7 @@ class ScrollViewForHeader: UIViewController {
             return contntainer
         }()
 
-        let topLabel = UILabel(text: topLabelText, font: .systemFont(ofSize: 14, weight: .thin), color: .white)
+        let topLabel = UILabel(text: topLabelText, font: .systemFont(ofSize: 14, weight: .light), color: .white)
         let bottomLabel = UILabel(text: bottomLabelText, font: .systemFont(ofSize: 14, weight: .thin), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
         topLabel.adjustsFontSizeToFitWidth = true
         bottomLabel.adjustsFontSizeToFitWidth = true

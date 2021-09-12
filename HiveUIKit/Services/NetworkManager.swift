@@ -125,7 +125,6 @@ class NetworkManager {
     // Get entityes TEMP
     
     func getEntity(with url: String) {
-        print(#function)
         let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
         
         let headers: HTTPHeaders = [
@@ -146,6 +145,48 @@ class NetworkManager {
                         let dataString = String(decoding: data, as: UTF8.self)
                         //                        status!(statusCode)
                         print("METRICS: \(dataString)")
+                    //                    do {
+                    //                        let farms = try JSONDecoder().decode(T.self, from: data)
+                    //                        completition(farms, nil)
+                    //                    }
+                    //                    catch let err {
+                    //                        print ("ENCOIDNG ERROR \(err)")
+                    //                    }
+                    case .failure (let error):
+                        print("AF REQUEST FAILURE \(error)")
+                    }
+                } else {
+                    print("AF REQUEST FAILURE: \(String(describing: response.response?.statusCode))")
+                }
+            }
+    }
+    
+
+//WS test temp
+    func webSocket() {
+        let url = "https://api2.hiveos.farm/api/v2/farms"
+        let accessToken = KeychainWrapper.standard.string(forKey: "accessToken")
+        print(accessToken)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken ?? "")",
+            "Accept": "application/json",
+            "Upgrade": "WebSocket",
+            "Connection": "Upgrade"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (response) in
+                guard let statusCode = response.response?.statusCode else { return }
+                if (200..<300).contains(statusCode) {
+                    switch response.result {
+                    case .success(let data):
+                        print ("SUCCESS")
+                        let dataString = String(decoding: data, as: UTF8.self)
+                        print(dataString)
+                        //                        status!(statusCode)
                     //                    do {
                     //                        let farms = try JSONDecoder().decode(T.self, from: data)
                     //                        completition(farms, nil)

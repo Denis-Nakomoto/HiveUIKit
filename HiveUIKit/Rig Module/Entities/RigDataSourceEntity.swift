@@ -50,8 +50,8 @@ class FormComponent: FormItem, Hashable {
     }
 }
 
-
 final class RigItem: FormComponent {
+    static let type = "rigItem"
     let rig: Worker
     let messages: [Messages]
     
@@ -62,14 +62,18 @@ final class RigItem: FormComponent {
 }
 
 final class GpuItem: FormComponent {
-    let worker: GPUStat
+    static let type = "gpuItem"
+    let gpuStat: GPUStat
+    let gpuInfo: GPUInfo
     
-    init(worker: GPUStat) {
-        self.worker = worker
+    init(gpuStat: GPUStat, gpuInfo: GPUInfo) {
+        self.gpuStat = gpuStat
+        self.gpuInfo = gpuInfo
     }
 }
 
 final class MetricsItem: FormComponent {
+    static let type = "metricsItem"
     let metrics: Hash
     
     init(metrics: Hash) {
@@ -78,6 +82,7 @@ final class MetricsItem: FormComponent {
 }
 
 final class GeneralWorkerInfo: FormComponent {
+    static let type = "generalWorkerInfo"
     let info: Worker
     
     init(info: Worker) {

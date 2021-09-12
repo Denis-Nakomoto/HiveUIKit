@@ -214,7 +214,6 @@ extension StacksAndViewsPreparableProtocol {
             summaryArray.append(item)
         }
         
-        
         arrangedViewQty += Int(summaryArray.count / 3)
         if summaryArray.count % 3 != 0 {
             arrangedViewQty += 1
@@ -233,7 +232,6 @@ extension StacksAndViewsPreparableProtocol {
             } else if arrView == arrangedViewQty - 1 {
                 arraySlice = summaryArray[(arrView * 3)...]
             }
-            print("ARRAYSLICE\(arraySlice)")
             
             for card in arraySlice {
                 if card.brand == "nvidia" {
@@ -250,20 +248,6 @@ extension StacksAndViewsPreparableProtocol {
                 spacing += 85
             }
             stack.addArrangedSubview(cardTypeContainerView)
-//            arraySlice.forEach {
-//                if $0.brand == "nvidia" {
-//                    cardTypeContainerView.setupCardTypeContainerView(cards: $0.card,
-//                                                                     qty: $0.qty,
-//                                                                     brand: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1),
-//                                                                     spacing: spacing)
-//                } else {
-//                    cardTypeContainerView.setupCardTypeContainerView(cards: $0.card,
-//                                                                     qty: $0.qty,
-//                                                                     brand: #colorLiteral(red: 0.2784313725, green: 0.1176470588, blue: 0.249258512, alpha: 1),
-//                                                                     spacing: spacing)
-//                }
-//                spacing += 85
-//            }
         }
     }
 }

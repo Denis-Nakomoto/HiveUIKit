@@ -24,6 +24,7 @@
 		92555E1E26D52391006D1429 /* DummyCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 92555E1D26D52391006D1429 /* DummyCoin.png */; };
 		92555E2026D5F443006D1429 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */; };
 		92555E2226D78D8D006D1429 /* MinerInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */; };
+		925F15FF26EB7E4A005E145C /* CompositionalLayoutCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F15FE26EB7E4A005E145C /* CompositionalLayoutCreatable.swift */; };
 		925F63F526EADF5B00FCBA75 /* CardTypeContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925F63F426EADF5B00FCBA75 /* CardTypeContainerView.swift */; };
 		9261695E26DE28FB002C9029 /* RigContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695D26DE28FB002C9029 /* RigContract.swift */; };
 		9261696026DE2939002C9029 /* RigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261695F26DE2939002C9029 /* RigView.swift */; };
@@ -77,7 +78,6 @@
 		92E05A94266BB233007A03A8 /* GpusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E05A93266BB233007A03A8 /* GpusContainerView.swift */; };
 		92E7D30D26DC590C0002EAA1 /* ScrollViewForHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */; };
 		92F5552726E1BE9300E1EFA9 /* TableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5552626E1BE9300E1EFA9 /* TableViewCell+Extension.swift */; };
-		92F5552926E1C2D900E1EFA9 /* FormCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */; };
 		92FDD1FE254C317B00DEF03E /* FarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */; };
 		92FEE2A22674DB4D0006BB28 /* WorkerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */; };
 		92FEE2AF26777B970006BB28 /* DetailedSingleGPUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */; };
@@ -103,6 +103,7 @@
 		92555E1D26D52391006D1429 /* DummyCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DummyCoin.png; sourceTree = "<group>"; };
 		92555E1F26D5F443006D1429 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		92555E2126D78D8D006D1429 /* MinerInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerInfoSubView.swift; sourceTree = "<group>"; };
+		925F15FE26EB7E4A005E145C /* CompositionalLayoutCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutCreatable.swift; sourceTree = "<group>"; };
 		925F63F426EADF5B00FCBA75 /* CardTypeContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeContainerView.swift; sourceTree = "<group>"; };
 		9261695D26DE28FB002C9029 /* RigContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigContract.swift; sourceTree = "<group>"; };
 		9261695F26DE2939002C9029 /* RigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RigView.swift; sourceTree = "<group>"; };
@@ -158,7 +159,6 @@
 		92E05A93266BB233007A03A8 /* GpusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpusContainerView.swift; sourceTree = "<group>"; };
 		92E7D30C26DC590C0002EAA1 /* ScrollViewForHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewForHeader.swift; sourceTree = "<group>"; };
 		92F5552626E1BE9300E1EFA9 /* TableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewCell+Extension.swift"; sourceTree = "<group>"; };
-		92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompositionalLayout.swift; sourceTree = "<group>"; };
 		92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmsViewController.swift; sourceTree = "<group>"; };
 		92FEE2A12674DB4D0006BB28 /* WorkerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCell.swift; sourceTree = "<group>"; };
 		92FEE2AE26777B970006BB28 /* DetailedSingleGPUView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSingleGPUView.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 			path = StoryBoards;
 			sourceTree = "<group>";
 		};
-		9203A8EB25492236004AE522 /* ViewControllers */ = {
+		9203A8EB25492236004AE522 /* SignInViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				9267F6832509AA2700F45271 /* LoginViewController.swift */,
@@ -205,7 +205,7 @@
 				92FDD1FD254C317B00DEF03E /* FarmsViewController.swift */,
 				920C47F0255B9D7B0047B85F /* WorkersViewController.swift */,
 			);
-			path = ViewControllers;
+			path = SignInViewControllers;
 			sourceTree = "<group>";
 		};
 		9203A8F925492565004AE522 /* Services */ = {
@@ -244,6 +244,7 @@
 				9243EB0526E706D90059FB97 /* DatePrepareableProtocol.swift */,
 				9243EB0926E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift */,
 				9243EB0726E707FB0059FB97 /* HeightCalculatorProtocol.swift */,
+				925F15FE26EB7E4A005E145C /* CompositionalLayoutCreatable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -322,7 +323,7 @@
 				9243EB0B26E720F00059FB97 /* Protocols */,
 				9261CD0F2552D8EA00F78CED /* UIKit + Extensions */,
 				9203A8F925492565004AE522 /* Services */,
-				9203A8EB25492236004AE522 /* ViewControllers */,
+				9203A8EB25492236004AE522 /* SignInViewControllers */,
 				9203A8EA25492229004AE522 /* StoryBoards */,
 				9267F6882509AA2900F45271 /* Assets.xcassets */,
 				92555E1D26D52391006D1429 /* DummyCoin.png */,
@@ -356,7 +357,6 @@
 				9266B9B926E19DA100D6A707 /* GpusCell.swift */,
 				9266B9BB26E19DC100D6A707 /* MetricsCell.swift */,
 				9266B9BD26E19DD400D6A707 /* GeneralDataCell.swift */,
-				92F5552826E1C2D900E1EFA9 /* FormCompositionalLayout.swift */,
 				926DB73C26E958EF00B5A783 /* SubViews */,
 			);
 			path = Cells;
@@ -582,7 +582,6 @@
 				9243EB0826E707FB0059FB97 /* HeightCalculatorProtocol.swift in Sources */,
 				9267F6802509AA2700F45271 /* AppDelegate.swift in Sources */,
 				9243EB0A26E71EA40059FB97 /* StacksAndViewsPreparableProtocol.swift in Sources */,
-				92F5552926E1C2D900E1EFA9 /* FormCompositionalLayout.swift in Sources */,
 				920C47F1255B9D7B0047B85F /* WorkersViewController.swift in Sources */,
 				92C788E7263E9453003D681E /* RootViewController.swift in Sources */,
 				92D696B526830C9A00277EA7 /* ShortWorkerView.swift in Sources */,
@@ -609,6 +608,7 @@
 				92BD0F50263A284B005463CB /* WorkersPresenter.swift in Sources */,
 				92BD0F51263A284B005463CB /* WorkersContract.swift in Sources */,
 				92C788F0263FBEDA003D681E /* UINavigationController+Extension.swift in Sources */,
+				925F15FF26EB7E4A005E145C /* CompositionalLayoutCreatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,7 +45,7 @@ class WorkerCell: UITableViewCell {
         NSLayoutConstraint.activate([
             detailedView.topAnchor.constraint(equalTo: shortView.bottomAnchor),
             detailedView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            detailedView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            detailedView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
             detailedView.heightAnchor.constraint(equalToConstant: CGFloat(detailedViewHeigth)),
             detailedView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])

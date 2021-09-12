@@ -16,24 +16,25 @@ class MetricsCell: UICollectionViewCell {
     
     let gradientBackgroundView = GradientView(from: .topLeading, to: .bottomTrailing, startColor: #colorLiteral(red: 0.8431372549, green: 0.8431372549, blue: 0.8431372549, alpha: 0.29169934), endColor: #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.7921568627, alpha: 0.5486825097))
     
+    override init(frame: CGRect) {
+        super.init (frame: frame)
+        setupCardView()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not implemented")
+    }
+    
     lazy var hashBarChartView: BarChartView = {
         let view = BarChartView()
         view.backgroundColor = .clear
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init (frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         removeViews()
-        setupCardView()
         setupConstraints()
     }
     

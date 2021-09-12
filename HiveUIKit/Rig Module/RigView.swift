@@ -8,19 +8,19 @@
 
 import UIKit
 
-class RigViewController: UIViewController, RigViewProtocol {
-
+class RigViewController: UIViewController, RigViewProtocol, CompositionalLayoutCreatable {
+    
     var presenter: RigPresenterProtocol?
     
     var worker: Worker?
     var metrics: MetricsModel?
     var messages: MessagesModel?
     var icons: [String : UIImage]?
+    var sections: [FormSectionComponent]?
     
-    private lazy var compLayout = FormCompositionalLayout()
-    private lazy var dataSource = makeDataSource()
+    private lazy var dataSource = createDataSource()
     private lazy var collectionView: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: compLayout.layout)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         cv.backgroundColor = .clear
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.reuseId)
@@ -36,6 +36,9 @@ class RigViewController: UIViewController, RigViewProtocol {
         navigationItem.title = worker?.name
         setupConstraints()
         updateDateSource()
+        if let wrkr = worker, let mtrs = metrics, let msgs = messages {
+            sections = formContentBuilder(worker: wrkr, metrics: mtrs, messages: msgs)
+        }
     }
     
     // Puts content to each section
@@ -45,8 +48,10 @@ class RigViewController: UIViewController, RigViewProtocol {
         var metricsItems: [MetricsItem] = []
         var algoArray: [String] = []
         
-        if let gpuStats = worker.gpuStats {
-            gpuStats.forEach { gpuStatsItems.append(GpuItem(worker: $0)) }
+        if let gpuStats = worker.gpuStats, let gpuInfo = worker.gpuInfo {
+            for (stat, info) in zip(gpuStats, gpuInfo) {
+                gpuStatsItems.append(GpuItem(gpuStat: stat, gpuInfo: info))
+            }
         }
         
         metrics.data.forEach { algo in
@@ -92,7 +97,7 @@ extension RigViewController {
         ])
     }
     
-    func makeDataSource() -> UICollectionViewDiffableDataSource<FormSectionComponent, FormComponent> {
+    func createDataSource() -> UICollectionViewDiffableDataSource<FormSectionComponent, FormComponent> {
         return UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             switch item {
             case is RigItem:
@@ -123,16 +128,11 @@ extension RigViewController {
     func updateDateSource(animated: Bool = false) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            
             var snapshot = NSDiffableDataSourceSnapshot<FormSectionComponent, FormComponent>()
-            
-            if let wrkr = self.worker, let mtrs = self.metrics, let msgs = self.messages {
-                let formSections = self.formContentBuilder(worker: wrkr, metrics: mtrs, messages: msgs)
-                snapshot.appendSections(formSections)
-                formSections.forEach { snapshot.appendItems($0.items, toSection: $0) }
-                self.dataSource.apply(snapshot, animatingDifferences: animated)
-            }
-            
+            guard let sections = self.sections else { return }
+            snapshot.appendSections(sections)
+            sections.forEach { snapshot.appendItems($0.items, toSection: $0) }
+            self.dataSource.apply(snapshot, animatingDifferences: animated)
         }
     }
     
@@ -140,14 +140,14 @@ extension RigViewController {
     func setupGeneralRigDataCell(on cell: GeneralRigDataCell) {
         if let worker = self.worker, let icons = self.icons {
             cell.setupCellData(with: worker, and: icons)
-            // Use the same method which for short wirker view but without gpu stack
+            // Use the same method which for short worker view but without gpu stack
             let iconAndHashStacksHeightAdd = prepareIconAndGPUStacks(worker: worker, and: icons)
             let i = iconAndHashStacksHeightAdd.last!
             cell.iconAndHashStacksHeightAdd += CGFloat(i)
             
             let detailedViewHieghtAdd = prepareDetailedViewHeight(worker: worker)
             cell.detailedViewHeightAdd += CGFloat(detailedViewHieghtAdd)
-            // Calculate worker and miner boot time
+            // Calculates worker and miner boot time
             var minerBootTime = ""
             let workerBootTime = convertTime(with: (worker.stats?.bootTime))
             if let minerTime = (worker.stats?.minerStartTime) {
@@ -170,5 +170,24 @@ extension RigViewController {
         presenter?.convertTime(with: value) ?? ""
     }
     
-
+    func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            switch self.sections![sectionIndex].items.first {
+            case is RigItem:
+                return self.createRigSection()
+            case is GpuItem:
+                return self.createGpuSection()
+            case is MetricsItem:
+                return self.createMetricsSection()
+            case is GeneralWorkerInfo:
+                return self.createGeneralWorkerInfo()
+            default:
+                return self.createRigSection()
+            }
+        }
+        return layout
+    }
+    
 }
+
+

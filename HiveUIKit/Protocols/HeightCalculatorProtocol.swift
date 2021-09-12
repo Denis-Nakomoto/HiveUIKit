@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol HeightCalculatorProtocol {
     // Calculates additional height for short view based on the qty of the coins currently in mining
     func prepareShortViewHeight(stacksHeights: [Int]) -> Int
@@ -19,7 +18,6 @@ protocol HeightCalculatorProtocol {
     // Calculates height of gpu and icon/hashrate stacks in order to adjust height of short view cell in workers module
     func prepareIconAndGPUStacks(worker: Worker, and icons: [String : UIImage]) -> [Int]
 }
-
 
 extension HeightCalculatorProtocol {
     
@@ -35,7 +33,6 @@ extension HeightCalculatorProtocol {
         return 0
     }
     
-   
     func prepareDetailedViewHeight(worker: Worker) -> Int {
         var heightAdd = 0
         if let gpuOnline = worker.stats?.gpusOnline {

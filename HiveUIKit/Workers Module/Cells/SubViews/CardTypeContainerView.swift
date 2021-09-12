@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CardTypeContainerView: UIView {
     
     override init(frame: CGRect) {

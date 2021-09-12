@@ -64,14 +64,12 @@ extension GeneralRigDataCell {
         contentView.backgroundColor = .black
         let powerStack = UIStackView(arrangedSubviews: [powerConsumingIcon, powerConsuming], axis: .horizontal, spacing: 3)
         
-//        workerName.translatesAutoresizingMaskIntoConstraints = false
         powerStack.translatesAutoresizingMaskIntoConstraints = false
         allConinsHashrateAndIconsStack.translatesAutoresizingMaskIntoConstraints = false
         gradientBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         detailedView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(gradientBackgroundView)
-//        addSubview(workerName)
         addSubview(allConinsHashrateAndIconsStack)
         addSubview(detailedView)
         allConinsHashrateAndIconsStack.distribution = .fillEqually
@@ -102,7 +100,7 @@ extension GeneralRigDataCell {
             detailedView.topAnchor.constraint(equalTo: allConinsHashrateAndIconsStack.bottomAnchor, constant: 8),
             detailedView.leadingAnchor.constraint(equalTo: leadingAnchor),
             detailedView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            detailedView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            detailedView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             detailedView.heightAnchor.constraint(equalToConstant: detailedViewHeightAdd + 335)
         ])
     }

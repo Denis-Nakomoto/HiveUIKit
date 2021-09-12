@@ -14,10 +14,7 @@ protocol DatePrepareableProtocol {
     func dateFormatter(from timestamp: String) -> String
 }
 
-
 extension DatePrepareableProtocol {
-    
-    
     
     // Calculates time of work for each worker
     // TODO: It would great to reafactor it

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "HiveLogo.png",
+      "filename" : "Hive logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "HiveLogo@2x.png",
+      "filename" : "Hive logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "HiveLogo@3x.png",
+      "filename" : "Hive logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
