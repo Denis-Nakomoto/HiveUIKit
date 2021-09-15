@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShortWorkerView: UIView, StacksAndViewsPreparableProtocol {
+class ShortWorkerView: UIView, StacksAndViewsPreparableProtocol, AutoRefreshable {
     
     var showRigViewDelegate: TransitionToRigProtocol?
     
@@ -25,7 +25,7 @@ class ShortWorkerView: UIView, StacksAndViewsPreparableProtocol {
     let workerNameButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(showRigView), for: .touchUpInside)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.1960784314, green: 0.5882352941, blue: 0.8392156863, alpha: 1), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         button.titleLabel?.textAlignment = .left
         button.frame = CGRect(x: 0, y: 0, width: 200, height: 15)
@@ -35,10 +35,13 @@ class ShortWorkerView: UIView, StacksAndViewsPreparableProtocol {
     let upTimeLabel = UILabel(text: "UpTime", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let fanLabelName = UILabel(text: "FAN", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let maxFanSpeedLabel = UILabel(text: "MaxFan", font: .systemFont(ofSize: 10, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
-    var allConinsHashrateAndIconsStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
+    let allConinsHashrateAndIconsStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
     let isNvidiaLabel = UILabel(text: "N", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.07058823529, green: 0.7921568627, blue: 0.02745098039, alpha: 1))
     let isAmdLabel = UILabel(text: "A", font: .systemFont(ofSize: 18, weight: .medium), color: #colorLiteral(red: 0.2784313725, green: 0.1176470588, blue: 0.249258512, alpha: 1))
-    var allGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
+    let allGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
+    let isOfflineLabel = UILabel(text: "Worker offline", font: .systemFont(ofSize: 18, weight: .medium), color: .red)
+    let overheatedImage = UIImageView(image: UIImage(systemName: "flame"))
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,15 +62,20 @@ class ShortWorkerView: UIView, StacksAndViewsPreparableProtocol {
     }
     
     // Configures all the inforamtion in the cell
-    func setupWorkerShortView(with value: Worker, and icons: [String : UIImage], stackHieghts: [Int], upTime: String) {
+    func setupWorkerShortView(with worker: Worker, and icons: [String : UIImage], stackHieghts: [Int], upTime: String) {
         self.icons = icons
         setupConstraints(heightsOfStacks: stackHieghts)
-        workerNameButton.setTitle(value.name, for: .normal)
+        workerNameButton.setTitle(worker.name, for: .normal)
         upTimeLabel.text = upTime
-        configureCoinsStack(with: value, and: icons, on: allConinsHashrateAndIconsStack)
-        configureGpuView(with: value, on: allGpusStack)
-        setupNvAmdLabel(worker: value, isAmdLabel: isAmdLabel, isNvidiaLabel: isNvidiaLabel)
-        maxFanSpeedLabel.text = "\(value.gpuSummary?.maxFan ?? 0)%"
+        configureCoinsStack(with: worker, and: icons, on: allConinsHashrateAndIconsStack)
+        configureGpuView(with: worker, on: allGpusStack)
+        setupNvAmdLabel(worker: worker, isAmdLabel: isAmdLabel, isNvidiaLabel: isNvidiaLabel)
+        maxFanSpeedLabel.text = "\(worker.gpuSummary?.maxFan ?? 0)%"
+        workerOfflineSetup(with: worker, on: isOfflineLabel, and: allGpusStack)
+    
+        if worker.stats?.overheated == false {
+            overheatedImage.isHidden = true
+        }
     }
     
     // Methods of TransitionToRigProtocol, initiates show single rig view
@@ -92,10 +100,15 @@ extension ShortWorkerView {
         isNvidiaLabel.translatesAutoresizingMaskIntoConstraints = false
         isAmdLabel.translatesAutoresizingMaskIntoConstraints = false
         fanLabelName.translatesAutoresizingMaskIntoConstraints = false
+        isOfflineLabel.translatesAutoresizingMaskIntoConstraints = false
+        overheatedImage.translatesAutoresizingMaskIntoConstraints = false
+        overheatedImage.tintColor = .red
         
+        addSubview(overheatedImage)
         addSubview(workerNameButton)
         addSubview(upTimeLabel)
         addSubview(allConinsHashrateAndIconsStack)
+        addSubview(isOfflineLabel)
         allConinsHashrateAndIconsStack.distribution = .fillEqually
         allConinsHashrateAndIconsStack.alignment = .leading
         addSubview(allGpusStack)
@@ -115,6 +128,11 @@ extension ShortWorkerView {
         NSLayoutConstraint.activate([
             upTimeLabel.trailingAnchor.constraint(equalTo: isAmdLabel.leadingAnchor, constant: 10),
             upTimeLabel.bottomAnchor.constraint(equalTo: maxFanSpeedLabel.bottomAnchor, constant: 1)
+        ])
+        
+        NSLayoutConstraint.activate([
+            overheatedImage.trailingAnchor.constraint(equalTo: upTimeLabel.leadingAnchor, constant: -10),
+            overheatedImage.bottomAnchor.constraint(equalTo: maxFanSpeedLabel.bottomAnchor, constant: 1)
         ])
         
         NSLayoutConstraint.activate([
@@ -149,6 +167,12 @@ extension ShortWorkerView {
             allConinsHashrateAndIconsStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             allConinsHashrateAndIconsStack.widthAnchor.constraint(equalToConstant: 200),
             allConinsHashrateAndIconsStack.heightAnchor.constraint(equalToConstant: CGFloat(heightsOfStacks.last ?? 0))
+        ])
+        
+        NSLayoutConstraint.activate([
+            isOfflineLabel.topAnchor.constraint(equalTo: workerNameButton.bottomAnchor, constant: 16),
+            isOfflineLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            isOfflineLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
 }

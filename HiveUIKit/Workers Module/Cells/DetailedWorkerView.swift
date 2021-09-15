@@ -10,6 +10,8 @@ import UIKit
 
 class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
     
+    var gpuStackHeighAdd = 0
+    var inforFieldMuliplier = 1
     let fanNameLabel = UILabel(text: "FAN", font: .systemFont(ofSize: 14, weight: .regular), color: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1))
     var fanLabel = UILabel(text: "Fan", font: .systemFont(ofSize: 14, weight: .thin), color: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1))
     let coreNameLabel = UILabel(text: "CORE", font: .systemFont(ofSize: 14, weight: .regular), color: #colorLiteral(red: 0, green: 0.8, blue: 0, alpha: 1))
@@ -28,10 +30,11 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
     let hiveVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     let linuxVersionImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
     let linuxVersion = UILabel(text: "", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    let isOfflineLabel = UILabel(text: "Worker offline", font: .systemFont(ofSize: 18, weight: .medium), color: .red)
     
     let driversStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
     
-    let minerInfoField = MinerInfoSubView()
+    let minerInfoFieldsStackView = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
     
     let allDetailedGpusStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 8)
     
@@ -64,6 +67,12 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
         linuxVersion.text = worker.versions?.kernel
         setupDriversStack(with: worker, on: driversStack)
         typeOfGpuStackSetup(with: worker, on: typeOfGpuStack)
+        workerOfflineSetup(with: worker, on: isOfflineLabel, and: allDetailedGpusStack)
+        setDataForInfoField(worker: worker, on: minerInfoFieldsStackView)
+        
+        if minerInfoFieldsStackView.arrangedSubviews.count > 1 {
+            inforFieldMuliplier = minerInfoFieldsStackView.arrangedSubviews.count
+        }
     }
     
     func setupConstraints() {
@@ -102,9 +111,10 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
         iPStack.translatesAutoresizingMaskIntoConstraints = false
         hiveVersionStack.translatesAutoresizingMaskIntoConstraints = false
         linuxVersionStack.translatesAutoresizingMaskIntoConstraints = false
-        minerInfoField.translatesAutoresizingMaskIntoConstraints = false
+        minerInfoFieldsStackView.translatesAutoresizingMaskIntoConstraints = false
         driversStack.translatesAutoresizingMaskIntoConstraints = false
         typeOfGpuStack.translatesAutoresizingMaskIntoConstraints = false
+        isOfflineLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(allDetailedGpusStack)
         allDetailedGpusStack.distribution = .fillEqually
@@ -118,22 +128,28 @@ class DetailedWorkerView: UIView, StacksAndViewsPreparableProtocol {
         addSubview(iPStack)
         addSubview(hiveVersionStack)
         addSubview(linuxVersionStack)
-        addSubview(minerInfoField)
+        addSubview(minerInfoFieldsStackView)
         addSubview(driversStack)
         addSubview(typeOfGpuStack)
+        addSubview(isOfflineLabel)
         
         NSLayoutConstraint.activate([
-            minerInfoField.topAnchor.constraint(equalTo: topAnchor),
-            minerInfoField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            minerInfoField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            minerInfoField.heightAnchor.constraint(equalToConstant: 38)
+            minerInfoFieldsStackView.topAnchor.constraint(equalTo: topAnchor),
+            minerInfoFieldsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            minerInfoFieldsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            minerInfoFieldsStackView.heightAnchor.constraint(equalToConstant: CGFloat((38 * inforFieldMuliplier) + 8))
         ])
         
         NSLayoutConstraint.activate([
-            allDetailedGpusStack.topAnchor.constraint(equalTo: minerInfoField.bottomAnchor, constant: 10),
+            allDetailedGpusStack.topAnchor.constraint(equalTo: minerInfoFieldsStackView.bottomAnchor, constant: 10),
             allDetailedGpusStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             allDetailedGpusStack.widthAnchor.constraint(equalToConstant: 230),
-            allDetailedGpusStack.heightAnchor.constraint(equalToConstant: 52)
+            allDetailedGpusStack.heightAnchor.constraint(equalToConstant: 52 + CGFloat(gpuStackHeighAdd))
+        ])
+        
+        NSLayoutConstraint.activate([
+            isOfflineLabel.topAnchor.constraint(equalTo: minerInfoFieldsStackView.bottomAnchor, constant: 10),
+            isOfflineLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
         
         NSLayoutConstraint.activate([

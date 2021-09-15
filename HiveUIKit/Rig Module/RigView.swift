@@ -146,6 +146,11 @@ extension RigViewController {
             cell.iconAndHashStacksHeightAdd += CGFloat(i)
             
             let detailedViewHieghtAdd = prepareDetailedViewHeight(worker: worker)
+            
+            if ((worker.minersSummary?.hashrates!.count) ?? 1) > 1 {
+                cell.detailedViewHeightAdd += CGFloat((46 * (worker.minersSummary?.hashrates?.count ?? 1)) - 46)
+            }
+            
             cell.detailedViewHeightAdd += CGFloat(detailedViewHieghtAdd)
             // Calculates worker and miner boot time
             var minerBootTime = ""
@@ -156,7 +161,6 @@ extension RigViewController {
                                                           workerBootTime: workerBootTime,
                                                           minerBootTime: minerBootTime)
             }
-            cell.detailedView.minerInfoField.setData(worker: worker)
         }
     }
     

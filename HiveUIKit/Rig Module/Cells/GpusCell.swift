@@ -48,17 +48,17 @@ extension GpusCell {
         let gpuInfo = item.gpuInfo
         
         let dictOfProperties = [
-            "index": "\(String(describing: gpuInfo.index ?? 0))",
-            "bus": "\(String(describing: gpuStat.busID ?? ""))",
-            "gpuType": "\(String(describing: gpuInfo.model ?? ""))",
-            "mem": "\(String(describing: gpuInfo.details?.mem ?? ""))",
-            "vendor": "\(String(describing: gpuInfo.details?.oem ?? ""))",
-            "hash": "\(String(describing: gpuStat.hash ?? 0))",
-            "temp": "\(String(describing: gpuStat.temp ?? 0))",
-            "fan": "\(String(describing: gpuStat.fan ?? 0))",
-            "power": "\(String(describing: gpuStat.power ?? 0))",
-            "memOem": "\(String(describing: gpuInfo.details?.memOEM ?? ""))",
-            "vbios":  "\(String(describing: gpuInfo.details?.vbios ?? ""))",
+            "index": String(describing: gpuInfo.index ?? 0),
+            "bus": String(describing: gpuStat.busID ?? ""),
+            "gpuType": String(describing: gpuInfo.model ?? ""),
+            "mem": String(describing: gpuInfo.details?.mem ?? ""),
+            "vendor": String(describing: gpuInfo.details?.oem ?? ""),
+            "hash": "\(String(describing: gpuStat.hash?.toSiUnitsAsETH() ?? ""))",
+            "temp": String(describing: (gpuStat.temp ?? 0).degreeRepresent()),
+            "fan": String(describing: (gpuStat.fan ?? 0).percentRepresent()),
+            "power": String(describing: gpuStat.power ?? 0),
+            "memOem": String(describing: gpuInfo.details?.memOEM ?? ""),
+            "vbios":  String(describing: gpuInfo.details?.vbios ?? ""),
             "powerLimit":  "\(String(describing: gpuInfo.powerLimit?.min ?? "")) \(String(describing: gpuInfo.powerLimit?.def ?? "")) \(String(describing: gpuInfo.powerLimit?.max ?? ""))"
         ]
         
@@ -95,8 +95,9 @@ extension GpusCell {
         for property in arrayOfBottomProperties {
             let reuseLabel = UILabel()
             reuseLabel.text = "\(property.uppercased()) \(dictOfProperties[property]!)"
-            reuseLabel.font = .systemFont(ofSize: 16, weight: .regular)
-            reuseLabel.textColor = #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1)
+            reuseLabel.font = .systemFont(ofSize: 12, weight: .regular)
+            reuseLabel.textColor = .white
+            reuseLabel.adjustsFontSizeToFitWidth = true
             bottomStack.addArrangedSubview(reuseLabel)
         }
         
@@ -127,17 +128,17 @@ extension GpusCell {
         ])
         
         NSLayoutConstraint.activate([
-            topStack.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            topStack.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             topStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
 
         NSLayoutConstraint.activate([
-            middleStack.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 8),
+            middleStack.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 5),
             middleStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
         
         NSLayoutConstraint.activate([
-            bottomStack.topAnchor.constraint(equalTo: middleStack.bottomAnchor, constant: 8),
+            bottomStack.topAnchor.constraint(equalTo: middleStack.bottomAnchor, constant: 5),
             bottomStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
     }

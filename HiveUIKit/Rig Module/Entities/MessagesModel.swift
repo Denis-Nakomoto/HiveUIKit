@@ -21,12 +21,12 @@ struct Messages: Codable {
     let time: Int
     let title: String
     let hasPayload: Bool
-    let cmdID: Int
+//    let cmdID: Int
 
     enum CodingKeys: String, CodingKey {
         case id, type, time, title
         case hasPayload = "has_payload"
-        case cmdID = "cmd_id"
+//        case cmdID = "cmd_id"
     }
 }
 
@@ -40,4 +40,12 @@ struct Pagination: Codable {
         case currentPage = "current_page"
         case totalPages = "total_pages"
     }
+}
+
+enum MessageTypes: String {
+    case success = "success"
+    case info = "info"
+    case file = "file"
+    case warning = "warning"
+    case danger = "danger"
 }

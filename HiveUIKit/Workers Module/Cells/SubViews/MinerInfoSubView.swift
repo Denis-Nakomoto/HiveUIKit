@@ -26,21 +26,6 @@ class MinerInfoSubView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(worker: Worker) {
-        minerSoft.text = worker.minersSummary?.hashrates?.first?.miner
-        
-        if let ver = worker.minersSummary?.hashrates?.first?.ver {
-        minerSoftVersion.text = " v.\(ver)"
-        }
-        
-        if let ratio = worker.minersSummary?.hashrates?.first?.shares?.ratio {
-        ration.text = "\(ratio)%"
-        }
-        
-        flightSheet.text = worker.flightSheet?.name
-        pool.text = worker.flightSheet?.items?.first?.pool
-    }
-    
     private func setupView() {
         
         backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.2078431373, blue: 0.2352941176, alpha: 1)

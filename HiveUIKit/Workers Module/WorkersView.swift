@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkersViewController: UITableViewController, WorkersViewProtocol, TransitionToRigProtocol {
+class WorkersViewController: UITableViewController, WorkersViewProtocol, TransitionToRigProtocol, AutoRefreshable {
 
     var presenter: WorkersPresenterProtocol?
     
@@ -38,6 +38,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
         tableView.dataSource = self
         showFullDetails = [Bool](repeating: false, count: workers?.data?.count ?? 0)
         tableView.addSubview(workersRefreshControl)
+        refreshWorker()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,9 +59,15 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
             let stackHieghts = self.prepareIconAndGPUStacks(worker: workers[indexPath.row], and: self.iconsImages)
             let shortViewHeightAdd = prepareShortViewHeight(stacksHeights: stackHieghts)
             let detailedViewHieghtAdd = prepareDetailedViewHeight(worker: workers[indexPath.row])
-            // Calculating adds for cell to fit the content
+            // Calculating adds for cell to fit the conte1z
+            
+            if (workers[indexPath.row].minersSummary?.hashrates!.count) ?? 1 > 1 {
+                cell.detailedViewHeigth += ((46 * (workers[indexPath.row].minersSummary?.hashrates!.count ?? 1)) - 46)
+            }
+            
             cell.shortViewHeigth += shortViewHeightAdd
             cell.detailedViewHeigth += detailedViewHieghtAdd
+            cell.detailedView.gpuStackHeighAdd += detailedViewHieghtAdd
             // Calculete worker and miner boot time
             var minerBootTime = ""
             let workerBootTime = self.convertTime(with: (self.workers?.data![indexPath.row].stats?.bootTime))
@@ -71,7 +78,7 @@ class WorkersViewController: UITableViewController, WorkersViewProtocol, Transit
             if showFullDetails[indexPath.row] {
                 cell.detailedView.isHidden = false
                 cell.detailedView.setupWorkerDetailedView(with: workers[indexPath.row], workerBootTime: workerBootTime, minerBootTime: minerBootTime)
-                cell.detailedView.minerInfoField.setData(worker: workers[indexPath.row])
+//                cell.detailedView.minerInfoField.setData(worker: workers[indexPath.row])
                 return cell
             } else {
                 cell.detailedView.isHidden = true

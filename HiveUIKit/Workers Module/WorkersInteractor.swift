@@ -69,14 +69,17 @@ class WorkersInteractor: WorkersInteractorProtocol, DatePrepareableProtocol, Hei
             self?.selectedFarm = selectedFarm
         }
         group.notify(queue: .global()) {
-            CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: self.farms!) { result in
-                self.iconsImages = result
+            if self.farms == nil {
+                self.presenter?.refreshWorkersFailure(with: "ERROR", and: "Refresh workers failure.")
+            } else {
+                CoinsIconsFetchSevice.shared.getIconsForCoinsInUse(with: self.farms!) { result in
+                    self.iconsImages = result
+                }
             }
         }
     }
     
     //Handeles transition to selected rig
-    
     func showRigView(rigId: Int, farmId: Int, icons: [String : UIImage]) {
         
         let group = DispatchGroup()

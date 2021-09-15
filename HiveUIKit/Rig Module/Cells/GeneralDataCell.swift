@@ -41,6 +41,7 @@ class GeneralDataCell: UICollectionViewCell {
         
         gradientBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
+        
         NSLayoutConstraint.activate([
             gradientBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             gradientBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),

@@ -58,10 +58,15 @@ class ScrollViewForHeader: UIViewController {
                           "Consumation": "\(farm.stats!.powerDraw)W"
         ]
         
-        for item in sourceDict {
-            if !item.value.isEmpty && item.value != "0" {
-                let arrangedView = createContainerViewForEachLabelPair(topLabelText: item.key,
-                                                                       bottomLabelText: item.value)
+        let sourceArray = ["WorkersOn", "WorkersOff", "GPU On","GPU Off",
+                          "Effectivency", "Ballance", "Daily cost", "Consumation"
+        ]
+        
+        for item in sourceArray {
+            let dictValue = sourceDict[item]
+            if !(dictValue?.isEmpty ?? true) && dictValue != "0" {
+                let arrangedView = createContainerViewForEachLabelPair(topLabelText: item,
+                                                                       bottomLabelText: dictValue!)
                 iterrationsCounter += 1
                 self.stackWidth += 100
                 // Add to scroll view width
@@ -69,13 +74,13 @@ class ScrollViewForHeader: UIViewController {
                     mainContainerView.frame.size.width += CGFloat(100)
                     headerScrollView.contentSize.width += CGFloat(100)
                 }
-                
                 self.mainStackView.addArrangedSubview(arrangedView)
             }
         }
+        
         coinsWithHash?.forEach({ coin in
             let arrangedView = createContainerViewForEachLabelPair(topLabelText: String(coin.coin),
-                                                                   bottomLabelText: String(coin.hashrate))
+                                                                   bottomLabelText: coin.hashrate.toSiUnitsAsETH())
             self.stackWidth += 100
             // Add to scroll view width
             mainContainerView.frame.size.width += CGFloat(100)

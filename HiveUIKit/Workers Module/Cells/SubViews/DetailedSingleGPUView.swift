@@ -31,8 +31,11 @@ class DetailedSingleGPUView: UIViewController {
         let gpuTemperature = UILabel(text: "\(temp)°", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
         
         let fanSpeed: UILabel = {
-            let label = UILabel(text: "\(fan)%", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+            let label = PaddingLabel(text: "\(fan)%", font: .systemFont(ofSize: 12, weight: .light), color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+            label.padding(0, 0, 2, 2)
             label.backgroundColor = fanColor
+            label.layer.cornerRadius = 2
+            label.clipsToBounds = true
             return label
         }()
         

@@ -1,23 +1,18 @@
 //
-//  Int+Extension.swift
+//  Double+extension.swift
 //  HiveUIKit
 //
-//  Created by Denis Svetlakov on 28.05.2021.
+//  Created by Denis Svetlakov on 12.09.2021.
 //  Copyright © 2021 Denis Svetlakov. All rights reserved.
 //
 
 import Foundation
 
-extension Int {
-    
-    func  fromUnixTimeStamp() -> Date? {
-        let date = Date(timeIntervalSince1970: TimeInterval(self))
-        return date
-    }
+extension Double {
     
     func toSiUnits() -> String {
         
-        var stringInt = String(describing: self)
+        var stringInt = String(describing: Int(self))
         let lenghtOfInt = stringInt.count
         
         if (0...3).contains(lenghtOfInt) {
@@ -34,27 +29,19 @@ extension Int {
     
     func toSiUnitsAsETH() -> String {
         
-        var stringInt = String(describing: self)
+        var stringInt = String(describing: Int(self))
         let lenghtOfInt = stringInt.count
         
-        if (4...6).contains(lenghtOfInt) {
+        if (0...3).contains(lenghtOfInt) {
             stringInt = "\(String(format: "%.1f", (self)))h/s"
-        } else if (7...9).contains(lenghtOfInt) {
+        } else if (4...6).contains(lenghtOfInt) {
             stringInt = "\(String(format: "%.1f", (self/1000)))Mh/s"
-        } else if (10...12).contains(lenghtOfInt) {
+        } else if (7...9).contains(lenghtOfInt) {
             stringInt = "\(String(format: "%.1f", (self/1000000)))Gh/s"
-        } else if (13...15).contains(lenghtOfInt) {
+        } else if (10...12).contains(lenghtOfInt) {
             stringInt = "\(String(format: "%.1f", (self/1000000000)))Th/s"
         }
         
         return stringInt
-    }
-    
-    func degreeRepresent() -> String {
-        return "\(String(describing: self))°"
-    }
-    
-    func percentRepresent() -> String {
-        return "\(String(describing: self))%"
     }
 }

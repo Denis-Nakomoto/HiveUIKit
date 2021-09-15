@@ -26,7 +26,13 @@ protocol StacksAndViewsPreparableProtocol {
     func setupDriversStack(with worker: Worker, on stack: UIStackView)
     
     // Setup card type view on the bottom of detailed worker view
-    func typeOfGpuStackSetup (with worker: Worker, on stack: UIStackView)
+    func typeOfGpuStackSetup(with worker: Worker, on stack: UIStackView)
+    
+    // Set labels is worker is offline
+    func workerOfflineSetup(with worker: Worker, on isOfflineLabel: UILabel, and allGpusStack: UIStackView)
+    
+    // Set data for info field in detailed subview
+    func setDataForInfoField(worker: Worker, on stack: UIStackView)
     
 }
 
@@ -44,7 +50,7 @@ extension StacksAndViewsPreparableProtocol {
                     let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
                     container.iconImage.image = icon
                     container.coinLabel.text = value.minersSummary?.hashrates?.first?.coin
-                    container.hashrateLabel.text = "\(String(format: "%.1f", (value.minersSummary?.hashrates?.first?.hash ?? 0)/1000))MHs"
+                    container.hashrateLabel.text = String(describing: value.minersSummary?.hashrates?.first?.hash?.toSiUnitsAsETH() ?? "")
                     stack.addArrangedSubview(container.view)
                 }
             }
@@ -130,14 +136,14 @@ extension StacksAndViewsPreparableProtocol {
                         if (0..<30).contains(fan) {
                             detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
                             spacing += 42
-                        } else if (30..<60).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.0634246245, green: 0.5824196935, blue: 0.9887700677, alpha: 1))
+                        } else if (30...60).contains(fan) {
+                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.1725490196, green: 0.5764705882, blue: 0.8509803922, alpha: 1))
                             spacing += 42
-                        } else if (60..<80).contains(fan) {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.6742147645, green: 0.6965720248, blue: 0.1999287951, alpha: 1))
+                        } else if (61..<80).contains(fan) {
+                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.9960784314, green: 0.8, blue: 0.431372549, alpha: 1))
                             spacing += 42
                         } else {
-                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.999709247, green: 0.05831817317, blue: 0.01927470519, alpha: 1))
+                            detailedGpuContainerView.createGpuContainer(temp: temp, fan: fan, hash: String(format: "%.1f", hash / 1000), spacing: spacing, fanColor: #colorLiteral(red: 0.9882352941, green: 0.3215686275, blue: 0.3176470588, alpha: 1))
                             spacing += 42
                         }
                     }
@@ -187,7 +193,7 @@ extension StacksAndViewsPreparableProtocol {
     }
     
     // Setup card type view on the bottom of detailed worker view
-    func typeOfGpuStackSetup (with worker: Worker, on stack: UIStackView) {
+    func typeOfGpuStackSetup(with worker: Worker, on stack: UIStackView) {
         
         stack.removeAllArrangedSubviews()
 
@@ -250,4 +256,44 @@ extension StacksAndViewsPreparableProtocol {
             stack.addArrangedSubview(cardTypeContainerView)
         }
     }
+    
+    // Set labels is worker is offline
+    func workerOfflineSetup(with worker: Worker, on isOfflineLabel: UILabel, and allGpusStack: UIStackView) {
+        if worker.stats?.online == true {
+            isOfflineLabel.isHidden = true
+            allGpusStack.isHidden = false
+        } else {
+            isOfflineLabel.isHidden = false
+            allGpusStack.isHidden = true
+        }
+    }
+    
+    // Set data for info field in detailed subview
+    func setDataForInfoField(worker: Worker, on stack: UIStackView) {
+
+        stack.removeAllArrangedSubviews()
+        
+        worker.minersSummary?.hashrates?.forEach ({
+            let minerInfoField = MinerInfoSubView()
+            
+            minerInfoField.minerSoft.text = $0.miner
+            
+            if let ver = $0.ver {
+                minerInfoField.minerSoftVersion.text = " v.\(ver)"
+            }
+            
+            if let ratio = $0.shares?.ratio {
+                minerInfoField.ration.text = "\(ratio)%"
+            }
+            
+            minerInfoField.flightSheet.text = worker.flightSheet?.name
+            var pools = ""
+            worker.flightSheet?.items?.forEach({
+                pools += $0.pool!
+            })
+            minerInfoField.pool.text = pools
+            stack.addArrangedSubview(minerInfoField)
+        })
+    }
+    
 }

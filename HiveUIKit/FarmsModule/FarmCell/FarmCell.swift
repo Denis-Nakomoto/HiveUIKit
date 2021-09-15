@@ -29,6 +29,7 @@ class FarmCell: UICollectionViewCell {
     let priceLblName = UILabel(text: "Daily price",  font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
     var allConinsHashrateAndIconsStack = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 5)
     let powerLblName = UILabel(text: "Consumation", font: .systemFont(ofSize: 14, weight: .light), color: #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.7803921569, alpha: 1))
+    let overheatedImage = UIImageView(image: UIImage(systemName: "flame"))
     
     
     let separator: UIView = {
@@ -107,8 +108,10 @@ extension FarmCell {
         allConinsHashrateAndIconsStack.distribution = .fill
         allConinsHashrateAndIconsStack.alignment = .leading
         separator.translatesAutoresizingMaskIntoConstraints = false
+        overheatedImage.translatesAutoresizingMaskIntoConstraints = false
+        overheatedImage.tintColor = .red
         
-        
+        addSubview(overheatedImage)
         addSubview(gradientBackgroundView)
         addSubview(workersStack)
         addSubview(gpuStack)
@@ -181,6 +184,11 @@ extension FarmCell {
         ])
         
         NSLayoutConstraint.activate([
+            overheatedImage.topAnchor.constraint(equalTo: workersStack.bottomAnchor, constant: 10),
+            overheatedImage.leadingAnchor.constraint(equalTo: priceStack.trailingAnchor, constant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
             allConinsHashrateAndIconsStack.topAnchor.constraint(equalTo: ballanceStack.bottomAnchor, constant: 16),
             allConinsHashrateAndIconsStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             allConinsHashrateAndIconsStack.widthAnchor.constraint(equalToConstant: 200),
@@ -189,16 +197,20 @@ extension FarmCell {
         
     }
     
-    func setupLabelsData(with value: Farm, and icons: [String : UIImage]) {
-        powerLabel.text = "\(value.stats!.powerDraw)W"
-        workersQtyLabel.text = String(value.workersCount)
-        effectivencyLabel.text = "\(value.stats!.asr)%"
-        gPUQtyLabel.text = String(value.stats!.gpusOnline)
-        ballanceLabel.text = "\(value.money!.balance)$"
-        farmNameLabel.text = String(value.name)
-        priceLabel.text = "\(value.money!.dailyPrice)$"
-        configureCoinsStack(with: value, and: icons)
-        setupWorkersOnlineLabel(value: value)
+    func setupLabelsData(with farm: Farm, and icons: [String : UIImage]) {
+        powerLabel.text = "\(farm.stats!.powerDraw)W"
+        workersQtyLabel.text = String(farm.workersCount)
+        effectivencyLabel.text = "\(farm.stats!.asr)%"
+        gPUQtyLabel.text = String(farm.stats!.gpusOnline)
+        ballanceLabel.text = "\(farm.money!.balance)$"
+        farmNameLabel.text = String(farm.name)
+        priceLabel.text = "\(farm.money!.dailyPrice)$"
+        configureCoinsStack(with: farm, and: icons)
+        setupWorkersOnlineLabel(value: farm)
+        
+        if farm.stats?.workersOverheated == 0 {
+            overheatedImage.isHidden = true
+        }
     }
     
     func setupWorkersOnlineLabel(value: Farm) {
@@ -224,7 +236,7 @@ extension FarmCell {
                         let container = ContainerView(frame: CGRect(x: 0, y: 0, width: 200, height: 27))
                         container.iconImage.image = icon
                         container.coinLabel.text = coin.coin
-                        container.hashrateLabel.text = "\(String(format: "%.1f", (coin.hashrate)/1000))MHs"
+                        container.hashrateLabel.text = String(describing: coin.hashrate.toSiUnitsAsETH())
                         allConinsHashrateAndIconsStack.addArrangedSubview(container.view)
                     }
                 }

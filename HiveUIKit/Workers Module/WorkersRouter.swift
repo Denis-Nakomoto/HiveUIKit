@@ -33,6 +33,7 @@ class WorkersRouter: WorkersRouterProtocol {
                        messages: MessagesModel,
                        icons: [String : UIImage]) {
         let rigViewController = RigRouter.createRigModule(rig: rig, metrics: metrics, messages: messages, icons: icons)
+        print(messages)
         let viewController = view as! WorkersViewController
         viewController.navigationController?.pushViewController(rigViewController, animated: true)
     }
